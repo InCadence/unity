@@ -16,6 +16,6 @@ public interface IConfigurationsConnector {
 
 	//public void deleteSection(String configurationFileName, String sectionPath);
 
-	public Boolean log(String logName, String callResultXml);
+	public boolean log(String logName, String callResultXml);
 
 }

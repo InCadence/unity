@@ -11,29 +11,24 @@ public class RestConfigConnector {
 	 * Private Member Variables
 	 ******************************/
 	
-	private static int _port = 8080;
-	private static String _address = "127.0.0.1";
-	private static RestConfigurationsConnector _connector = new RestConfigurationsConnector(_port, _address);
+	private static RestConfigurationsConnector _connector = null;//new RestConfigurationsConnector(_port, _address);
 
 	/*********************
 	 * Public Functions
 	 *********************/
 	
-	public static String getAddress() {
-		return _address;
+	public static void initialize(String address, int port) {
+		
+		_connector = new RestConfigurationsConnector(address, port);
+		
 	}
-
-	public static void setAddress(String address) {
-		RestConfigConnector._address = address;
-		_connector = new RestConfigurationsConnector(_port, _address);
+	
+	public static String getAddress() {
+		return _connector.getAddress();
 	}
 	
 	public static int getPort() {
-		return _port;
-	}
-	public static void setPort(int port) {
-		RestConfigConnector._port = port;
-		_connector = new RestConfigurationsConnector(_port, _address);
+		return _connector.getPort();
 	}
 
 	public static String getSetting(String configurationFileName, String settingPath, String defaultValue, SettingType type) {
@@ -49,21 +44,25 @@ public class RestConfigConnector {
 			return value;
 
 		} catch (Exception ex) {
-			// Log Failed Error			
-			new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Connector.Rest.RestConfigConnector");
+			// Log Failed Error		
+			CallResult.log(CallResults.FAILED_ERROR, ex,"Unity.Connector.Rest.RestConfigConnector");
 			return defaultValue;
 		}
 	}
 
-	public static void setSetting(String configurationFileName, String settingPath, String value, SettingType type) {
+	public static boolean setSetting(String configurationFileName, String settingPath, String value, SettingType type) {
 		try {
 			// call on the connector
 			_connector.setSetting(configurationFileName, settingPath, value, type);
+			
+			return true; 
 
 		} catch (Exception ex) {
 			// Log Failed Error
 
-			new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Connector.Rest.RestConfigConnector");
+			CallResult.log(CallResults.FAILED_ERROR, ex,"Unity.Connector.Rest.RestConfigConnector");
+			
+			return false; 
 		}
 	}
 //	public static CallResult getSettingType(String configurationFileName,String settingPath) {
@@ -127,12 +126,12 @@ public class RestConfigConnector {
 //		}
 //	}
 
-	public static Boolean log(String appName, String callResultXml) {
+	public static boolean log(String AppName, String callResultXml) {
 
 		try {			
 
-			if (_connector.log(appName, callResultXml)) {
-
+			if (_connector.log(AppName, callResultXml)) {
+			
 				return true;
 			} else {
 
@@ -140,8 +139,9 @@ public class RestConfigConnector {
 			}
 		} catch (Exception ex) {
 			// Return Failed Error
-			new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
-			return false;
+			CallResult.log(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			
+			return false; 
 		}
 	}
 }

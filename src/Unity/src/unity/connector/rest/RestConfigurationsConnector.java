@@ -7,16 +7,17 @@ import org.springframework.web.client.RestTemplate;
 import unity.configuration.IConfigurationsConnector;
 import unity.configuration.SettingType;
 import unity.configuration.SettingTypeUtility;
+import unity.core.runtime.CallResult;
+import unity.core.runtime.CallResult.CallResults;
 
-public class RestConfigurationsConnector implements IConfigurationsConnector {
+public class RestConfigurationsConnector implements IConfigurationsConnector{
 
 	/******************************
 	 * Private Member Variables
 	 ******************************/
 	
-	private Integer _port;
+	private int _port;
 	private String _address;
-	private RestTemplate _restTemplate;
 	
 	/*********************
 	 * Public Constructors
@@ -24,24 +25,47 @@ public class RestConfigurationsConnector implements IConfigurationsConnector {
 	
 	//Default constructor for local connections
 	public RestConfigurationsConnector() {
-		this._port = 8080;
-		this._address = "localhost";
-		this._restTemplate = new RestTemplate();
+
+		Initialize("localhost", 8080);
+		
 	}
 	
-	public RestConfigurationsConnector(int port, String address) {
-		this._port = port;
-		this._address = address+":"+port;
-		this._restTemplate = new RestTemplate();
+	public RestConfigurationsConnector(String address, int port) {
+
+		Initialize(address, port);
+		
 	}
 
+	private void Initialize(String address, int port) {
+		
+		try {
+			
+			this._port = port;
+			this._address = address + ":" + port;
+
+		} catch (Exception ex) {
+			CallResult.log(CallResults.FAILED_ERROR, ex, this);
+		}
+		
+	}
+	
 	/*********************
 	 * Public Functions
 	 *********************/
 	
+	public String getAddress() {
+		return this._address;
+	}
+
+	public int getPort() {
+		return this._port;
+	}
+	
+	@Override
 	public String getSetting(String configurationFileName, String settingPath, String defaultValue, SettingType settingType, Boolean setIfNotFound) {
 		
 		RestTemplate restTemplate = new RestTemplate();
+		
         //replace char so they wont mess up the url
 		configurationFileName = configurationFileName.replace('.', '-');
 		settingPath = settingPath.replace('/', '-');
@@ -51,56 +75,63 @@ public class RestConfigurationsConnector implements IConfigurationsConnector {
 		
 		Map<String,String> hashMap = new HashMap<String,String>();
 		
+		
 		hashMap.put("address", this._address);
-		hashMap.put("port", this._port.toString());
+		//hashMap.put("port", Integer.toString(this._port));
 		hashMap.put("configurationFileName", configurationFileName);
 		hashMap.put("settingPath", settingPath);
 		hashMap.put("defaultValue", defaultValue);
-		hashMap.put("value", "changedvalue");
+		//hashMap.put("value", "changedvalue");
 		hashMap.put("type", type);
 		hashMap.put("setIfNotFound", setIfNotFound.toString());
 		
 		//call to rest service
-		return restTemplate.getForObject("http://"+_address+"/configuration/reader?"
+		String value =  restTemplate.getForObject("http://"+_address+"/configuration/reader?"
 				+ "configurationFileName={configurationFileName}&"
 				+ "settingPath={settingPath}&"
 				+ "defaultValue={defaultValue}&"
 				+ "type={type}&"
 				+ "setIfNotFound={setIfNotFound}",
 				ConfigurationValue.class, hashMap).getResult();
+		
+		return value; 
+		
 	}
 
+	@Override
 	public void setSetting(String configurationFileName, String settingPath, String value, SettingType settingType) {
 		        
-		        RestTemplate restTemplate = new RestTemplate();
-		        //replace char so they wont mess up the url
-				configurationFileName = configurationFileName.replace('.', '-');
-				settingPath = settingPath.replace('/', '-');
-				settingPath = settingPath.replace('\\', '-');
-				settingPath = settingPath.replace('.', '-');
-				String type = SettingTypeUtility.settingTypeToString(settingType);
+		RestTemplate restTemplate = new RestTemplate();
+		        
+		//replace char so they wont mess up the url
+		configurationFileName = configurationFileName.replace('.', '-');
+		settingPath = settingPath.replace('/', '-');
+		settingPath = settingPath.replace('\\', '-');
+		settingPath = settingPath.replace('.', '-');
+		String type = SettingTypeUtility.settingTypeToString(settingType);
 				
-				Map<String,String> hashMap = new HashMap<String,String>();
+		Map<String,String> hashMap = new HashMap<String,String>();
 				
-				hashMap.put("address", this._address);
-				hashMap.put("port", this._port.toString());
-				hashMap.put("configurationFileName", configurationFileName);
-				hashMap.put("settingPath", settingPath);
-				hashMap.put("value", value);
-				hashMap.put("type", type);
+		hashMap.put("address", this._address);
+		//hashMap.put("port", Integer.toString(this._port));
+		hashMap.put("configurationFileName", configurationFileName);
+		hashMap.put("settingPath", settingPath);
+		hashMap.put("value", value);
+		hashMap.put("type", type);
 				
-				//call to rest service
-				restTemplate.getForObject("http://"+_address+"/configuration/writer?"
-						+ "configurationFileName={configurationFileName}&"
-						+ "settingPath={settingPath}&"
-						+ "value={value}&"
-						+ "type={type}&",
+		//call to rest service
+		restTemplate.getForObject("http://"+_address+"/configuration/writer?"
+				+ "configurationFileName={configurationFileName}&"
+				+ "settingPath={settingPath}&"
+				+ "value={value}&"
+				+ "type={type}&",
 						ConfigurationValue.class, hashMap);
 
 	}
 
 	
-	public Boolean log(String logName, String callResultXml) {
+	@Override
+	public boolean log(String logName, String callResultXml) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		Map<String,String> hashMap = new HashMap<String,String>();

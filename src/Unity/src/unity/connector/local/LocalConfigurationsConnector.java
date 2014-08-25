@@ -24,9 +24,12 @@ public class LocalConfigurationsConnector implements IConfigurationsConnector{
 	/*********************
 	 * Public Functions
 	 *********************/
+
+	@Override
 	public String getSetting(String configurationFileName, String settingPath, String defaultValue, SettingType type, Boolean setIfNotFound) {
-			return this._localConfigurations.getSetting(configurationFileName, settingPath, defaultValue, type, setIfNotFound);		
+		return this._localConfigurations.getSetting(configurationFileName, settingPath, defaultValue, type, setIfNotFound);		
 	}
+	
 	
 	public SettingType getSettingType(String configurationFileName,String settingPath) {
 		return this._localConfigurations.getSettingType(configurationFileName, settingPath);
@@ -39,6 +42,7 @@ public class LocalConfigurationsConnector implements IConfigurationsConnector{
 		
 	}*/
 	
+	@Override
 	public void setSetting(String configurationFileName,String settingPath, String value, SettingType type) {
 		this._localConfigurations.setSetting(configurationFileName, settingPath, value, type);
 	}
@@ -51,8 +55,10 @@ public class LocalConfigurationsConnector implements IConfigurationsConnector{
 		this._localConfigurations.deleteSection(configurationFileName, sectionPath);
 	}
 	
-	public Boolean log(String logName, String callResultXml) {
+	@Override
+	public boolean log(String logName, String callResultXml) {
 		 return _localConfigurations.log(logName,callResultXml);
 	}
+
 
 }
