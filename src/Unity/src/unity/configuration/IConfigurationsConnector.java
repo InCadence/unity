@@ -1,7 +1,5 @@
 package unity.configuration;
 
-import unity.configuration.SettingType;
-
 public interface IConfigurationsConnector {
 
 	public String getSetting(String configurationFileName, String settingPath, String defaultValue, SettingType type, Boolean setIfNotFound);
@@ -18,6 +16,6 @@ public interface IConfigurationsConnector {
 
 	//public void deleteSection(String configurationFileName, String sectionPath);
 
-	public void logToLocal(String logName, String callResultXml);
+	public Boolean log(String logName, String callResultXml);
 
 }

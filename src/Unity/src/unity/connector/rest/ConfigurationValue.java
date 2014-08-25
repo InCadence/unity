@@ -4,16 +4,16 @@ import unity.configuration.ConfigurationFiles;
 import unity.configuration.SettingType;
 import unity.configuration.SettingTypeUtility;
 
-public class SettingValue  {
+public class ConfigurationValue  {
 
 	private ConfigurationFiles _configurationFiles = new ConfigurationFiles();
 	private String result;
 	
 
 	
-	public SettingValue() {	}
+	public ConfigurationValue() {	}
 	
-    public SettingValue(String configurationFileNameRest,String settingPathRest,String defaultValue,String type,String setIfNotFound) {
+    public ConfigurationValue(String configurationFileNameRest,String settingPathRest,String defaultValue,String type,String setIfNotFound) {
 
     	//convert input
     	String configurationFileName = configurationFileNameRest.replace('-', '.');
@@ -21,16 +21,10 @@ public class SettingValue  {
     	SettingType settingType = SettingTypeUtility.stringToSettingType(type);
     	Boolean setIfNotFoundBool = Boolean.parseBoolean(setIfNotFound);
     	
-    	System.out.println(configurationFileName);
-		System.out.println(settingPath);
-		System.out.println(defaultValue);
-		System.out.println(type);
-		System.out.println(setIfNotFound);
-    	
-		this.result = _configurationFiles.getSetting(configurationFileName, settingPath, defaultValue, settingType, setIfNotFoundBool);
+		result = _configurationFiles.getSetting(configurationFileName, settingPath, defaultValue, settingType, setIfNotFoundBool);
 	}
     
-    public SettingValue(String configurationFileNameRest,String settingPathRest,String value,String type) {
+    public ConfigurationValue(String configurationFileNameRest,String settingPathRest,String value,String type) {
 		
     	//convert input
     	String configurationFileName = configurationFileNameRest.replace('-', '.');
@@ -38,7 +32,7 @@ public class SettingValue  {
     	SettingType settingType = SettingTypeUtility.stringToSettingType(type);
     	
 		_configurationFiles.setSetting(configurationFileName, settingPath, value, settingType);
-		this.result = "true";
+		result = "true";
 	}   
 
 	public String getResult() {

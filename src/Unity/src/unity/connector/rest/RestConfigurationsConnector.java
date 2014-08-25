@@ -1,16 +1,12 @@
 package unity.connector.rest;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.web.client.RestTemplate;
-
 import unity.configuration.IConfigurationsConnector;
 import unity.configuration.SettingType;
 import unity.configuration.SettingTypeUtility;
-import unity.connector.local.LocalConfigConnector;
 
 public class RestConfigurationsConnector implements IConfigurationsConnector {
 
@@ -45,6 +41,7 @@ public class RestConfigurationsConnector implements IConfigurationsConnector {
 	
 	public String getSetting(String configurationFileName, String settingPath, String defaultValue, SettingType settingType, Boolean setIfNotFound) {
 		
+		RestTemplate restTemplate = new RestTemplate();
         //replace char so they wont mess up the url
 		configurationFileName = configurationFileName.replace('.', '-');
 		settingPath = settingPath.replace('/', '-');
@@ -64,18 +61,18 @@ public class RestConfigurationsConnector implements IConfigurationsConnector {
 		hashMap.put("setIfNotFound", setIfNotFound.toString());
 		
 		//call to rest service
-		return this._restTemplate.getForObject("http://"+_address+"/configuration/reader?"
+		return restTemplate.getForObject("http://"+_address+"/configuration/reader?"
 				+ "configurationFileName={configurationFileName}&"
 				+ "settingPath={settingPath}&"
 				+ "defaultValue={defaultValue}&"
 				+ "type={type}&"
 				+ "setIfNotFound={setIfNotFound}",
-				SettingValue.class, hashMap).getResult();
+				ConfigurationValue.class, hashMap).getResult();
 	}
 
 	public void setSetting(String configurationFileName, String settingPath, String value, SettingType settingType) {
 		        
-		RestTemplate restTemplate = new RestTemplate();
+		        RestTemplate restTemplate = new RestTemplate();
 		        //replace char so they wont mess up the url
 				configurationFileName = configurationFileName.replace('.', '-');
 				settingPath = settingPath.replace('/', '-');
@@ -98,30 +95,32 @@ public class RestConfigurationsConnector implements IConfigurationsConnector {
 						+ "settingPath={settingPath}&"
 						+ "value={value}&"
 						+ "type={type}&",
-						SettingValue.class, hashMap);
+						ConfigurationValue.class, hashMap);
 
 	}
 
 	
-	public void logToUnity(String logName, String callResultXml) throws UnsupportedEncodingException {
+	public Boolean log(String logName, String callResultXml) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		Map<String,String> hashMap = new HashMap<String,String>();
 		
-		hashMap.put("logName", URLEncoder.encode(logName, "UTF-8") );
-		hashMap.put("callResultXml", URLEncoder.encode(callResultXml, "UTF-8") );
-		
-		//call to rest service
-		restTemplate.getForObject("http://"+_address+"/log?"
-				+ "logName={logName}&"
-				+ "callResultXml={callResultXml}&",
-				UnityLog.class, hashMap);
+		try {
+			hashMap.put("logName", URLEncoder.encode(logName, "UTF-8") );
+			hashMap.put("callResultXml", URLEncoder.encode(callResultXml, "UTF-8") );
+			
+			//call to rest service
+			UnityLog logResult = restTemplate.getForObject("http://"+_address+"/log?"
+					+ "logName={logName}&"
+					+ "callResultXml={callResultXml}&",
+					UnityLog.class, hashMap);
+			//return success
+			return Boolean.parseBoolean(logResult.getResult());
+			
+		} catch (Exception ex) {
+			return false;
+		}		
 
-	}
-	
-	public void logToLocal(String logName, String callResultXml) {
-
-         LocalConfigConnector.log(logName, callResultXml);
 	}
 
 }

@@ -20,7 +20,7 @@ public class ConfigurationFiles {
 	
 	private Hashtable<String, ConfigurationFile> _configurationFiles;
 	
-	private String _logLocation ="";
+	private String _logLocation;
 	
 	/*********************
 	 * Public Properties

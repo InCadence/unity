@@ -127,22 +127,21 @@ public class RestConfigConnector {
 //		}
 //	}
 
-	public static void log(String AppName, String callResultXml) {
+	public static Boolean log(String appName, String callResultXml) {
 
-		try {
-			
-			_connector.logToUnity(AppName, callResultXml);
+		try {			
 
-//			if (_connector.log(logName, callResultXml)) {
-//
-//				return new CallResult(CallResults.SUCCESS);
-//			} else {
-//
-//				return new CallResult(CallResults.FAILED);
-//			}
+			if (_connector.log(appName, callResultXml)) {
+
+				return true;
+			} else {
+
+				return false;
+			}
 		} catch (Exception ex) {
 			// Return Failed Error
 			new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			return false;
 		}
 	}
 }

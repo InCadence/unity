@@ -51,8 +51,8 @@ public class LocalConfigurationsConnector implements IConfigurationsConnector{
 		this._localConfigurations.deleteSection(configurationFileName, sectionPath);
 	}
 	
-	public void logToLocal(String logName, String callResultXml) {
-		 _localConfigurations.log(logName,callResultXml);
+	public Boolean log(String logName, String callResultXml) {
+		 return _localConfigurations.log(logName,callResultXml);
 	}
 
 }

@@ -1,7 +1,6 @@
 package unity.connector.local;
 
 import unity.configuration.SettingType;
-import unity.connector.rmi.RmiConfigurationsConnector;
 import unity.core.runtime.CallResult;
 import unity.core.runtime.CallResult.CallResults;
 
@@ -122,11 +121,11 @@ public class LocalConfigConnector {
 		}
 	}
 
-	public static void log(String AppName, String callResultXml) {
+	public static void log(String appName, String callResultXml) {
 
 		try {
 
-			_connector.logToLocal(AppName, callResultXml);
+			_connector.log(appName, callResultXml);
 
 		} catch (Exception ex) {
 			

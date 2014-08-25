@@ -6,5 +6,6 @@
 # Folders #
 bin/
 lib/
+target/
 .metadata/
 .vpprefdata/

@@ -33,7 +33,10 @@ import org.jdom2.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import unity.configuration.ConfigurationFiles;
 import unity.connector.local.LocalConfigConnector;
+import unity.connector.rest.RestConfigConnector;
+import unity.logger.log4j.CallResultLogger;
 
 public class CallResult {
 	
@@ -528,8 +531,10 @@ public class CallResult {
 			}
 			
 			if (toFile) {
-				// Log to File Log 
+				
+				// Log to File Log, try rest connector first
 				LocalConfigConnector.log(appName, xml);
+					
 			}
 			
 			//Return Success
