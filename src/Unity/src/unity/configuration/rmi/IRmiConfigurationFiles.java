@@ -16,7 +16,7 @@ public interface IRmiConfigurationFiles extends Remote {
 	public void add(String fileName) throws RemoteException;
 	public String getSetting(String configurationFileName, String settingPath, String defaultValue, String type, Boolean setIfNotFound ) throws RemoteException;
 	public SettingType getSettingType(String configurationFileName, String settingPath) throws RemoteException;
-	public void setSetting(String configurationFileName, String settingPath, String value, SettingType type) throws RemoteException;
+	public void setSetting(String configurationFileName, String settingPath, String value, String type) throws RemoteException;
 	public void deleteSetting(String configurationFileName, String settingPath) throws RemoteException;
 	public void deleteSection(String configurationFileName, String sectionPath) throws RemoteException;
 	public ConfigurationFile getConfigurationFile(String configurationFileName) throws RemoteException;

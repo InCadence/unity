@@ -22,7 +22,7 @@ public class RmiConfigConnector {
 	/****************************
 	 * Private Member Variables
 	 ***************************/
-	private static RmiConfigurationsConnector _connector = null;
+	private static RmiConfigurationsConnector _connector = new RmiConfigurationsConnector(1099,"127.0.0.1");
 
 	/****************************
 	 * Shared constructor
@@ -42,37 +42,38 @@ public class RmiConfigConnector {
 	 * public shared methods
 	 ***************************/
 
-	public static CallResult getSetting(String configurationFileName, String settingPath, String defaultValue, SettingType type) {
+	public static String getSetting(String configurationFileName, String settingPath, String defaultValue, SettingType type) {
 		return getSetting(configurationFileName, settingPath, defaultValue, type, false);
 	}
 
-	public static CallResult getSetting(String configurationFileName,String settingPath, String defaultValue, SettingType type, Boolean setIfNotFound) {
+	public static String getSetting(String configurationFileName,String settingPath, String defaultValue, SettingType type, Boolean setIfNotFound) {
 		try {
 			//call on the connector, convert setting type to string because only serializable objects are allowed over RMI 
 			String value = _connector.getSetting(configurationFileName, settingPath,defaultValue, type.toString(), setIfNotFound);
 
 			// return success
-			return new CallResult(CallResults.SUCCESS,(Object)value);
+			return value;
 
 		} catch (Exception ex) {
 			// Return Failed Error
-			return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			return null;
 		}
 	}
 
-	public static CallResult getSettingType(String configurationFileName,String settingPath) {
-		try {
-			// call on the connector
-			SettingType type = _connector.getSettingType(configurationFileName, settingPath);
-
-			// return success
-			return new CallResult(CallResults.SUCCESS,(Object)type);
-
-		} catch (Exception ex) {
-			// Return Failed Error
-			return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
-		}
-	}
+//	public static CallResult getSettingType(String configurationFileName,String settingPath) {
+//		try {
+//			// call on the connector
+//			SettingType type = _connector.getSettingType(configurationFileName, settingPath);
+//
+//			// return success
+//			return new CallResult(CallResults.SUCCESS,(Object)type);
+//
+//		} catch (Exception ex) {
+//			// Return Failed Error
+//			return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+//		}
+//	}
 
 	/*
 	 * public static CallResult getSection(String configurationFileName, String
@@ -96,59 +97,62 @@ public class RmiConfigConnector {
 	 * "Unity.Runtime.ConfigConnector"); } }
 	 */
 
-	public static CallResult setSetting(String configurationFileName, String settingPath, String value, SettingType type) {
+	public static Boolean setSetting(String configurationFileName, String settingPath, String value, SettingType type) {
 		try {
 			// call on the connector
 			_connector.setSetting(configurationFileName, settingPath, value, type);
 			// return Success
-			return new CallResult(CallResults.SUCCESS);
+			return true;
 		} catch (Exception ex) {
 			// Return Failed Error
-			return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			return false;
 		}
 	}
 
-	public static CallResult deleteSetting(String configurationFileName,
-			String settingPath) {
-		try {
-			// call on the connector
-			_connector.deleteSetting(configurationFileName, settingPath);
-			// return success
-			return new CallResult(CallResults.SUCCESS);
-		} catch (Exception ex) {
-			// Return Failed Error
-			return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
-		}
-	}
+//	public static CallResult deleteSetting(String configurationFileName,
+//			String settingPath) {
+//		try {
+//			// call on the connector
+//			_connector.deleteSetting(configurationFileName, settingPath);
+//			// return success
+//			return new CallResult(CallResults.SUCCESS);
+//		} catch (Exception ex) {
+//			// Return Failed Error
+//			return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+//		}
+//	}
+//
+//	public static CallResult deleteSection(String configurationFileName,
+//			String sectionPath) {
+//		try {
+//			// call on the connector
+//			_connector.deleteSection(configurationFileName, sectionPath);
+//			// return success
+//			return new CallResult(CallResults.SUCCESS);
+//		} catch (Exception ex) {
+//			// Return Failed Error
+//			return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+//		}
+//	}
 
-	public static CallResult deleteSection(String configurationFileName,
-			String sectionPath) {
-		try {
-			// call on the connector
-			_connector.deleteSection(configurationFileName, sectionPath);
-			// return success
-			return new CallResult(CallResults.SUCCESS);
-		} catch (Exception ex) {
-			// Return Failed Error
-			return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
-		}
-	}
-
-	public static CallResult log(String logName, String callResultXml) {
+	public static Boolean log(String logName, String callResultXml) {
 
 		try {
 
 			if (_connector.log(logName, callResultXml)) {
 
-				return new CallResult(CallResults.SUCCESS);
+				return true;
 			} else {
 
-				return new CallResult(CallResults.FAILED);
+				return false;
 			}
 		} catch (Exception ex) {
 			// testing
 			System.out.println(ex);
-			return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			
+			new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			return false;
 		}
 	}
 

@@ -65,28 +65,28 @@ public class RmiConfigurationsConnector{
 			return this._configurations.getSetting(configurationFileName, settingPath, defaultValue, type.toString(), setIfNotFound);		
 	}
 	
-	public SettingType getSettingType(String configurationFileName,String settingPath) throws RemoteException {
-		return this._configurations.getSettingType(configurationFileName, settingPath);
-	}
-	/*
-    public ConfigurationNode getSection(String configurationFileName,String sectionPath) {
-    	
-    }
-	public String[] getSectionList(String configurationFileName,String sectionPath) {
-		
-	}*/
+//	public SettingType getSettingType(String configurationFileName,String settingPath) throws RemoteException {
+//		return this._configurations.getSettingType(configurationFileName, settingPath);
+//	}
+//	
+//  public ConfigurationNode getSection(String configurationFileName,String sectionPath) {
+//    	
+//    }
+//	public String[] getSectionList(String configurationFileName,String sectionPath) {
+//		
+//	}
 	
 	public void setSetting(String configurationFileName,String settingPath, String value, SettingType type) throws RemoteException {
-		this._configurations.setSetting(configurationFileName, settingPath, value, type);
+		this._configurations.setSetting(configurationFileName, settingPath, value, type.toString());
 	}
 	
-	public void deleteSetting(String configurationFileName,String settingPath) throws RemoteException {
-		this._configurations.deleteSetting(configurationFileName, settingPath);
-	}
+//	public void deleteSetting(String configurationFileName,String settingPath) throws RemoteException {
+//		this._configurations.deleteSetting(configurationFileName, settingPath);
+//	}
 	
-	public void deleteSection(String configurationFileName,String sectionPath) throws RemoteException {
-		this._configurations.deleteSection(configurationFileName, sectionPath);
-	}
+//	public void deleteSection(String configurationFileName,String sectionPath) throws RemoteException {
+//		this._configurations.deleteSection(configurationFileName, sectionPath);
+//	}
 	
 	public boolean log(String logName, String callResultXml) throws RemoteException {
 		return _configurations.log(logName,callResultXml);

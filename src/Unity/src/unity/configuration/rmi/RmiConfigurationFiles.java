@@ -109,9 +109,7 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
 	}
 
 	@Override
-	public String getSetting(String configurationFileName, String settingPath,
-			String defaultValue, String type, Boolean setIfNotFound)
-			throws RemoteException {
+	public String getSetting(String configurationFileName, String settingPath, String defaultValue, String type, Boolean setIfNotFound) throws RemoteException {
 		//ConfigurationFile configFile = null;
     	//Access the ConfigurationFile object
 		ConfigurationFile configFile = getConfigurationFile(configurationFileName);
@@ -129,8 +127,8 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
 	}
 
 	@Override
-	public SettingType getSettingType(String configurationFileName,
-			String settingPath) throws RemoteException {
+	public SettingType getSettingType(String configurationFileName, String settingPath) throws RemoteException {
+        
 		ConfigurationFile configFile = null;
     	//Access the ConfigurationFile object
     	configFile = getConfigurationFile(configurationFileName);
@@ -144,22 +142,23 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
 	}
 
 	@Override
-	public void setSetting(String configurationFileName, String settingPath,
-			String value, SettingType type) throws RemoteException {
+	public void setSetting(String configurationFileName, String settingPath, String value, String type) throws RemoteException {
 		ConfigurationFile configFile = null;
     	//Access the ConfigurationFile object
     	configFile = getConfigurationFile(configurationFileName);
     	
+    	//convert string back to setting type 
+        SettingType settingType = SettingTypeUtility.stringToSettingType(type);
+        
     	//set the setting
     	if (configFile != null) {
-    		configFile.setSetting(settingPath, value, type);
+    		configFile.setSetting(settingPath, value, settingType);
     	}
 
 	}
 
 	@Override
-	public void deleteSetting(String configurationFileName, String settingPath)
-			throws RemoteException {
+	public void deleteSetting(String configurationFileName, String settingPath) throws RemoteException {
 		ConfigurationFile configFile = null;
     	//Access the ConfigurationFile object
     	configFile = getConfigurationFile(configurationFileName);
@@ -172,8 +171,7 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
 	}
 
 	@Override
-	public void deleteSection(String configurationFileName, String sectionPath)
-			throws RemoteException {
+	public void deleteSection(String configurationFileName, String sectionPath) throws RemoteException {
 		ConfigurationFile configFile = null;
     	//Access the ConfigurationFile object
     	configFile = getConfigurationFile(configurationFileName);
@@ -208,8 +206,7 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
 	}
 
 	@Override
-	public Boolean log(String logName, String callResultXml)
-			throws RemoteException {
+	public Boolean log(String logName, String callResultXml) throws RemoteException {
 
 		try{
 			//We log to locations under the Unity's logs folder.  Each application
@@ -280,7 +277,7 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
 				
 			}else{				
 				//It doesn't exist; Create
-				filepath.mkdir();
+				filepath.mkdirs();
 				
 				//Check Again
 				if(filepath.exists()){

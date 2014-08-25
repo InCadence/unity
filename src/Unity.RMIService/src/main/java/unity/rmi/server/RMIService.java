@@ -7,7 +7,7 @@ import unity.configuration.ConfigurationFiles;
 import unity.configuration.SettingType;
 import unity.configuration.rmi.RmiConfigurationFiles;
 
-public class ConfigurationService {
+public class RMIService {
 
 
 	public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class ConfigurationService {
         	System.out.println("Port set to: " + args[1]);
         	RmiConfigurationFiles remoteConfigurationFiles = new RmiConfigurationFiles();
         	Naming.rebind("configurations", remoteConfigurationFiles);
-        	System.out.println("Unity service is running...");
+        	System.out.println("Unity RMI service is running...");
         }
         catch(Exception ex)
         {
