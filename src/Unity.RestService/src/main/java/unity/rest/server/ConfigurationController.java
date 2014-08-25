@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import unity.connector.rest.SettingValue;
+
 @RestController
 public class ConfigurationController {
 
@@ -15,6 +17,8 @@ public class ConfigurationController {
 			@RequestParam(value="defaultValue", required=true) String defaultValue,
 			@RequestParam(value="type", required=true) String type,
 			@RequestParam(value="setIfNotFound", required=true) String setIfNotFound) {
+		
+		
 		return new SettingValue(configurationFileName,settingPath,defaultValue,type,setIfNotFound);
 	}
 	
