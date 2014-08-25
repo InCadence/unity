@@ -1,0 +1,1 @@
+java -Dserver.port=8080 -jar target/unity-restservice-0.0.1.jar
