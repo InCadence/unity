@@ -94,51 +94,19 @@ public class CallResult {
 	 * Constructors *
 	 ****************/
 	public CallResult(){
-		
-		this(CallResults.UNKNOWN);
-		this.setDateTimeGMT();
-		
-		//get stack trace
-		StackTraceElement[] Trace = Thread.currentThread().getStackTrace();
-				
-		//need n to get last element in stack trace
-		int n = Trace.length-1;
-				
-		this._MethodName = Trace[n].getMethodName();
-		this._LineNumber = Trace[n].getLineNumber();
-		this._StackTrace = stackTracetoString(Trace);
+		this(CallResults.UNKNOWN, "", "");
 	}
 	
 	public CallResult(CallResults result, Exception ex, String moduleName){
 		
-		this(result);
-		
+		this(result, ex.getMessage(), moduleName);
 		this._Exception = ex;
-		this._Message = ex.getMessage();
-		this._ModuleName= moduleName;
-		this.setDateTimeGMT();
-		//get stack trace
-		StackTraceElement[] Trace = ex.getStackTrace();
-						
-		//need n to get last element in stack trace
-		int n = Trace.length-1;
-						
-		this._MethodName = Trace[n].getMethodName();
-		this._LineNumber = Trace[n].getLineNumber();
-		this._StackTrace = stackTracetoString(Trace);
 		
-		//debug print if any exceptions
-		if(result == CallResults.FAILED_ERROR){
-			LogOut(true, true);
-			//LogOut
-		}
 	}
 	
 	public CallResult(CallResults result, String message, String moduleName){
 
-		this(result);
-		
-		this._Exception = null;
+		this._Result = result;
 		this._Message = message;
 		this._ModuleName = moduleName;
 		this.setDateTimeGMT();
@@ -168,54 +136,18 @@ public class CallResult {
 	}
 	
 	public CallResult(CallResults result){
-		
-		this._Result = result;
-		this._Message = "";
-		this._ModuleName = "";		
-		this.setDateTimeGMT();
-		
-		//get stack trace
-		StackTraceElement[] Trace = Thread.currentThread().getStackTrace();
-		
-		//need n to get last element in stack trace
-		int n = Trace.length-1;
-		
-		this._MethodName = Trace[n].getMethodName();
-		this._LineNumber = Trace[n].getLineNumber();
-		this._StackTrace = stackTracetoString(Trace);
-		
-		if(result == CallResults.FAILED_ERROR){
-			LogOut(true, true);
-			//LogOut
-		}
+		this(result, "", "");
 	}
 	
 	//constructor to pass back object because java is pass by value only
     public CallResult(CallResults result, Object value){
 		
-		this._Result = result;
-		this._Message = "";
-		this._ModuleName = "";		
-		this.setDateTimeGMT();
-		
-		//get stack trace
-		StackTraceElement[] Trace = Thread.currentThread().getStackTrace();
-		
-		//need n to get last element in stack trace
-		int n = Trace.length-1;
-		
-		this._MethodName = Trace[n].getMethodName();
-		this._LineNumber = Trace[n].getLineNumber();
-		this._StackTrace = stackTracetoString(Trace);
-		
-		if(result == CallResults.FAILED_ERROR){
-			LogOut(true, true);
-			//LogOut
-		}
-		
+    	this(result, "", "");
+    			
 		if(result == CallResults.SUCCESS) {
 			this._ReturnValue = value;
 		}
+		
 	}
 	
 	
@@ -596,17 +528,8 @@ public class CallResult {
 			}
 			
 			if (toFile) {
-				
 				// Log to File Log 
-				LocalConfigConnector localConfigConnector = new LocalConfigConnector();
-				
-				localConfigConnector.log(appName, xml);
-                /*
-				if (this.ModuleName == "Unity.Runtime.Configuration"){//TODO: Find out what this is in the java project;
-					//do Nothing
-				} else {
-					if ()
-				}*/
+				LocalConfigConnector.log(appName, xml);
 			}
 			
 			//Return Success
