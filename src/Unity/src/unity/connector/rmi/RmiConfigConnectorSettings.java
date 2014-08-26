@@ -1,12 +1,16 @@
 package unity.connector.rmi;
 
-import unity.configuration.ConfigurationFiles;
-import unity.configuration.SettingType;
+import unity.connector.local.LocalConfigurationsConnector;
+import unity.core.runtime.SettingsBase;
 
-public class RmiConfigConnectorSettings {
+public class RmiConfigConnectorSettings extends SettingsBase {
 
-	private static String _unityAddress;
+	private static final String ConfigurationFileName = "unity.config";
 	private static Boolean _RemotingEnabled = true;
+	
+	static {
+		RmiConfigConnectorSettings.Initialize(new LocalConfigurationsConnector());
+	}
 	
 	public static String getProductName() {
 		return "ProductName";
@@ -17,24 +21,7 @@ public class RmiConfigConnectorSettings {
 	}
 	
 	public static String getAddress() {
-		if (!_RemotingEnabled) {
-			//Return Nothing if Remoting is Disabled
-			return null;
-		}
-		
-		if (_unityAddress == null &&_unityAddress.isEmpty()) {
-			//Pull Address From Config
-			ConfigurationFiles configurationFiles = new ConfigurationFiles();
-			_unityAddress = configurationFiles.getSetting("unity.config", "unity/addresses/UnityAddress", "127.0.0.1", SettingType.stString, true);
-			//TODO: find java equivalent _unityAddress = System.Configuration.ConfigurationManager.AppSettings("UnityServer");
-			
-			//is set?
-			if (_unityAddress == null &&_unityAddress.isEmpty()) {
-				//Default to Localhost
-				_unityAddress = "127.0.0.1";
-			}
-		}
-		return _unityAddress;
+		return RmiConfigConnectorSettings.GetSetting(ConfigurationFileName, "unity/addresses/UnityAddress", "127.0.0.1", true);
 	}
 
 	public static Boolean getRemotingEnabled() {

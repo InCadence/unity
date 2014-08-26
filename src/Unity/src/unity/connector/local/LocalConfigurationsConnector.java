@@ -43,8 +43,8 @@ public class LocalConfigurationsConnector implements IConfigurationsConnector{
 	}*/
 	
 	@Override
-	public void setSetting(String configurationFileName,String settingPath, String value, SettingType type) {
-		this._localConfigurations.setSetting(configurationFileName, settingPath, value, type);
+	public boolean setSetting(String configurationFileName,String settingPath, String value, SettingType type) {
+		return this._localConfigurations.setSetting(configurationFileName, settingPath, value, type);
 	}
 	
 	public void deleteSetting(String configurationFileName,String settingPath) {

@@ -99,7 +99,7 @@ public class RestConfigurationsConnector implements IConfigurationsConnector{
 	}
 
 	@Override
-	public void setSetting(String configurationFileName, String settingPath, String value, SettingType settingType) {
+	public boolean setSetting(String configurationFileName, String settingPath, String value, SettingType settingType) {
 		        
 		RestTemplate restTemplate = new RestTemplate();
 		        
@@ -126,6 +126,8 @@ public class RestConfigurationsConnector implements IConfigurationsConnector{
 				+ "value={value}&"
 				+ "type={type}&",
 						ConfigurationValue.class, hashMap);
+		
+		return true;
 
 	}
 

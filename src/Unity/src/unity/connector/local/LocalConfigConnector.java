@@ -84,14 +84,19 @@ public class LocalConfigConnector {
 	 * "Unity.Runtime.ConfigConnector"); } }
 	 */
 
-	public static void setSetting(String configurationFileName, String settingPath, String value, SettingType type) {
+	public static boolean setSetting(String configurationFileName, String settingPath, String value, SettingType type) {
 		try {
 			// call on the connector
 			_connector.setSetting(configurationFileName, settingPath, value, type);
+			
+			return true;
 
 		} catch (Exception ex) {
 			// Log Failed Error
-			new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			CallResult.log(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
+			
+			return false;
+			
 		}
 	}
 

@@ -1,5 +1,6 @@
 package Unity.UnitTest.Rest;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -9,8 +10,10 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import Unity.UnitTest.TestSettings;
 import unity.configuration.SettingType;
 import unity.connector.rest.RestConfigConnector;
+import unity.connector.rest.RestConfigurationsConnector;
 import unity.core.runtime.CallResult;
 import unity.core.runtime.CallResult.CallResults;
 
@@ -31,7 +34,9 @@ public class UnityRestConnectorTests {
 		_testIntValue = randomInt;
 		
 		RestConfigConnector.initialize("localhost", 8080);
-
+		
+		TestSettings.Initialize(new RestConfigurationsConnector("localhost", 8080));
+		
 	}
 	
 	@Test
@@ -77,6 +82,26 @@ public class UnityRestConnectorTests {
 	public void TestAddLogEntry() {
 		CallResult rst = new CallResult(CallResults.SUCCESS);
 		RestConfigConnector.log("TestLogName.log", rst.toXML(true));
+	}
+	
+	@Test
+	public void TestSettingsClass() {
+		
+		assertTrue("Failed Set", TestSettings.setTestStringSetting(_testStringValue));
+		assertTrue("Failed Set", TestSettings.setTestIntSetting(_testIntValue));
+		assertTrue("Failed Set", TestSettings.setTestBooleanSetting(true));
+
+		TestSettings.ClearCache();
+		
+		assertTrue("Mismatch", _testStringValue == TestSettings.getTestStringSetting());
+		assertTrue("Mismatch", _testIntValue == TestSettings.getTestIntSetting());
+		assertTrue("Mismatch", TestSettings.getTestBooleanSetting());
+
+		assertTrue("Failed Set", TestSettings.setTestBooleanSetting(false));
+
+		TestSettings.ClearCache();
+
+		assertFalse("Mismatch", TestSettings.getTestBooleanSetting());
 	}
 
 	@After

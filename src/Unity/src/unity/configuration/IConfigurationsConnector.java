@@ -10,7 +10,7 @@ public interface IConfigurationsConnector {
 	//public ConfigurationNode getSection(String configurationFileName,String sectionPath); public String[] getSectionList(String configurationFileName,String sectionPath);
 	 
 
-	public void setSetting(String configurationFileName, String settingPath,String value, SettingType type);
+	public boolean setSetting(String configurationFileName, String settingPath,String value, SettingType type);
 
 	//public void deleteSetting(String configurationFileName, String settingPath);
 

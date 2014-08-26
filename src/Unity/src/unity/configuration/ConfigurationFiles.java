@@ -123,7 +123,7 @@ public class ConfigurationFiles {
     	return null;
 	}*/
 	
-    public void setSetting(String configurationFileName, String settingPath, String value, SettingType type) {
+    public boolean setSetting(String configurationFileName, String settingPath, String value, SettingType type) {
     	ConfigurationFile configFile = null;
     	//Access the ConfigurationFile object
     	configFile = getConfigurationFile(configurationFileName);
@@ -132,6 +132,8 @@ public class ConfigurationFiles {
     	if (configFile != null) {
     		configFile.setSetting(settingPath, value, type);
     	}
+    	
+    	return true;
     }
     
     public void deleteSetting(String configurationFileName, String settingPath) {
