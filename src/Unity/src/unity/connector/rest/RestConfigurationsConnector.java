@@ -86,7 +86,7 @@ public class RestConfigurationsConnector implements IConfigurationsConnector{
 		hashMap.put("setIfNotFound", setIfNotFound.toString());
 		
 		//call to rest service
-		String value =  restTemplate.getForObject("http://"+_address+"/configuration/reader?"
+		String value =  restTemplate.getForObject("http://"+_address+"/configuration?"
 				+ "configurationFileName={configurationFileName}&"
 				+ "settingPath={settingPath}&"
 				+ "defaultValue={defaultValue}&"
@@ -120,12 +120,12 @@ public class RestConfigurationsConnector implements IConfigurationsConnector{
 		hashMap.put("type", type);
 				
 		//call to rest service
-		restTemplate.getForObject("http://"+_address+"/configuration/writer?"
+		restTemplate.postForObject("http://"+_address+"/configuration?"
 				+ "configurationFileName={configurationFileName}&"
 				+ "settingPath={settingPath}&"
 				+ "value={value}&"
 				+ "type={type}&",
-						ConfigurationValue.class, hashMap);
+				new ConfigurationValue(), ConfigurationValue.class, hashMap);
 		
 		return true;
 
@@ -143,10 +143,10 @@ public class RestConfigurationsConnector implements IConfigurationsConnector{
 			hashMap.put("callResultXml", URLEncoder.encode(callResultXml, "UTF-8") );
 			
 			//call to rest service
-			UnityLog logResult = restTemplate.getForObject("http://"+_address+"/log?"
+			UnityLog logResult = restTemplate.postForObject("http://"+_address+"/log?"
 					+ "logName={logName}&"
 					+ "callResultXml={callResultXml}&",
-					UnityLog.class, hashMap);
+					new UnityLog(), UnityLog.class, hashMap);
 			//return success
 			return Boolean.parseBoolean(logResult.getResult());
 			

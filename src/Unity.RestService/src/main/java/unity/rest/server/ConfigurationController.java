@@ -1,6 +1,7 @@
 package unity.rest.server;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +12,7 @@ import unity.connector.rest.UnityLog;
 public class ConfigurationController {
 
     
-	@RequestMapping("/configuration/reader")
+	@RequestMapping(value = "/configuration", method = RequestMethod.GET)
 	public ConfigurationValue getSetting(
 			@RequestParam(value="configurationFileName", required=true) String configurationFileName,
 			@RequestParam(value="settingPath", required=true) String settingPath,
@@ -22,7 +23,7 @@ public class ConfigurationController {
 		
 	}
 	
-	@RequestMapping("/configuration/writer")
+	@RequestMapping(value = "/configuration", method = RequestMethod.POST)
 	public ConfigurationValue setSetting(
 			@RequestParam(value="configurationFileName", required=true) String configurationFileName,
 			@RequestParam(value="settingPath", required=true) String settingPath,
@@ -31,7 +32,7 @@ public class ConfigurationController {
 		return new ConfigurationValue(configurationFileName,settingPath,value,type);
 	}
 	
-	@RequestMapping("/log")
+	@RequestMapping(value = "/log", method = RequestMethod.POST)
 	public UnityLog log(
 			@RequestParam(value="logName", required=true) String logName,
 			@RequestParam(value="callResultXml", required=true) String callResultXml) {

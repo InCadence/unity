@@ -8,6 +8,7 @@
   <properties>
   	<unityVersion>0.0.1</unityVersion>
   	<unityRMIVersion>0.0.1</unityRMIVersion>
+  	<unityRestVersion>0.0.1</unityRestVersion>
   </properties>
   <dependencyManagement>
   	<dependencies>
