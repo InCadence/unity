@@ -1,13 +1,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>unity</groupId>
   <artifactId>unity-rmiservice</artifactId>
-  <version>0.0.1</version>
+  <groupId>unity</groupId>
+  <version>${unityRMIVersion}</version>
+  <parent>
+  	<groupId>unity</groupId>
+  	<artifactId>unity-pom</artifactId>
+  	<version>0.0.1</version>
+  </parent>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>unity</groupId>
+  			<artifactId>unity-bom</artifactId>
+  			<version>0.0.1</version>
+  			<type>pom</type>
+  			<scope>import</scope>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
   <dependencies>
   	<dependency>
   		<groupId>unity</groupId>
   		<artifactId>unity-core</artifactId>
-  		<version>0.0.1</version>
   	</dependency>
   </dependencies>
 </project>

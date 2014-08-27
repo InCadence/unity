@@ -30,13 +30,12 @@
         	<version>2.10.2</version>
         </dependency>
         <dependency>
-        	<groupId>unity</groupId>
-        	<artifactId>unity-core</artifactId>
-        	<version>0.0.1</version>
-        </dependency>
-        <dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-log4j</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>unity</groupId>
+        	<artifactId>unity-core</artifactId>
         </dependency>
     </dependencies>
 
@@ -62,25 +61,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!--  
-            <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.3</version>
-            <configuration>
-                <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>make-assembly</id>  this is used for inheritance merges 
-                    <phase>package</phase> bind to the packaging phase 
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>-->
         </plugins>
     </build>
 
@@ -96,4 +76,15 @@
             <url>http://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
+    <dependencyManagement>
+    	<dependencies>
+    		<dependency>
+    			<groupId>unity</groupId>
+    			<artifactId>unity-bom</artifactId>
+    			<version>0.0.1</version>
+    			<type>pom</type>
+    			<scope>import</scope>
+    		</dependency>
+    	</dependencies>
+    </dependencyManagement>
 </project>
