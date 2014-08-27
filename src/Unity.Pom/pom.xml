@@ -13,5 +13,6 @@
   	<groupId>unity</groupId>
   	<artifactId>unity-bom</artifactId>
   	<version>0.0.1</version>
+  	<relativePath>../Unity.Bom</relativePath>
   </parent>
 </project>

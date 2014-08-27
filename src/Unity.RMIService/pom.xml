@@ -7,6 +7,7 @@
   	<groupId>unity</groupId>
   	<artifactId>unity-pom</artifactId>
   	<version>0.0.1</version>
+  	<relativePath>../Unity.Pom</relativePath>
   </parent>
   <dependencyManagement>
   	<dependencies>

@@ -5,7 +5,7 @@
 
     <groupId>unity</groupId>
     <artifactId>unity-restservice</artifactId>
-    <version>${unityRestVersion}</version>
+    <version>0.0.1</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
