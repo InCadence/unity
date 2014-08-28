@@ -36,7 +36,7 @@ public class RmiConfigurationsConnector{
 	
 	public void comInitialize(Integer port, String address) {
 		
-		if (address == null && address.isEmpty()) {
+		if (address == null || address.isEmpty()) {
 			try {
 				this._configurations = new RmiConfigurationFiles();
 			} catch (RemoteException e) {
