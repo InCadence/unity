@@ -19,8 +19,10 @@ public class ConfigurationFile implements IConfigurationFile {
 
     private String _fileName;
     private XMLConfiguration _xmlDoc;
-    private Byte _key;
-    private Byte _IV;
+
+    // TODO: Implement Encryption
+    // private Byte _key;
+    // private Byte _IV;
 
     /***************************
      * Constructors *
@@ -857,16 +859,13 @@ public class ConfigurationFile implements IConfigurationFile {
         }
     }
 
-    private static final String[] EMPTY_STRING_ARRAY = new String[0];
-
-    private String[] settingPathPartsToSectionPathParts(String[] pathParts)
-    {
-        int pathPartsLength = pathParts.length;
-        List<String> list = new ArrayList<String>(Arrays.asList(pathParts));
-        list.remove(pathPartsLength - 1);
-        // list.removeAll(Arrays.asList("a"));
-        return list.toArray(EMPTY_STRING_ARRAY);
-    }
+    /*
+     * private static final String[] EMPTY_STRING_ARRAY = new String[0];
+     * 
+     * private String[] settingPathPartsToSectionPathParts(String[] pathParts) { int pathPartsLength = pathParts.length;
+     * List<String> list = new ArrayList<String>(Arrays.asList(pathParts)); list.remove(pathPartsLength - 1); //
+     * list.removeAll(Arrays.asList("a")); return list.toArray(EMPTY_STRING_ARRAY); }
+     */
 
     protected Boolean hasAttribute(ConfigurationNode node, String attributeName)
     {

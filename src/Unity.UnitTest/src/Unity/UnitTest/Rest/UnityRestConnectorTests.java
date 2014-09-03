@@ -116,7 +116,7 @@ public class UnityRestConnectorTests {
 
             CallResult rst = new CallResult(CallResults.SUCCESS);
             RestConfigConnector.log("TestLogName.log", rst.toXML(true));
-
+            
         }
         catch (Exception ex)
         {
