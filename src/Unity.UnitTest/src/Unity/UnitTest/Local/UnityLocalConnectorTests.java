@@ -27,7 +27,7 @@ public class UnityLocalConnectorTests {
 		int randomInt = randomGenerator.nextInt(100);
 		
 		// Create Test Data
-		_testStringValue = "Matthew" + randomInt;
+		_testStringValue = "Matthew" + randomInt + "local";
 		_testIntValue = randomInt;
 
 	}
@@ -41,13 +41,13 @@ public class UnityLocalConnectorTests {
 			int intValue;
 			
 			// Local Configuration
-			LocalConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue + "local", SettingType.stString);
+			LocalConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.stString);
 			LocalConfigConnector.setSetting("app.config", "app/section1/random", Integer.toString(_testIntValue), SettingType.stInteger);
 			
 			value = LocalConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.stString, false);
 			intValue = Integer.parseInt(LocalConfigConnector.getSetting("app.config", "app/section1/random", "", SettingType.stInteger, false));
 			
-			assertTrue("Mismatch", value.equals(_testStringValue + "local"));
+			assertTrue("Mismatch", value.equals(_testStringValue));
 			assertTrue("Mismatch", _testIntValue == intValue);
 
 		} catch (Exception ex) {

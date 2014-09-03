@@ -136,7 +136,7 @@ public class UnityRestConnectorTests {
 
             TestSettings.ClearCache();
 
-            assertTrue("Mismatch", _testStringValue == TestSettings.getTestStringSetting());
+            assertTrue("Mismatch", _testStringValue.equals(TestSettings.getTestStringSetting()));
             assertTrue("Mismatch", _testIntValue == TestSettings.getTestIntSetting());
             assertTrue("Mismatch", TestSettings.getTestBooleanSetting());
 
