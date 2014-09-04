@@ -2,13 +2,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>unity</groupId>
   <artifactId>unity-bom</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Unity.bom</name>
   <properties>
-  	<unityVersion>0.0.1</unityVersion>
-  	<unityRMIVersion>0.0.1</unityRMIVersion>
-  	<unityRestVersion>0.0.1</unityRestVersion>
+  	<unityVersion>0.0.1-SNAPSHOT</unityVersion>
+  	<unityRMIVersion>0.0.1-SNAPSHOT</unityRMIVersion>
+  	<unityRestVersion>0.0.1-SNAPSHOT</unityRestVersion>
   </properties>
   <dependencyManagement>
   	<dependencies>
