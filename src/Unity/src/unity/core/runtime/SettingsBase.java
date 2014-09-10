@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 import unity.configuration.IConfigurationsConnector;
 import unity.configuration.SettingType;
+import unity.connector.local.LocalConfigurationsConnector;
 
 /*-----------------------------------------------------------------------------'
 Copyright 2014 - InCadence Strategic Solutions Inc., All Rights Reserved
@@ -29,7 +30,7 @@ public class SettingsBase {
     --------------------------------------------------------------------------*/
 
 	private static Hashtable<String, String> _Cache = null;
-	private static IConfigurationsConnector _Connector;
+	private static IConfigurationsConnector _Connector = new LocalConfigurationsConnector();
 
     /*--------------------------------------------------------------------------
 		Public Functions
