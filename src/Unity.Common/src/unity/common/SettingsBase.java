@@ -25,8 +25,8 @@ public class SettingsBase {
     	Private Member Variables
     --------------------------------------------------------------------------*/
 
-    private static Hashtable<String, String> _Cache = null;
-    private static IConfigurationsConnector _Connector = null;
+    private static Hashtable<String, String> _cache = null;
+    private static IConfigurationsConnector _connector = null;
 
     private static Object _cacheLock = new Object();
 
@@ -34,16 +34,16 @@ public class SettingsBase {
     	Public Functions
     --------------------------------------------------------------------------*/
 
-    public static void Initialize(IConfigurationsConnector connector)
+    public static void initialize(IConfigurationsConnector connector)
     {
-        SettingsBase._Connector = connector;
+        SettingsBase._connector = connector;
     }
 
-    public static void ClearCache()
+    public static void clearCache()
     {
         synchronized (_cacheLock)
         {
-            SettingsBase.GetCache().clear();
+            SettingsBase.getCache().clear();
         }
     }
 
@@ -51,7 +51,7 @@ public class SettingsBase {
     	Protected Functions
     --------------------------------------------------------------------------*/
 
-    protected static int GetSettingWithMin(String ConfigurationFileName,
+    protected static int getSettingWithMin(String ConfigurationFileName,
                                            String SettingPath,
                                            int DefaultValue,
                                            int MinValue,
@@ -62,7 +62,7 @@ public class SettingsBase {
         if (DefaultValue < MinValue) DefaultValue = MinValue;
 
         // Get Setting
-        int value = SettingsBase.GetSetting(ConfigurationFileName, SettingPath, DefaultValue, SetIfNotFound);
+        int value = SettingsBase.getSetting(ConfigurationFileName, SettingPath, DefaultValue, SetIfNotFound);
 
         // Ensure Setting Meets Requirement
         if (value < MinValue) value = MinValue;
@@ -71,7 +71,7 @@ public class SettingsBase {
 
     }
 
-    protected static int GetSettingWithMax(String ConfigurationFileName,
+    protected static int getSettingWithMax(String ConfigurationFileName,
                                            String SettingPath,
                                            int DefaultValue,
                                            int MaxValue,
@@ -82,7 +82,7 @@ public class SettingsBase {
         if (DefaultValue > MaxValue) DefaultValue = MaxValue;
 
         // Get Setting
-        int value = SettingsBase.GetSetting(ConfigurationFileName, SettingPath, DefaultValue, SetIfNotFound);
+        int value = SettingsBase.getSetting(ConfigurationFileName, SettingPath, DefaultValue, SetIfNotFound);
 
         // Ensure Setting Meets Requirement
         if (value > MaxValue) value = MaxValue;
@@ -91,10 +91,10 @@ public class SettingsBase {
 
     }
 
-    protected static int GetSetting(String ConfigurationFileName, String SettingPath, int DefaultValue, boolean SetIfNotFound)
+    protected static int getSetting(String ConfigurationFileName, String SettingPath, int DefaultValue, boolean SetIfNotFound)
     {
 
-        return Integer.parseInt(SettingsBase.GetSetting(ConfigurationFileName,
+        return Integer.parseInt(SettingsBase.getSetting(ConfigurationFileName,
                                                         SettingPath,
                                                         Integer.toString(DefaultValue),
                                                         SettingType.stInteger,
@@ -102,13 +102,13 @@ public class SettingsBase {
 
     }
 
-    protected static boolean GetSetting(String ConfigurationFileName,
+    protected static boolean getSetting(String ConfigurationFileName,
                                         String SettingPath,
                                         boolean DefaultValue,
                                         boolean SetIfNotFound)
     {
 
-        return Boolean.parseBoolean(SettingsBase.GetSetting(ConfigurationFileName,
+        return Boolean.parseBoolean(SettingsBase.getSetting(ConfigurationFileName,
                                                             SettingPath,
                                                             Boolean.toString(DefaultValue),
                                                             SettingType.stBoolean,
@@ -116,17 +116,17 @@ public class SettingsBase {
 
     }
 
-    protected static String GetSetting(String ConfigurationFileName,
+    protected static String getSetting(String ConfigurationFileName,
                                        String SettingPath,
                                        String DefaultValue,
                                        boolean SetIfNotFound)
     {
 
-        return SettingsBase.GetSetting(ConfigurationFileName, SettingPath, DefaultValue, SettingType.stString, SetIfNotFound);
+        return SettingsBase.getSetting(ConfigurationFileName, SettingPath, DefaultValue, SettingType.stString, SetIfNotFound);
 
     }
 
-    protected static String GetSetting(String ConfigurationFileName,
+    protected static String getSetting(String ConfigurationFileName,
                                        String SettingPath,
                                        String DefaultValue,
                                        SettingType Type,
@@ -137,22 +137,22 @@ public class SettingsBase {
         synchronized (_cacheLock)
         {
             // Normalize Key
-            String CacheKey = SettingsBase.NormalizeCacheKey(ConfigurationFileName, SettingPath);
+            String CacheKey = SettingsBase.normalizeCacheKey(ConfigurationFileName, SettingPath);
 
             // Read Value From Cache
-            value = SettingsBase.GetCache().get(CacheKey);
+            value = SettingsBase.getCache().get(CacheKey);
 
             // Value Cached?
             if (value == null)
             {
                 // No; User Defined Connector?
-                if (_Connector != null)
+                if (_connector != null)
                 {
                     // Yes; Read Configuration
-                    value = _Connector.getSetting(ConfigurationFileName, SettingPath, DefaultValue, Type, SetIfNotFound);
+                    value = _connector.getSetting(ConfigurationFileName, SettingPath, DefaultValue, Type, SetIfNotFound);
 
                     // Add to Cache
-                    SettingsBase.GetCache().put(CacheKey, value);
+                    SettingsBase.getCache().put(CacheKey, value);
                 }
                 else
                 {
@@ -166,28 +166,28 @@ public class SettingsBase {
         return value;
     }
 
-    protected static boolean SetSetting(String ConfigurationFileName, String SettingPath, int Value)
+    protected static boolean setSetting(String ConfigurationFileName, String SettingPath, int Value)
     {
 
-        return SettingsBase.SetSetting(ConfigurationFileName, SettingPath, Integer.toString(Value), SettingType.stInteger);
+        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Integer.toString(Value), SettingType.stInteger);
 
     }
 
-    protected static boolean SetSetting(String ConfigurationFileName, String SettingPath, boolean Value)
+    protected static boolean setSetting(String ConfigurationFileName, String SettingPath, boolean Value)
     {
 
-        return SettingsBase.SetSetting(ConfigurationFileName, SettingPath, Boolean.toString(Value), SettingType.stBoolean);
+        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Boolean.toString(Value), SettingType.stBoolean);
 
     }
 
-    protected static boolean SetSetting(String ConfigurationFileName, String SettingPath, String Value)
+    protected static boolean setSetting(String ConfigurationFileName, String SettingPath, String Value)
     {
 
-        return SettingsBase.SetSetting(ConfigurationFileName, SettingPath, Value, SettingType.stString);
+        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Value, SettingType.stString);
 
     }
 
-    protected static boolean SetSetting(String ConfigurationFileName, String SettingPath, String Value, SettingType Type)
+    protected static boolean setSetting(String ConfigurationFileName, String SettingPath, String Value, SettingType Type)
     {
 
         boolean Updated = true;
@@ -195,19 +195,19 @@ public class SettingsBase {
         synchronized (_cacheLock)
         {
             // Normalize Key
-            String CacheKey = SettingsBase.NormalizeCacheKey(ConfigurationFileName, SettingPath);
+            String CacheKey = SettingsBase.normalizeCacheKey(ConfigurationFileName, SettingPath);
 
             // Setting Not Cached or Modified?
-            if (!SettingsBase.GetCache().containsKey(CacheKey) || SettingsBase.GetCache().get(CacheKey) != Value)
+            if (!SettingsBase.getCache().containsKey(CacheKey) || SettingsBase.getCache().get(CacheKey) != Value)
             {
 
                 // Yes; Replace Cached Value
-                SettingsBase.GetCache().put(CacheKey, Value);
+                SettingsBase.getCache().put(CacheKey, Value);
 
                 // Update Configuration File
-                if (_Connector != null)
+                if (_connector != null)
                 {
-                    Updated = _Connector.setSetting(ConfigurationFileName, SettingPath, Value, Type);
+                    Updated = _connector.setSetting(ConfigurationFileName, SettingPath, Value, Type);
                 }
 
             }
@@ -217,7 +217,7 @@ public class SettingsBase {
 
     }
 
-    protected static String NormalizeCacheKey(String ConfigurationFileName, String SettingPath)
+    protected static String normalizeCacheKey(String ConfigurationFileName, String SettingPath)
     {
 
         String CacheKey = ConfigurationFileName + "." + SettingPath;
@@ -226,19 +226,19 @@ public class SettingsBase {
 
     }
 
-    private static Hashtable<String, String> GetCache()
+    private static Hashtable<String, String> getCache()
     {
 
         // Cache Initialized?
-        if (SettingsBase._Cache == null)
+        if (SettingsBase._cache == null)
         {
 
             // No; Initialize
-            SettingsBase._Cache = new Hashtable<String, String>();
+            SettingsBase._cache = new Hashtable<String, String>();
 
         }
 
-        return SettingsBase._Cache;
+        return SettingsBase._cache;
 
     }
 

@@ -36,7 +36,7 @@ public class UnityRestConnectorTests {
 
         RestConfigConnector.initialize("localhost", 8080);
 
-        TestSettings.Initialize(new RestConfigurationsConnector("localhost", 8080));
+        TestSettings.initialize(new RestConfigurationsConnector("localhost", 8080));
 
     }
 
@@ -134,7 +134,7 @@ public class UnityRestConnectorTests {
             assertTrue("Failed Set", TestSettings.setTestIntSetting(_testIntValue));
             assertTrue("Failed Set", TestSettings.setTestBooleanSetting(true));
 
-            TestSettings.ClearCache();
+            TestSettings.clearCache();
 
             assertTrue("Mismatch", _testStringValue.equals(TestSettings.getTestStringSetting()));
             assertTrue("Mismatch", _testIntValue == TestSettings.getTestIntSetting());
@@ -142,7 +142,7 @@ public class UnityRestConnectorTests {
 
             assertTrue("Failed Set", TestSettings.setTestBooleanSetting(false));
 
-            TestSettings.ClearCache();
+            TestSettings.clearCache();
 
             assertFalse("Mismatch", TestSettings.getTestBooleanSetting());
 
