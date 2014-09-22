@@ -9,10 +9,10 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import unity.common.CallResult;
 import unity.common.SettingType;
+import unity.common.CallResult.CallResults;
 import unity.connector.local.LocalConfigConnector;
-import unity.core.runtime.CallResult;
-import unity.core.runtime.CallResult.CallResults;
 
 public class UnityLocalConnectorTests {
 

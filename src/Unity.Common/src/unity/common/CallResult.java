@@ -7,7 +7,7 @@
 // terms of the license agreement you entered into with InCadence.
 // ----------------------------------------------------------------------------------------------
 
-package unity.core.runtime;
+package unity.common;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -32,15 +32,24 @@ import org.jdom2.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import unity.connector.local.LocalConfigConnector;
-
 public class CallResult {
+
+    /*--------------------------------------------------------------------------
+    Private Member Variables
+    --------------------------------------------------------------------------*/
+
+    private static IConfigurationsConnector _connector = null;
 
     public enum CallResults
     {
         UNKNOWN, SUCCESS, FAILED, FAILED_ERROR, CANCELED, LOGINSTATUS, INFO;
 
     };
+
+    public static void initialize(IConfigurationsConnector connector)
+    {
+        CallResult._connector = connector;
+    }
 
     public static class ValueResult<T> {
 
@@ -571,12 +580,10 @@ public class CallResult {
                 }
             }
 
-            if (toFile)
+            if (toFile && _connector != null)
             {
-
                 // Log to File Log, try rest connector first
-                LocalConfigConnector.log(appName, xml);
-
+                _connector.log(appName, xml);
             }
 
             // Return Success

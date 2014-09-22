@@ -1,8 +1,8 @@
 package unity.connector.rmi;
 
+import unity.common.CallResult;
 import unity.common.SettingType;
-import unity.core.runtime.CallResult;
-import unity.core.runtime.CallResult.CallResults;
+import unity.common.CallResult.CallResults;
 
 public class RmiConfigConnector {
 

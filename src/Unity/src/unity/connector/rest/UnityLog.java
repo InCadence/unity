@@ -3,9 +3,9 @@ package unity.connector.rest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import unity.common.CallResult;
+import unity.common.CallResult.CallResults;
 import unity.connector.local.LocalConfigConnector;
-import unity.core.runtime.CallResult;
-import unity.core.runtime.CallResult.CallResults;
 
 public class UnityLog {
 

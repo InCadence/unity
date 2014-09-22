@@ -6,11 +6,11 @@ import java.util.Map;
 
 import org.springframework.web.client.RestTemplate;
 
+import unity.common.CallResult;
 import unity.common.IConfigurationsConnector;
 import unity.common.SettingType;
+import unity.common.CallResult.CallResults;
 import unity.configuration.SettingTypeUtility;
-import unity.core.runtime.CallResult;
-import unity.core.runtime.CallResult.CallResults;
 
 public class RestConfigurationsConnector implements IConfigurationsConnector {
 
