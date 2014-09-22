@@ -1,5 +1,7 @@
 package unity.configuration;
 
+import unity.common.SettingType;
+
 
 public class SettingTypeUtility {
 

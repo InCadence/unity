@@ -1,4 +1,4 @@
-package unity.configuration;
+package unity.common;
 
 public interface IConfigurationsConnector {
 

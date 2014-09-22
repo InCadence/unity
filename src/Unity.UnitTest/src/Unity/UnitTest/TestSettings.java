@@ -1,5 +1,6 @@
 package Unity.UnitTest;
-import unity.core.runtime.SettingsBase;
+
+import unity.common.SettingsBase;
 
 public final class TestSettings extends SettingsBase {
 	

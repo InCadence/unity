@@ -3,8 +3,8 @@ package unity.configuration.rmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import unity.common.SettingType;
 import unity.configuration.ConfigurationFile;
-import unity.configuration.SettingType;
 
 public interface IRmiConfigurationFiles extends Remote {
 

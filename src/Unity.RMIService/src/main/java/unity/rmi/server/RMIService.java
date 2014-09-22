@@ -3,8 +3,8 @@ package unity.rmi.server;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 
+import unity.common.SettingType;
 import unity.configuration.ConfigurationFiles;
-import unity.configuration.SettingType;
 import unity.configuration.rmi.RmiConfigurationFiles;
 
 public class RMIService {

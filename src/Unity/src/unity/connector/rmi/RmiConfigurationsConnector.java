@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import unity.configuration.SettingType;
+import unity.common.SettingType;
 import unity.configuration.rmi.IRmiConfigurationFiles;
 import unity.configuration.rmi.RmiConfigurationFiles;
 

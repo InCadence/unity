@@ -4,6 +4,7 @@
   <packaging>pom</packaging>
   <modules>
   <module>../Unity</module>
+  <module>../Unity.Common</module>
   <module>../Unity.RMIService</module>
   <module>../Unity.RestService</module>
   </modules>

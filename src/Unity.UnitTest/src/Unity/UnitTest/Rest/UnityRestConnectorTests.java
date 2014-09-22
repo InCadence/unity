@@ -10,12 +10,12 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Unity.UnitTest.TestSettings;
-import unity.configuration.SettingType;
+import unity.common.SettingType;
 import unity.connector.rest.RestConfigConnector;
 import unity.connector.rest.RestConfigurationsConnector;
 import unity.core.runtime.CallResult;
 import unity.core.runtime.CallResult.CallResults;
+import Unity.UnitTest.TestSettings;
 
 public class UnityRestConnectorTests {
 

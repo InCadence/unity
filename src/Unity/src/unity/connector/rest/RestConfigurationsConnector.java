@@ -3,9 +3,11 @@ package unity.connector.rest;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.springframework.web.client.RestTemplate;
-import unity.configuration.IConfigurationsConnector;
-import unity.configuration.SettingType;
+
+import unity.common.IConfigurationsConnector;
+import unity.common.SettingType;
 import unity.configuration.SettingTypeUtility;
 import unity.core.runtime.CallResult;
 import unity.core.runtime.CallResult.CallResults;

@@ -11,6 +11,8 @@ import org.apache.commons.configuration.tree.ConfigurationNode;
 import org.apache.commons.configuration.tree.DefaultConfigurationNode;
 import org.apache.commons.io.FileUtils;
 
+import unity.common.SettingType;
+
 public class ConfigurationFile implements IConfigurationFile {
 
     /***************************

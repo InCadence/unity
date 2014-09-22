@@ -2,6 +2,8 @@ package unity.configuration;
 
 import org.apache.commons.configuration.tree.ConfigurationNode;
 
+import unity.common.SettingType;
+
 public interface IConfigurationFile {
 
 	

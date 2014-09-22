@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.TimeZone;
 
-import unity.configuration.SettingType;
+import unity.common.SettingType;
 import unity.logger.adapter.LoggerAdapter;
 import unity.logger.log4j.CallResultLogger;
 

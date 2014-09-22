@@ -1,7 +1,7 @@
 package unity.connector.rest;
 
 
-import unity.configuration.SettingType;
+import unity.common.SettingType;
 import unity.core.runtime.CallResult;
 import unity.core.runtime.CallResult.CallResults;
 

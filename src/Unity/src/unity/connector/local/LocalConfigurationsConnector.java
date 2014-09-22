@@ -1,8 +1,8 @@
 package unity.connector.local;
 
+import unity.common.IConfigurationsConnector;
+import unity.common.SettingType;
 import unity.configuration.ConfigurationFiles;
-import unity.configuration.IConfigurationsConnector;
-import unity.configuration.SettingType;
 
 public class LocalConfigurationsConnector implements IConfigurationsConnector{
 

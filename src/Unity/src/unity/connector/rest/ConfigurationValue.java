@@ -1,7 +1,7 @@
 package unity.connector.rest;
 
+import unity.common.SettingType;
 import unity.configuration.ConfigurationFiles;
-import unity.configuration.SettingType;
 import unity.configuration.SettingTypeUtility;
 
 public class ConfigurationValue  {

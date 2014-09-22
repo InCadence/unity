@@ -1,7 +1,7 @@
 package unity.connector.rmi;
 
+import unity.common.SettingsBase;
 import unity.connector.local.LocalConfigurationsConnector;
-import unity.core.runtime.SettingsBase;
 
 public class RmiConfigConnectorSettings extends SettingsBase {
 

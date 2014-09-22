@@ -9,6 +9,7 @@
   	<unityVersion>0.0.1-SNAPSHOT</unityVersion>
   	<unityRMIVersion>0.0.1-SNAPSHOT</unityRMIVersion>
   	<unityRestVersion>0.0.1-SNAPSHOT</unityRestVersion>
+  	<unityCommonVersion>0.0.1-SNAPSHOT</unityCommonVersion>
   </properties>
   <dependencyManagement>
   	<dependencies>
@@ -16,6 +17,11 @@
   			<groupId>unity</groupId>
   			<artifactId>unity-core</artifactId>
   			<version>${unityVersion}</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>unity</groupId>
+  			<artifactId>unity-common</artifactId>
+  			<version>${unityCommonVersion}</version>
   		</dependency>
   	</dependencies>
   </dependencyManagement>

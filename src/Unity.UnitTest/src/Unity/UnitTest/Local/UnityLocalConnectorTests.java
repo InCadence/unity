@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import unity.configuration.SettingType;
+import unity.common.SettingType;
 import unity.connector.local.LocalConfigConnector;
 import unity.core.runtime.CallResult;
 import unity.core.runtime.CallResult.CallResults;

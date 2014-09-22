@@ -24,6 +24,10 @@
   		<groupId>unity</groupId>
   		<artifactId>unity-core</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>unity</groupId>
+  		<artifactId>unity-common</artifactId>
+  	</dependency>
   </dependencies>
   <properties>
   	<start-class>unity.rmi.server.RMIService</start-class>
