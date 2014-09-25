@@ -3,32 +3,47 @@ package Unity.UnitTest;
 import unity.common.SettingsBase;
 
 public final class TestSettings extends SettingsBase {
-	
-	private static final String ConfigurationFileName = "test.config";
-	
-	public static String getTestStringSetting() {
-		return TestSettings.getSetting(ConfigurationFileName, "/test/teststring", "", true);
-	}
-	
-	public static boolean setTestStringSetting(String value) {
-		return TestSettings.setSetting(ConfigurationFileName, "/test/teststring", value);
-	}
-	
-	public static boolean getTestBooleanSetting() {
-		return TestSettings.getSetting(ConfigurationFileName, "/test/testboolean", false, true);
-	}
-	
-	public static boolean setTestBooleanSetting(boolean value) {
-		return TestSettings.setSetting(ConfigurationFileName, "/test/testboolean", value);
-	}
 
-	public static int getTestIntSetting() {
-		return TestSettings.getSetting(ConfigurationFileName, "/test/testint", 10, true);
-	}
-	
-	public static boolean setTestIntSetting(int value) {
-		return TestSettings.setSetting(ConfigurationFileName, "/test/testint", value);
-	}
+    private static final String ConfigurationFileName = "test.config";
 
-	
+    public static String getTestStringSetting(String variableName)
+    {
+        return TestSettings.getSetting(ConfigurationFileName, "/test/" + variableName, "", true);
+    }
+
+    public static boolean setTestStringSetting(String variableName, String value)
+    {
+        return TestSettings.setSetting(ConfigurationFileName, "/test/" + variableName, value);
+    }
+
+    public static boolean getTestBooleanSetting(String variableName)
+    {
+        return TestSettings.getSetting(ConfigurationFileName, "/test/" + variableName, false, true);
+    }
+
+    public static boolean setTestBooleanSetting(String variableName, boolean value)
+    {
+        return TestSettings.setSetting(ConfigurationFileName, "/test/" + variableName, value);
+    }
+
+    public static int getTestIntSetting(String variableName)
+    {
+        return TestSettings.getSetting(ConfigurationFileName, "/test/" + variableName, 10, true);
+    }
+
+    public static boolean setTestIntSetting(String variableName, int value)
+    {
+        return TestSettings.setSetting(ConfigurationFileName, "/test/" + variableName, value);
+    }
+
+    public static int getSettingWithMin(String variableName, int defaultValue, int minValue)
+    {
+        return getSettingWithMin(ConfigurationFileName, "/test/" + variableName, defaultValue, minValue, true);
+    }
+
+    public static int getSettingWithMax(String variableName, int defaultValue, int maxValue)
+    {
+        return getSettingWithMax(ConfigurationFileName, "/test/" + variableName, defaultValue, maxValue, true);
+    }
+
 }

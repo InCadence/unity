@@ -130,21 +130,21 @@ public class UnityRestConnectorTests {
 
         try
         {
-            assertTrue("Failed Set", TestSettings.setTestStringSetting(_testStringValue));
-            assertTrue("Failed Set", TestSettings.setTestIntSetting(_testIntValue));
-            assertTrue("Failed Set", TestSettings.setTestBooleanSetting(true));
+            assertTrue("Failed Set", TestSettings.setTestStringSetting("StringVar", _testStringValue));
+            assertTrue("Failed Set", TestSettings.setTestIntSetting("IntVar", _testIntValue));
+            assertTrue("Failed Set", TestSettings.setTestBooleanSetting("BoolVar", true));
 
             TestSettings.clearCache();
 
-            assertTrue("Mismatch", _testStringValue.equals(TestSettings.getTestStringSetting()));
-            assertTrue("Mismatch", _testIntValue == TestSettings.getTestIntSetting());
-            assertTrue("Mismatch", TestSettings.getTestBooleanSetting());
+            assertTrue("Mismatch", _testStringValue.equals(TestSettings.getTestStringSetting("StringVar")));
+            assertTrue("Mismatch", _testIntValue == TestSettings.getTestIntSetting("IntVar"));
+            assertTrue("Mismatch", TestSettings.getTestBooleanSetting("BoolVar"));
 
-            assertTrue("Failed Set", TestSettings.setTestBooleanSetting(false));
+            assertTrue("Failed Set", TestSettings.setTestBooleanSetting("BoolVar", false));
 
             TestSettings.clearCache();
 
-            assertFalse("Mismatch", TestSettings.getTestBooleanSetting());
+            assertFalse("Mismatch", TestSettings.getTestBooleanSetting("BoolVar"));
 
         }
         catch (Exception ex)
