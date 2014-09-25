@@ -167,10 +167,7 @@ public class RmiConfigConnector {
         }
         catch (Exception ex)
         {
-            // testing
-            System.out.println(ex);
-
-            new CallResult(CallResults.FAILED_ERROR, ex, "Unity.Runtime.ConfigConnector");
+            CallResult.log(CallResults.FAILED_ERROR, ex, "Unity.Runtime.ConfigConnector");
             return false;
         }
     }
