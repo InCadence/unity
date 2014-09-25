@@ -12,7 +12,6 @@ import java.util.TimeZone;
 import unity.common.SettingType;
 import unity.configuration.ConfigurationFile;
 import unity.configuration.SettingTypeUtility;
-import unity.logger.adapter.LoggerAdapter;
 import unity.logger.log4j.CallResultLogger;
 
 public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiConfigurationFiles {
@@ -286,8 +285,7 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
                 }
 
                 // Append to Log File
-                LoggerAdapter loggeradapter = new CallResultLogger();
-                loggeradapter.toXmlFileLog(logFileName, callResultXml);
+                CallResultLogger.toXmlFileLog(logFileName, callResultXml);
                 return true;
             }
             else

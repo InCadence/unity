@@ -1,119 +1,58 @@
 package unity.logger.log4j;
 
-import java.io.File;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import unity.logger.adapter.LoggerAdapter;
+import unity.common.CallResult.CallResults;
 
-public class CallResultLogger implements LoggerAdapter {
+public class CallResultLogger {
 
     private static Logger filelogger = LogManager.getLogger("filelogger");
     private static Logger consolelogger = LogManager.getLogger("consolelogger");
     private static Logger emaillogger = LogManager.getLogger("emaillogger");
     private static Logger xmllogger = LogManager.getLogger("xmllogger");
 
-    public CallResultLogger()
+    public static void toFileLog(CallResults logLevel, String logFileLocation, String logEntry)
     {
-        // creates log4j2 xml file if not found. Currently not needed.
-        // MyXMLConfiguration config = new MyXMLConfiguration();
+        toLog(filelogger, logLevel, logEntry);
     }
 
-    public void toFileLog(EventLogEntryType logLevel, String logFileLocation, String logEntry)
+    public static void toConsoleLog(CallResults logLevel, String logEntry)
     {
-
-        try
-        {
-
-            File logFilename = new File(logFileLocation, "events.log");
-            System.setProperty("logFilename", logFilename.getAbsolutePath());
-
-            org.apache.logging.log4j.core.LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
-            context.reconfigure();
-
-            switch (logLevel) {
-
-            case WARNING:
-                filelogger.warn(logEntry);
-                break;
-            case ERROR:
-                filelogger.error(logEntry);
-                break;
-            default:
-                filelogger.info(logEntry);
-            }
-        }
-        catch (Exception ex)
-        {
-            // do something
-        }
+        toLog(consolelogger, logLevel, logEntry);
     }
 
-    public void toConsoleLog(EventLogEntryType logLevel, String logEntry)
+    public static void toEmailLog(CallResults logLevel, String logEntry)
     {
-
-        try
-        {
-            switch (logLevel) {
-
-            case WARNING:
-                consolelogger.warn(logEntry);
-                break;
-            case ERROR:
-                consolelogger.error(logEntry);
-                break;
-            default:
-                consolelogger.info(logEntry);
-            }
-        }
-        catch (Exception ex)
-        {
-            // do something
-        }
+        toLog(emaillogger, logLevel, logEntry);
     }
 
-    public void toEmailLog(EventLogEntryType logLevel, String logEntry)
+    public static void toXmlFileLog(String logFilename, String callResultXml)
     {
+        System.setProperty("logFilename", logFilename);
 
-        try
-        {
-            switch (logLevel) {
+        org.apache.logging.log4j.core.LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+        context.reconfigure();
 
-            case WARNING:
-                emaillogger.warn(logEntry);
-                break;
-            case ERROR:
-                emaillogger.error(logEntry);
-                break;
-            default:
-                emaillogger.info(logEntry);
-            }
-        }
-        catch (Exception ex)
-        {
-            // do something
-        }
+        xmllogger.info(callResultXml);
     }
 
-    public void toXmlFileLog(String logFilename, String callResultXml)
+    private static void toLog(Logger logger, CallResults logLevel, String logEntry)
     {
 
-        try
-        {
-            System.setProperty("logFilename", logFilename);
+        switch (logLevel) {
 
-            org.apache.logging.log4j.core.LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
-            context.reconfigure();
-
-            xmllogger.info(callResultXml);
-
+        case FAILED:
+            logger.warn(logEntry);
+            break;
+        case FAILED_ERROR:
+            logger.error(logEntry);
+            break;
+        case DEBUG:
+            logger.debug(logEntry);
+            break;
+        default:
+            logger.info(logEntry);
         }
-        catch (Exception ex)
-        {
-
-            // do something
-        }
-
     }
 }

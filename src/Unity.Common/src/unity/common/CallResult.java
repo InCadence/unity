@@ -42,13 +42,13 @@ public class CallResult {
 
     public enum CallResults
     {
-        UNKNOWN, SUCCESS, FAILED, FAILED_ERROR, CANCELED, LOGINSTATUS, INFO;
+        UNKNOWN, SUCCESS, FAILED, FAILED_ERROR, CANCELED, LOGINSTATUS, INFO, DEBUG;
 
     };
 
     public static void initialize(IConfigurationsConnector connector)
     {
-        CallResult._connector = connector;
+        _connector = connector;
     }
 
     public static class ValueResult<T> {
@@ -177,34 +177,39 @@ public class CallResult {
         return "My.Application.Info.ProductName";
     }
 
-    public boolean getIsSuccess()
+    public boolean isSuccess()
     {
         return (this._Result == CallResults.SUCCESS);
     }
 
-    public boolean getIsFailed()
+    public boolean isFailed()
     {
         return (this._Result == CallResults.FAILED);
     }
 
-    public boolean getIsFailedError()
+    public boolean isFailedError()
     {
         return (this._Result == CallResults.FAILED_ERROR);
     }
 
-    public boolean getIsCanceled()
+    public boolean isCanceled()
     {
         return (this._Result == CallResults.CANCELED);
     }
 
-    public boolean getIsInfo()
+    public boolean isInfo()
     {
         return (this._Result == CallResults.INFO);
     }
 
-    public boolean getIsLoginStatus()
+    public boolean isLoginStatus()
     {
         return (this._Result == CallResults.LOGINSTATUS);
+    }
+
+    public boolean isDebugStatus()
+    {
+        return (this._Result == CallResults.DEBUG);
     }
 
     public String getStackTrace()
@@ -557,30 +562,30 @@ public class CallResult {
             /* String appName = this.Application.Info.ProductName;//TODO: find equivalent/fix */
             String appName = "Unity";
             String xml = this.toXML(true);
-            // rst =
 
             /*
              * if(rst != callResults.SUCCESS){ return rst; }
              */
             boolean isDebug = java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments().toString().indexOf("-agentlib:jdwp") > 0;
 
-            if (toDebugPrint)
+            if (toDebugPrint && isDebug)
             {
-                System.out.println(xml);
-                if (isDebug)
-                {
-                    try
-                    {
-                        // JOptionPane.showMessageDialog(null, "CallResult: /n /n" + xml, appName,
-                        // JOptionPane.DEFAULT_OPTION);
-                    }
-                    catch (Exception ex)
-                    {
-                    }
+                switch (_Result) {
+                case DEBUG:
+                    System.out.println(this.getMessage());
+                    break;
+                case FAILED:
+                case FAILED_ERROR:
+                case INFO:
+                case UNKNOWN:
+                    System.out.println(xml);
+                    break;
+                default:
+                    break;
                 }
             }
 
-            if (toFile && _connector != null)
+            if (toFile && !this.isDebugStatus() && _connector != null)
             {
                 // Log to File Log, try rest connector first
                 _connector.log(appName, xml);

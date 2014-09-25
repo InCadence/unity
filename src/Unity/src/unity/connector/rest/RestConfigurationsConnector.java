@@ -7,9 +7,9 @@ import java.util.Map;
 import org.springframework.web.client.RestTemplate;
 
 import unity.common.CallResult;
+import unity.common.CallResult.CallResults;
 import unity.common.IConfigurationsConnector;
 import unity.common.SettingType;
-import unity.common.CallResult.CallResults;
 import unity.configuration.SettingTypeUtility;
 
 public class RestConfigurationsConnector implements IConfigurationsConnector {

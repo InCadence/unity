@@ -22,7 +22,8 @@ public interface IConfigurationsConnector {
 
     // public void deleteSection(String configurationFileName, String
     // sectionPath);
-
+    
+    
     public boolean log(String logName, String callResultXml);
 
 }

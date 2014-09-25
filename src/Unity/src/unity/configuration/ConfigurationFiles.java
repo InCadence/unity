@@ -8,7 +8,6 @@ import java.util.Hashtable;
 import java.util.TimeZone;
 
 import unity.common.SettingType;
-import unity.logger.adapter.LoggerAdapter;
 import unity.logger.log4j.CallResultLogger;
 
 public class ConfigurationFiles {
@@ -255,8 +254,7 @@ public class ConfigurationFiles {
                 }
 
                 // Append to Log File
-                LoggerAdapter loggeradapter = new CallResultLogger();
-                loggeradapter.toXmlFileLog(logFileName, callResultXml);
+                CallResultLogger.toXmlFileLog(logFileName, callResultXml);
                 return true;
             }
             else

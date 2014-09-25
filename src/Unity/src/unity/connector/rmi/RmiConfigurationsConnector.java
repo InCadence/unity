@@ -4,11 +4,12 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import unity.common.IConfigurationsConnector;
 import unity.common.SettingType;
 import unity.configuration.rmi.IRmiConfigurationFiles;
 import unity.configuration.rmi.RmiConfigurationFiles;
 
-public class RmiConfigurationsConnector {
+public class RmiConfigurationsConnector implements IConfigurationsConnector {
 
     /****************************
      * Private Member Variables
@@ -18,23 +19,9 @@ public class RmiConfigurationsConnector {
     /*********************
      * Constructors
      *********************/
-    static
-    {
-        /*
-         * Use .NET Remoting to access the Singleton Configurations object ' that is hosted and remoted by the
-         * ConfigurationsService. We ' do this in this static block because it only needs ' to be done once
-         */
-        // TODO: Find java equiv
-    }
-
     public RmiConfigurationsConnector(Integer port, String address)
     {
         comInitialize(port, address);
-    }
-
-    public RmiConfigurationsConnector()
-    {
-        // Default constructor to allow access from COM?
     }
 
     public void comInitialize(Integer port, String address)
@@ -74,19 +61,6 @@ public class RmiConfigurationsConnector {
     /*********************
      * Public Functions
      *********************/
-    public String getSetting(String configurationFileName,
-                             String settingPath,
-                             String defaultValue,
-                             String type,
-                             Boolean setIfNotFound) throws RemoteException
-    {
-        return this._configurations.getSetting(configurationFileName,
-                                               settingPath,
-                                               defaultValue,
-                                               type.toString(),
-                                               setIfNotFound);
-    }
-
     // public SettingType getSettingType(String configurationFileName,String settingPath) throws RemoteException {
     // return this._configurations.getSettingType(configurationFileName, settingPath);
     // }
@@ -98,12 +72,6 @@ public class RmiConfigurationsConnector {
     //
     // }
 
-    public void setSetting(String configurationFileName, String settingPath, String value, SettingType type)
-            throws RemoteException
-    {
-        this._configurations.setSetting(configurationFileName, settingPath, value, type.toString());
-    }
-
     // public void deleteSetting(String configurationFileName,String settingPath) throws RemoteException {
     // this._configurations.deleteSetting(configurationFileName, settingPath);
     // }
@@ -112,9 +80,52 @@ public class RmiConfigurationsConnector {
     // this._configurations.deleteSection(configurationFileName, sectionPath);
     // }
 
-    public boolean log(String logName, String callResultXml) throws RemoteException
+    @Override
+    public boolean log(String logName, String callResultXml)
     {
-        return _configurations.log(logName, callResultXml);
+        try
+        {
+            return _configurations.log(logName, callResultXml);
+        }
+        catch (RemoteException e)
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public String getSetting(String configurationFileName,
+                             String settingPath,
+                             String defaultValue,
+                             SettingType type,
+                             Boolean setIfNotFound)
+    {
+        try
+        {
+            return this._configurations.getSetting(configurationFileName,
+                                                   settingPath,
+                                                   defaultValue,
+                                                   type.toString(),
+                                                   setIfNotFound);
+        }
+        catch (RemoteException e)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean setSetting(String configurationFileName, String settingPath, String value, SettingType type)
+    {
+        try
+        {
+            this._configurations.setSetting(configurationFileName, settingPath, value, type.toString());
+            return true;
+        }
+        catch (RemoteException e)
+        {
+            return false;
+        }
     }
 
 }

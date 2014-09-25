@@ -8,7 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ 
 		Unity.UnitTest.Local.UnityLocalConnectorTests.class, 
-		Unity.UnitTest.Rest.UnityRestConnectorTests.class 
+		Unity.UnitTest.Rest.UnityRestConnectorTests.class
 	})
 public class AllTests {
 	

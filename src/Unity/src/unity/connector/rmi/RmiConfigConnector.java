@@ -60,7 +60,7 @@ public class RmiConfigConnector {
             String value = _connector.getSetting(configurationFileName,
                                                  settingPath,
                                                  defaultValue,
-                                                 type.toString(),
+                                                 type,
                                                  setIfNotFound);
 
             // return success
