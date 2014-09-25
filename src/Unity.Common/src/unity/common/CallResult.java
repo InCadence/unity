@@ -481,10 +481,7 @@ public class CallResult {
 
     public static CallResults log(CallResults result)
     {
-
-        CallResult cr = new CallResult();
-        cr.setCallResults(result);
-        return cr.LogOut(true, true);
+        return log(result, null, "", "");
     }
 
     public static CallResults log(CallResults result, String message, Object moduleObject)
@@ -496,27 +493,12 @@ public class CallResult {
     public static CallResults log(CallResults result, String message, Class<?> objectType)
     {
 
-        return log(result, message, objectType.getName());
+        return log(result, null, message, objectType.getName());
     }
 
     public static CallResults log(CallResults result, String message, String moduleName)
     {
-
-        CallResult cr = new CallResult();
-        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-
-        // set values
-        cr.setResult(result);
-        cr.setException(null);
-        cr.setMessage(message);
-        cr.setModuleName(moduleName);
-        cr.setDateTimeGMT();
-
-        int n = trace.length - 1;
-        cr.setMethodName(trace[n].getMethodName());
-        cr.setLineNumer(trace[n].getLineNumber());
-
-        return cr.LogOut(true, true);
+        return log(result, null, message, moduleName);
     }
 
     public static CallResults log(CallResults result, Exception ex, Object moduleObject)
@@ -526,18 +508,31 @@ public class CallResult {
 
     public static CallResults log(CallResults result, Exception ex, Class<?> objectType)
     {
-        return log(result, ex, objectType.getName());
+        return log(result, ex, ex.getMessage(), objectType.getName());
     }
 
-    public static CallResults log(CallResults result, Exception ex, String moduleName)
+    public static CallResults log(CallResults result, Exception ex, String message, String moduleName)
     {
+        // Is Debug Result?
+        if (result == CallResults.DEBUG)
+        {
+            // Yes; Is Debugger Attached?
+            boolean isDebug = java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments().toString().indexOf("-agentlib:jdwp") > 0;
+
+            if (!isDebug)
+            {
+                // No; Short Circuit Logic
+                return CallResults.SUCCESS;
+            }
+        }
+
         CallResult cr = new CallResult();
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
 
         // set values
         cr.setResult(result);
         cr.setException(ex);
-        cr.setMessage(ex.getMessage());
+        cr.setMessage(message);
         cr.setModuleName(moduleName);
         cr.setDateTimeGMT();
 
@@ -572,11 +567,15 @@ public class CallResult {
             {
                 switch (_Result) {
                 case DEBUG:
-                    System.out.println(this.getMessage());
+                    System.out.println("Debug: " + this.getMessage());
                     break;
                 case FAILED:
-                case FAILED_ERROR:
+                    System.out.println("Warning: " + this.getMessage());
+                    break;
                 case INFO:
+                    System.out.println("Info: " + this.getMessage());
+                    break;
+                case FAILED_ERROR:
                 case UNKNOWN:
                     System.out.println(xml);
                     break;
