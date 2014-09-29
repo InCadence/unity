@@ -17,10 +17,10 @@
     </plugins>
   </build>
 	<dependencies>
-  		<dependency>
-  			<groupId>unity</groupId>
-  			<artifactId>unity-core</artifactId>
-  		</dependency>
+	<dependency>
+		<groupId>unity</groupId>
+		<artifactId>unity-common</artifactId>
+	</dependency>
 	</dependencies>  
 	<dependencyManagement>
 		<dependencies>
