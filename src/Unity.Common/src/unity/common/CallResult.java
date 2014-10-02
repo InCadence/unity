@@ -1,13 +1,21 @@
-// ----------------------------------------------------------------------------------------------
-// Copyright (c) 2012-2014 InCadence Strategic Solutions. All Rights Reserved.
-//
-// This software is the confidential and proprietary information of InCadence
-// Strategic Solutions ("Confidential Information"). You shall not disclose
-// such Confidential Information and shall use it only in accordance with the
-// terms of the license agreement you entered into with InCadence.
-// ----------------------------------------------------------------------------------------------
-
 package unity.common;
+
+/*-----------------------------------------------------------------------------'
+ Copyright 2014 - InCadence Strategic Solutions Inc., All Rights Reserved
+
+ Notwithstanding any contractor copyright notice, the Government has Unlimited
+ Rights in this work as defined by DFARS 252.227-7013 and 252.227-7014.  Use
+ of this work other than as specifically authorized by these DFARS Clauses may
+ violate Government rights in this work.
+
+ DFARS Clause reference: 252.227-7013 (a)(16) and 252.227-7014 (a)(16)
+ Unlimited Rights. The Government has the right to use, modify, reproduce,
+ perform, display, release or disclose this computer software and to have or
+ authorize others to do so.
+
+ Distribution Statement D. Distribution authorized to the Department of
+ Defense and U.S. DoD contractors only in support of U.S. DoD efforts.
+ -----------------------------------------------------------------------------*/
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -32,6 +40,14 @@ import org.jdom2.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+/**
+ * CallResult is designed for providing uniform error handling and result messages across calling methods. CallResult
+ * encapsulates success, failure or cancel states, as well as error messages and class- and method-level resolution to allow
+ * the caller to identify the faulting call.
+ * 
+ * @author InCadence
+ *
+ */
 public class CallResult {
 
     /*--------------------------------------------------------------------------
@@ -46,6 +62,11 @@ public class CallResult {
 
     };
 
+    /**
+     * Initializes the connector to use for logging CallResults
+     * 
+     * @param connector the connector to use for logging CallResults
+     * */
     public static void initialize(IConfigurationsConnector connector)
     {
         _connector = connector;
@@ -91,7 +112,6 @@ public class CallResult {
     private int _LineNumber;
     private String _StackTrace;
     private Object _ReturnValue;
-
     private Exception _Exception;
 
     /***************************
@@ -103,11 +123,22 @@ public class CallResult {
     /****************
      * Constructors *
      ****************/
+
+    /**
+     * Constructs a CallResult with the state unknown
+     */
     public CallResult()
     {
         this(CallResults.UNKNOWN, "", "");
     }
 
+    /**
+     * Constructs a CallResult
+     * 
+     * @param result the state of the call
+     * @param ex an exception to be stored in the CallResult
+     * @param moduleName the name of the module
+     */
     public CallResult(CallResults result, Exception ex, String moduleName)
     {
 
@@ -116,6 +147,13 @@ public class CallResult {
 
     }
 
+    /**
+     * Constructs a CallResult
+     * 
+     * @param result the state of the call
+     * @param message a message to provide details regarding the state of the CallResult
+     * @param moduleName the name of the module
+     */
     public CallResult(CallResults result, String message, String moduleName)
     {
 
@@ -141,22 +179,46 @@ public class CallResult {
         }
     }
 
+    /**
+     * Constructs a CallResult
+     * 
+     * @param result the state of the CallResult
+     * @param ex an exception to be stored in the CallResult
+     * @param moduleObject the module object
+     */
     public CallResult(CallResults result, Exception ex, Object moduleObject)
     {
         this(result, ex, moduleObject.getClass().getName());
     }
 
+    /**
+     * Constructs a CallResult
+     * 
+     * @param result the state of the CallResult
+     * @param message a message to provide details regarding the state of the CallResult
+     * @param moduleObject the module object
+     */
     public CallResult(CallResults result, String message, Object moduleObject)
     {
         this(result, message, moduleObject.getClass().getName());
     }
 
+    /**
+     * Constructs a CallResult
+     * 
+     * @param result the state of the CallResult
+     */
     public CallResult(CallResults result)
     {
         this(result, "", "");
     }
 
-    // constructor to pass back object because java is pass by value only
+    /**
+     * Constructs a CallResult
+     * 
+     * @param result the state of the CallResult
+     * @param value the object to be stored in the CallResult
+     */
     public CallResult(CallResults result, Object value)
     {
 
@@ -172,81 +234,161 @@ public class CallResult {
     /**************
      * Properties *
      **************/
+
+    /**
+     * Returns the name of the product
+     * 
+     * @return - the name of the product
+     */
     public static String productName()
     {
+        // TODO: placeholder
         return "My.Application.Info.ProductName";
     }
 
+    /**
+     * Returns <code>true</code> if the state of the CallResult is Success
+     * 
+     * @return <code>true</code> if the state of the CallResult is Success; <code>false</code> otherwise
+     */
     public boolean isSuccess()
     {
         return (this._Result == CallResults.SUCCESS);
     }
 
+    /**
+     * Returns <code>true</code> if the state of the CallResult is Failed
+     * 
+     * @return <code>true</code> if the state of the CallResult is Failed; <code>false</code> otherwise
+     */
     public boolean isFailed()
     {
         return (this._Result == CallResults.FAILED);
     }
 
+    /**
+     * Returns <code>true</code> if the state of the CallResult is Failed Error
+     * 
+     * @return <code>true</code> if the state of the CallResult is Failed Error; <code>false</code> otherwise
+     */
     public boolean isFailedError()
     {
         return (this._Result == CallResults.FAILED_ERROR);
     }
 
+    /**
+     * Returns <code>true</code> if the state of the CallResult is Canceled
+     * 
+     * @return <code>true</code> if the state of the CallResult is Canceled; <code>false</code> otherwise
+     */
     public boolean isCanceled()
     {
         return (this._Result == CallResults.CANCELED);
     }
 
+    /**
+     * Returns <code>true</code> if the state of the CallResult is Info
+     * 
+     * @return <code>true</code> if the state of the CallResult is Info; <code>false</code> otherwise
+     */
     public boolean isInfo()
     {
         return (this._Result == CallResults.INFO);
     }
 
+    /**
+     * Returns <code>true</code> if the state of the CallResult is Login Status
+     * 
+     * @return <code>true</code> if the state of the CallResult is Login Status; <code>false</code> otherwise
+     */
     public boolean isLoginStatus()
     {
         return (this._Result == CallResults.LOGINSTATUS);
     }
 
+    /**
+     * Returns <code>true</code> if the state of the CallResult is Debug Status
+     * 
+     * @return <code>true</code> if the state of the CallResult is Debug Status; <code>false</code> otherwise
+     */
     public boolean isDebugStatus()
     {
         return (this._Result == CallResults.DEBUG);
     }
 
+    /**
+     * Returns the stack trace of the CallResult
+     * 
+     * @return the stack trace of the CallResult
+     */
     public String getStackTrace()
     {
         return this._StackTrace;
     }
 
+    /**
+     * Returns the state of the CallResult
+     * 
+     * @return the state of the CallResult
+     */
     public CallResults getCallResults()
     {
         return this._Result;
     }
 
+    /**
+     * Returns the object from the calling method
+     * 
+     * @return the object from the calling method
+     */
     public Object getValue()
     {
         return this._ReturnValue;
     }
 
+    /**
+     * Sets the state of the CallResult
+     * 
+     * @param result the state of the CallResult to be set
+     */
     public void setCallResults(CallResults result)
     {
         this._Result = result;
     }
 
+    /**
+     * Returns the message from the CallResult
+     * 
+     * @return the message from the CallResult
+     */
     public String getMessage()
     {
         return this._Message;
     }
 
+    /**
+     * Sets the message in the CallResult
+     * 
+     * @param message the message to be stored in the CallResult
+     */
     public void setMessage(String message)
     {
         this._Message = message;
     }
 
+    /**
+     * Returns the DateTime stamp of the CallResult in GMT
+     * 
+     * @return the DateTime stamp of the CallResult in GMT
+     */
     public Date getDateTimeGMT()
     {
         return this._DateTimeGMT;
     }
 
+    /**
+     * Sets the DateTime stamp of the CallResult as the current instant in GMT
+     */
     public void setDateTimeGMT()
     {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
@@ -262,11 +404,21 @@ public class CallResult {
         }
     }
 
+    /**
+     * Returns the Exception of the CallResult
+     * 
+     * @return the Exception of the CallResult
+     */
     public Exception getException()
     {
         return this._Exception;
     }
 
+    /**
+     * Sets the Exception of the CallResult
+     * 
+     * @param ex the Exception of the CallResult
+     */
     public void setException(Exception ex)
     {
         this._Exception = ex;
@@ -276,36 +428,71 @@ public class CallResult {
         }
     }
 
+    /**
+     * Returns the Module Name of the CallResult
+     * 
+     * @return the Module Name of the CallResult
+     */
     public String getaModuleName()
     {
         return this._ModuleName;
     }
 
+    /**
+     * Sets the Module Name of the CallResult
+     * 
+     * @param name the Module Name of the CallResult
+     */
     public void setModuleName(String name)
     {
         this._ModuleName = name;
     }
 
+    /**
+     * Returns the Method Name of the CallResult
+     * 
+     * @return the Method Name of the CallResult
+     */
     public String getMethodName()
     {
         return this._MethodName;
     }
 
+    /**
+     * Sets the Method Name of the CallResult
+     * 
+     * @param name the Method Name of the CallResult
+     */
     public void setMethodName(String name)
     {
         this._MethodName = name;
     }
 
+    /**
+     * Returns the Line Number of the CallResult
+     * 
+     * @return the Line Number of the CallResult
+     */
     public int getLineNumber()
     {
         return this._LineNumber;
     }
 
+    /**
+     * Sets the Line Number of the CallResult
+     * 
+     * @param lineNumber the Line Number of the CallResult
+     */
     public void setLineNumer(int lineNumber)
     {
         this._LineNumber = lineNumber;
     }
 
+    /**
+     * Sets the status of the CallResult
+     * 
+     * @param _Result the status of the CallResult
+     */
     public void setResult(CallResults _Result)
     {
         this._Result = _Result;
@@ -321,7 +508,7 @@ public class CallResult {
      * } //
      */
 
-    public String stackTracetoString(StackTraceElement[] Trace)
+    private String stackTracetoString(StackTraceElement[] Trace)
     {
 
         String result = "";
@@ -333,6 +520,13 @@ public class CallResult {
         return result;
     }
 
+    /**
+     * Returns the CallResult formatted as XML
+     * 
+     * @param includeDebugInformation whether to include the module name, method name, line number and stacktrace in the
+     *            CallResult XML
+     * @return the CallResult formatted as XML
+     */
     public String toXML(boolean includeDebugInformation)
     {
         try
@@ -417,11 +611,17 @@ public class CallResult {
 
     }
 
-    public CallResults toXML(boolean includeDebugInformation, String Xml)
-    {
-        return CallResults.SUCCESS;
-    }
-
+    // public CallResults toXML(boolean includeDebugInformation, String Xml)
+    // {
+    // return CallResults.SUCCESS;
+    // }
+    /**
+     * Parses information into the CallResult object from a CallResult formated as XML.
+     * 
+     * @see This method will return a CallResults status of SUCCESS if Parsing is successful; FAILLED_ERROR otherwise.
+     * @param xml the callResult in XML format
+     * @return the result of the call
+     */
     public CallResults fromXML(String xml)
     {
         try
@@ -473,44 +673,114 @@ public class CallResult {
         }
     }
 
+    /**
+     * Logs the CallResult as a CallResult formated as XML.
+     * 
+     * @see This method will return a CallResults status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
+     * @param callResult the CallResult to be logged
+     * @return the result of the call
+     */
     public static CallResults log(CallResult callResult)
     {
 
         return callResult.LogOut(true, true);
     }
 
+    /**
+     * Logs the CallResults status as a CallResult formated as XML.
+     * 
+     * @see This method will return a CallResults status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
+     * @param result the CallResults status
+     * @return the result of the call
+     */
     public static CallResults log(CallResults result)
     {
         return log(result, null, "", "");
     }
 
+    /**
+     * Logs the CallResults status, message and Module Object as a CallResult formated as XML.
+     * 
+     * @see This method will return a CallResults status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
+     * @param result the CallResults status
+     * @param message the message to be logged
+     * @param moduleObject the module Object of the calling method
+     * @return the result of the call
+     */
     public static CallResults log(CallResults result, String message, Object moduleObject)
     {
 
         return log(result, message, moduleObject.getClass());
     }
 
+    /**
+     * Logs the CallResults status, message and class of the calling method as a CallResult formated as XML.
+     * 
+     * @see This method will return a CallResults status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
+     * @param result the CallResults status
+     * @param message the message to be logged
+     * @param objectType the class of the calling method
+     * @return the result of the call
+     */
     public static CallResults log(CallResults result, String message, Class<?> objectType)
     {
 
         return log(result, null, message, objectType.getName());
     }
 
+    /**
+     * Logs the CallResults status, message and Module Name of the calling method as a CallResult formated as XML.
+     * 
+     * @see This method will return a CallResults status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
+     * @param result the CallResults status
+     * @param message the message to be logged
+     * @param moduleName the Module name of the calling method
+     * @return the result of the call
+     */
     public static CallResults log(CallResults result, String message, String moduleName)
     {
         return log(result, null, message, moduleName);
     }
 
+    /**
+     * Logs the CallResults status, exception and the module Object of the calling method as a CallResult formated as XML.
+     * 
+     * @see This method will return a CallResults status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
+     * @param result the CallResults status
+     * @param ex the exception to be logged
+     * @param moduleObject the module Object of the calling method
+     * @return the result of the call
+     */
     public static CallResults log(CallResults result, Exception ex, Object moduleObject)
     {
         return log(result, ex, moduleObject.getClass());
     }
 
+    /**
+     * Logs the CallResults status, exception and the class of the calling method as a CallResult formated as XML.
+     * 
+     * @see This method will return a CallResults status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
+     * @param result the CallResults status
+     * @param ex the exception to be logged
+     * @param objectType the class of the calling method
+     * @return the result of the call
+     */
     public static CallResults log(CallResults result, Exception ex, Class<?> objectType)
     {
         return log(result, ex, ex.getMessage(), objectType.getName());
     }
 
+    /**
+     * Logs the CallResults status, exception, message and the module name of the calling method as a CallResult formated as
+     * XML.
+     * 
+     * @see This method will return a CallResults status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
+     * @param result the CallResults status
+     * @param ex the exception to be logged
+     * @param message the message from the calling method
+     * @param moduleName the module name of the calling method
+     * @return the result of the call
+     */
     public static CallResults log(CallResults result, Exception ex, String message, String moduleName)
     {
         // Is Debug Result?
@@ -586,7 +856,7 @@ public class CallResult {
 
             if (toFile && !this.isDebugStatus() && _connector != null)
             {
-                // Log to File Log, try rest connector first
+                // Log to File Log
                 _connector.log(appName, xml);
             }
 

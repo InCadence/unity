@@ -19,6 +19,13 @@ import java.util.Hashtable;
  Defense and U.S. DoD contractors only in support of U.S. DoD efforts.
  -----------------------------------------------------------------------------*/
 
+/**
+ * SettingsBase is the base class for all setting contexts which allow an application to store and retrieve setting values
+ * from a local or remote source. The SettingBase class encapsulates a connector and uses a cache to temporary store setting values.
+ * 
+ * @author InCadence
+ *
+ */
 public class SettingsBase {
 
     /*--------------------------------------------------------------------------
@@ -34,11 +41,19 @@ public class SettingsBase {
     	Public Functions
     --------------------------------------------------------------------------*/
 
+    /**
+     * Initializes the connector
+     * 
+     * @param connector the connector to use for storing and retrieving setting values 
+     */
     public static void initialize(IConfigurationsConnector connector)
     {
         SettingsBase._connector = connector;
     }
 
+    /**
+     * Remove all entries in the cache 
+     */
     public static void clearCache()
     {
         synchronized (_cacheLock)

@@ -25,6 +25,28 @@
   		</dependency>
   	</dependencies>
   </dependencyManagement>
+  	<repositories>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<id>public</id>
+			<url>http://10.15.0.70:8081/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+<distributionManagement>
+  <snapshotRepository>
+    <id>snapshots</id>
+    <url>http://10.15.0.70:8081/nexus/content/repositories/snapshots</url>
+  </snapshotRepository>
+</distributionManagement>
   <modules>
   	<module>../Unity.Pom</module>
   </modules>
