@@ -1,4 +1,4 @@
-package unity.rmi.server;
+package com.incadencecorp.unity.rmi.server;
 
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;

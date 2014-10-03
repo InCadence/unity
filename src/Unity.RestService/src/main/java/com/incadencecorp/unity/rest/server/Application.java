@@ -1,4 +1,4 @@
-package unity.rest.server;
+package com.incadencecorp.unity.rest.server;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;

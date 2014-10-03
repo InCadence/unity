@@ -1,4 +1,4 @@
-package unity.rest.server;
+package com.incadencecorp.unity.rest.server;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;

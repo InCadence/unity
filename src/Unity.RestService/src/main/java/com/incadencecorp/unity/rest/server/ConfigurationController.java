@@ -1,4 +1,4 @@
-package unity.rest.server;
+package com.incadencecorp.unity.rest.server;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
