@@ -1,0 +1,76 @@
+package com.incadencecorp.unity.common;
+
+/*-----------------------------------------------------------------------------'
+ Copyright 2014 - InCadence Strategic Solutions Inc., All Rights Reserved
+
+ Notwithstanding any contractor copyright notice, the Government has Unlimited
+ Rights in this work as defined by DFARS 252.227-7013 and 252.227-7014.  Use
+ of this work other than as specifically authorized by these DFARS Clauses may
+ violate Government rights in this work.
+
+ DFARS Clause reference: 252.227-7013 (a)(16) and 252.227-7014 (a)(16)
+ Unlimited Rights. The Government has the right to use, modify, reproduce,
+ perform, display, release or disclose this computer software and to have or
+ authorize others to do so.
+
+ Distribution Statement D. Distribution authorized to the Department of
+ Defense and U.S. DoD contractors only in support of U.S. DoD efforts.
+ -----------------------------------------------------------------------------*/
+
+/**
+ * Enumeration that stores the configuration object type.
+ * 
+ * @author InCadence
+ *
+ */
+public enum SettingType
+{
+
+    /**
+     * Type String
+     */
+    stString(0),
+    /**
+     * Type Boolean
+     */
+    stBoolean(1),
+    /**
+     * Type Integer
+     */
+    stInteger(2),
+    /**
+     * Type EncryptedString
+     */
+    stEncryptedString(3),
+    /**
+     * Type Unknown
+     */
+    stUnknown(99);
+
+    private int _value;
+
+    private SettingType(int value)
+    {
+        this._value = value;
+    }
+
+    /**
+     * Sets the integer value of SettingType.
+     * 
+     * @param integer value of SettingType.
+     */
+    public void setSettingType(int value)
+    {
+        this._value = value;
+    }
+
+    /**
+     * Returns the integer value of SettingType.
+     * 
+     * @return the integer value of SettingType.
+     */
+    public Integer getSettingType()
+    {
+        return this._value;
+    }
+}

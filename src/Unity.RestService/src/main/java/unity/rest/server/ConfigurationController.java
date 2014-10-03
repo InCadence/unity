@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import unity.connector.rest.ConfigurationValue;
-import unity.connector.rest.UnityLog;
+import com.incadencecorp.unity.connector.rest.ConfigurationValue;
+import com.incadencecorp.unity.connector.rest.UnityLog;
 
 @RestController
 public class ConfigurationController {

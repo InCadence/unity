@@ -3,11 +3,11 @@ package unity.rmi.server;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 
-import unity.common.CallResult;
-import unity.common.SettingType;
-import unity.common.CallResult.CallResults;
-import unity.configuration.ConfigurationFiles;
-import unity.configuration.rmi.RmiConfigurationFiles;
+import com.incadencecorp.unity.common.CallResult;
+import com.incadencecorp.unity.common.SettingType;
+import com.incadencecorp.unity.common.CallResult.CallResults;
+import com.incadencecorp.unity.configuration.ConfigurationFiles;
+import com.incadencecorp.unity.configuration.rmi.RmiConfigurationFiles;
 
 public class RMIService {
 
