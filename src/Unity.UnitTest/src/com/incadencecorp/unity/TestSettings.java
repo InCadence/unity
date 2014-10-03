@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.unittest;
+package com.incadencecorp.unity;
 
 import com.incadencecorp.unity.common.SettingsBase;
 

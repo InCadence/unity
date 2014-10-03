@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.unittest.common;
+package com.incadencecorp.unity.common;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,7 +7,7 @@ import java.util.Random;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.incadencecorp.unity.unittest.TestSettings;
+import com.incadencecorp.unity.TestSettings;
 
 public class SettingsBaseTest {
 
