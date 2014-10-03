@@ -238,7 +238,7 @@ public class CallResult {
     /**
      * Returns the name of the product
      * 
-     * @return - the name of the product
+     * @return the name of the product
      */
     public static String productName()
     {
