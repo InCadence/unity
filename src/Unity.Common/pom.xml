@@ -32,6 +32,6 @@
 		<groupId>com.incadencecorp.unity</groupId>
 		<artifactId>unity-pom</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../Unity.Pom/pom.xml</relativePath>
+		<relativePath>../Unity.Pom</relativePath>
 	</parent>
 </project>
