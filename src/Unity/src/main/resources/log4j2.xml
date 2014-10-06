@@ -1,1 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Configuration><Appenders><File filename="${sys:logFilename}" name="file"><PatternLayout pattern="%d %-5p [%t] %C{2} - %msg%n"/></File><File filename="${sys:logFilename}" name="xmlfile"><PatternLayout pattern="%msg%n"/></File><Console name="console" target="SYSTEM_OUT"><PatternLayout pattern="%d %-5p [%t] %C{2} - %msg%n"/></Console></Appenders><Loggers><Logger level="info" name="filelogger"><AppenderRef ref="file"/></Logger><Logger level="info" name="xmllogger"><AppenderRef ref="xmlfile"/></Logger><Logger level="info" name="consolelogger"><AppenderRef ref="console"/></Logger><Root level="info"/></Loggers></Configuration>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE xml>
+<Configuration>
+	<Appenders>
+		<File filename="${sys:logFilename}" name="file">
+			<PatternLayout pattern="%d %-5p [%t] %C{2} - %msg%n" />
+		</File>
+		<File filename="${sys:logFilename}" name="xmlfile">
+			<PatternLayout pattern="%msg%n" />
+		</File>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d %-5p [%t] %C{2} - %msg%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger level="info" name="filelogger">
+			<AppenderRef ref="file" />
+		</Logger>
+		<Logger level="info" name="xmllogger">
+			<AppenderRef ref="xmlfile" />
+		</Logger>
+		<Logger level="info" name="consolelogger">
+			<AppenderRef ref="console" />
+		</Logger>
+		<Root level="info" />
+	</Loggers>
+</Configuration>

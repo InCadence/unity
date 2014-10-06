@@ -26,7 +26,4 @@ public class SettingsBaseTest {
         assertTrue(TestSettings.getSettingWithMin("MinValue", 10, 1) == 3);
         assertTrue(TestSettings.getTestIntSetting("MinValue") == 3);
     }
-
-
-
 }
