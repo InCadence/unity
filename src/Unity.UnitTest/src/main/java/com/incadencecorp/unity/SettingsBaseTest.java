@@ -1,23 +1,21 @@
-package com.incadencecorp.unity.common;
+package com.incadencecorp.unity;
 
 import static org.junit.Assert.assertTrue;
-
-import java.util.Random;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.incadencecorp.unity.TestSettings;
+import com.incadencecorp.unity.common.TestSettings;
 
 public class SettingsBaseTest {
 
-    private static int _testIntValue;
+    //private static int _testIntValue;
 
     @BeforeClass
     public static void Initialize()
     {
-        Random randomGenerator = new Random();
-        _testIntValue = randomGenerator.nextInt(100);
+        //Random randomGenerator = new Random();
+        //_testIntValue = randomGenerator.nextInt(100);
     }
     
     @Test

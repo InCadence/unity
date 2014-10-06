@@ -10,9 +10,9 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.incadencecorp.unity.TestSettings;
 import com.incadencecorp.unity.common.CallResult;
 import com.incadencecorp.unity.common.SettingType;
+import com.incadencecorp.unity.common.TestSettings;
 import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.connector.rest.RestConfigConnector;
 import com.incadencecorp.unity.connector.rest.RestConfigurationsConnector;

@@ -4,7 +4,6 @@
 	<artifactId>unity-common</artifactId>
 	<version>${unityCommonVersion}</version>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

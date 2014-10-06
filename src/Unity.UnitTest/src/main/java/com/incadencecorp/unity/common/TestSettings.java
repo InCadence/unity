@@ -1,4 +1,4 @@
-package com.incadencecorp.unity;
+package com.incadencecorp.unity.common;
 
 import com.incadencecorp.unity.common.SettingsBase;
 
