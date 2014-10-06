@@ -47,7 +47,7 @@
 			<version>2.4</version>
 		</dependency>
 		<dependency>
-			<groupId>unity</groupId>
+			<groupId>com.incadencecorp.unity</groupId>
 			<artifactId>unity-common</artifactId>
 		</dependency>
 		<dependency>
@@ -57,7 +57,7 @@
 		</dependency>
 	</dependencies>
 	<parent>
-		<groupId>unity</groupId>
+		<groupId>com.incadencecorp.unity</groupId>
 		<artifactId>unity-pom</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../Unity.Pom/pom.xml</relativePath>

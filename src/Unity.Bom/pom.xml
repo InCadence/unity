@@ -1,31 +1,32 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>unity</groupId>
-  <artifactId>unity-bom</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>Unity.bom</name>
-  <properties>
-  	<unityVersion>0.0.1-SNAPSHOT</unityVersion>
-  	<unityRMIVersion>0.0.1-SNAPSHOT</unityRMIVersion>
-  	<unityRestVersion>0.0.1-SNAPSHOT</unityRestVersion>
-  	<unityCommonVersion>0.0.1-SNAPSHOT</unityCommonVersion>
-  </properties>
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>unity</groupId>
-  			<artifactId>unity-core</artifactId>
-  			<version>${unityVersion}</version>
-  		</dependency>
-  		<dependency>
-  			<groupId>unity</groupId>
-  			<artifactId>unity-common</artifactId>
-  			<version>${unityCommonVersion}</version>
-  		</dependency>
-  	</dependencies>
-  </dependencyManagement>
-  	<repositories>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.incadencecorp.unity</groupId>
+	<artifactId>unity-bom</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Unity.bom</name>
+	<properties>
+		<unityVersion>0.0.1-SNAPSHOT</unityVersion>
+		<unityRMIVersion>0.0.1-SNAPSHOT</unityRMIVersion>
+		<unityRestVersion>0.0.1-SNAPSHOT</unityRestVersion>
+		<unityCommonVersion>0.0.1-SNAPSHOT</unityCommonVersion>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.incadencecorp.unity</groupId>
+				<artifactId>unity-core</artifactId>
+				<version>${unityVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.incadencecorp.unity</groupId>
+				<artifactId>unity-common</artifactId>
+				<version>${unityCommonVersion}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<repositories>
 		<repository>
 			<releases>
 				<enabled>true</enabled>
@@ -41,13 +42,13 @@
 			<url>http://10.15.0.70:8081/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
-<distributionManagement>
-  <snapshotRepository>
-    <id>snapshots</id>
-    <url>http://10.15.0.70:8081/nexus/content/repositories/snapshots</url>
-  </snapshotRepository>
-</distributionManagement>
-  <modules>
-  	<module>../Unity.Pom</module>
-  </modules>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://10.15.0.70:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<modules>
+		<module>../Unity.Pom</module>
+	</modules>
 </project>

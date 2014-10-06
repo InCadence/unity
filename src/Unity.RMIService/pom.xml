@@ -1,35 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>unity-rmiservice</artifactId>
-  <version>${unityRMIVersion}</version>
-  <parent>
-  	<groupId>unity</groupId>
-  	<artifactId>unity-pom</artifactId>
-  	<relativePath>../Unity.Pom</relativePath>
-  	<version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>unity</groupId>
-  			<artifactId>unity-bom</artifactId>
-  			<version>0.0.1-SNAPSHOT</version>
-  			<type>pom</type>
-  			<scope>import</scope>
-  		</dependency>
-  	</dependencies>
-  </dependencyManagement>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>unity-rmiservice</artifactId>
+	<version>${unityRMIVersion}</version>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.incadencecorp.unity</groupId>
+				<artifactId>unity-bom</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
   <dependencies>
   	<dependency>
-  		<groupId>unity</groupId>
+  		<groupId>com.incadencecorp.unity</groupId>
   		<artifactId>unity-core</artifactId>
   	</dependency>
   	<dependency>
-  		<groupId>unity</groupId>
+  		<groupId>com.incadencecorp.unity</groupId>
   		<artifactId>unity-common</artifactId>
   	</dependency>
   </dependencies>
   <properties>
   	<start-class>unity.rmi.server.RMIService</start-class>
   </properties>
+  <groupId>com.incadencecorp.unity</groupId>
 </project>

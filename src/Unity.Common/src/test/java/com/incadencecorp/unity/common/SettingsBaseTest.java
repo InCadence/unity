@@ -1,11 +1,9 @@
-package com.incadencecorp.unity;
+package com.incadencecorp.unity.common;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.incadencecorp.unity.common.TestSettings;
 
 public class SettingsBaseTest {
 
