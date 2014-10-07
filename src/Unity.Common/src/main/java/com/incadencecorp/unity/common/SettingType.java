@@ -29,23 +29,23 @@ public enum SettingType
     /**
      * Type String
      */
-    stString(0),
+    ST_STRING(0),
     /**
      * Type Boolean
      */
-    stBoolean(1),
+    ST_BOOLEAN(1),
     /**
      * Type Integer
      */
-    stInteger(2),
+    ST_INTEGER(2),
     /**
      * Type EncryptedString
      */
-    stEncryptedString(3),
+    ST_ENCRYPTED_STRING(3),
     /**
      * Type Unknown
      */
-    stUnknown(99);
+    ST_UNKNOWN(99);
 
     private int _value;
 

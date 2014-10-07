@@ -112,7 +112,7 @@ public class SettingsBase {
         return Integer.parseInt(SettingsBase.getSetting(ConfigurationFileName,
                                                         SettingPath,
                                                         Integer.toString(DefaultValue),
-                                                        SettingType.stInteger,
+                                                        SettingType.ST_INTEGER,
                                                         SetIfNotFound));
 
     }
@@ -126,7 +126,7 @@ public class SettingsBase {
         return Boolean.parseBoolean(SettingsBase.getSetting(ConfigurationFileName,
                                                             SettingPath,
                                                             Boolean.toString(DefaultValue),
-                                                            SettingType.stBoolean,
+                                                            SettingType.ST_BOOLEAN,
                                                             SetIfNotFound));
 
     }
@@ -137,7 +137,7 @@ public class SettingsBase {
                                        boolean SetIfNotFound)
     {
 
-        return SettingsBase.getSetting(ConfigurationFileName, SettingPath, DefaultValue, SettingType.stString, SetIfNotFound);
+        return SettingsBase.getSetting(ConfigurationFileName, SettingPath, DefaultValue, SettingType.ST_STRING, SetIfNotFound);
 
     }
 
@@ -184,21 +184,21 @@ public class SettingsBase {
     protected static boolean setSetting(String ConfigurationFileName, String SettingPath, int Value)
     {
 
-        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Integer.toString(Value), SettingType.stInteger);
+        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Integer.toString(Value), SettingType.ST_INTEGER);
 
     }
 
     protected static boolean setSetting(String ConfigurationFileName, String SettingPath, boolean Value)
     {
 
-        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Boolean.toString(Value), SettingType.stBoolean);
+        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Boolean.toString(Value), SettingType.ST_BOOLEAN);
 
     }
 
     protected static boolean setSetting(String ConfigurationFileName, String SettingPath, String Value)
     {
 
-        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Value, SettingType.stString);
+        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Value, SettingType.ST_STRING);
 
     }
 

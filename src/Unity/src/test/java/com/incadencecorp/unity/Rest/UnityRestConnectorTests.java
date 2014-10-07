@@ -51,17 +51,17 @@ public class UnityRestConnectorTests {
             int intValue;
 
             // REST Configuration
-            RestConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.stString);
+            RestConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.ST_STRING);
             RestConfigConnector.setSetting("app.config",
                                            "app/section1/random",
                                            Integer.toString(_testIntValue),
-                                           SettingType.stInteger);
+                                           SettingType.ST_INTEGER);
 
-            value = RestConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.stString, false);
+            value = RestConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.ST_STRING, false);
             intValue = Integer.parseInt(RestConfigConnector.getSetting("app.config",
                                                                        "app/section1/random",
                                                                        "",
-                                                                       SettingType.stInteger,
+                                                                       SettingType.ST_INTEGER,
                                                                        false));
 
             assertTrue("Mismatch", value.equals(_testStringValue));
@@ -88,12 +88,12 @@ public class UnityRestConnectorTests {
             Stringvalue = RestConfigConnector.getSetting("app.config",
                                                          "app/section1/firstname",
                                                          "",
-                                                         SettingType.stString,
+                                                         SettingType.ST_STRING,
                                                          false);
             intValue = Integer.parseInt(RestConfigConnector.getSetting("app.config",
                                                                        "app/section1/random",
                                                                        "",
-                                                                       SettingType.stInteger,
+                                                                       SettingType.ST_INTEGER,
                                                                        false));
 
             assertTrue("Mismatch", Stringvalue.equals(_testStringValue));

@@ -58,7 +58,7 @@ public class CallResult {
 
     public enum CallResults
     {
-        UNKNOWN, SUCCESS, FAILED, FAILED_ERROR, CANCELED, LOGINSTATUS, INFO, DEBUG;
+        UNKNOWN, SUCCESS, FAILED, FAILED_ERROR, CANCELED, LOGIN_STATUS, INFO, DEBUG;
 
     };
 
@@ -303,7 +303,7 @@ public class CallResult {
      */
     public boolean isLoginStatus()
     {
-        return (this._Result == CallResults.LOGINSTATUS);
+        return (this._Result == CallResults.LOGIN_STATUS);
     }
 
     /**

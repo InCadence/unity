@@ -34,7 +34,7 @@ public class ConfigurationFiles {
             this._logLocation = this.getSetting("Unity.config",
                                                 "Unity/Settings/LogLocation",
                                                 LogDirectory.getAbsolutePath(),
-                                                SettingType.stString,
+                                                SettingType.ST_STRING,
                                                 true);
         }
         return this._logLocation;
@@ -132,7 +132,7 @@ public class ConfigurationFiles {
         }
         else
         {
-            return SettingType.stUnknown;
+            return SettingType.ST_UNKNOWN;
         }
     }
 

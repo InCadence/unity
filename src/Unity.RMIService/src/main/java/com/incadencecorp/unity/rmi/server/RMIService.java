@@ -19,7 +19,7 @@ public class RMIService {
 		CallResult.log(CallResults.INFO, "Address set to: " + args[0], "RMI Service");
 		
 		ConfigurationFiles configurationFiles = new ConfigurationFiles();
-		configurationFiles.setSetting("unity.config", "unity/addresses/UnityAddress", args[0], SettingType.stString);
+		configurationFiles.setSetting("unity.config", "unity/addresses/UnityAddress", args[0], SettingType.ST_STRING);
 		
         try
         {

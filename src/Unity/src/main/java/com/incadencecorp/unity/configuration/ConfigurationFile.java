@@ -296,7 +296,7 @@ public class ConfigurationFile implements IConfigurationFile {
             Boolean rtn = false;
 
             // Update Value
-            if (type == SettingType.stEncryptedString)
+            if (type == SettingType.ST_ENCRYPTED_STRING)
             {
                 // TODO: encryption stuff
                 rtn = true;
@@ -368,11 +368,11 @@ public class ConfigurationFile implements IConfigurationFile {
                     catch (Exception ex)
                     {
                         // failed, set setting type to unknown
-                        type = SettingType.stUnknown;
+                        type = SettingType.ST_UNKNOWN;
                     }
 
                     // check if value is encrypted
-                    if (type == SettingType.stEncryptedString)
+                    if (type == SettingType.ST_ENCRYPTED_STRING)
                     {
                         // TODO: Decrypt String
                     }
@@ -407,7 +407,7 @@ public class ConfigurationFile implements IConfigurationFile {
     public SettingType getSettingType(String settingPath)
     {
         // This method locates the setting and returns back the SettingType.
-        SettingType type = SettingType.stUnknown;
+        SettingType type = SettingType.ST_UNKNOWN;
 
         // 1. Get the Setting node (does not create if it does not exist)
         ConfigurationNode node = getSettingNode(settingPath, false);
@@ -423,13 +423,13 @@ public class ConfigurationFile implements IConfigurationFile {
             catch (Exception ex)
             {
                 // failed, set setting type to unknown
-                return type = SettingType.stUnknown;
+                return type = SettingType.ST_UNKNOWN;
             }
 
         }
         else
         {
-            return type = SettingType.stUnknown;
+            return type = SettingType.ST_UNKNOWN;
         }
 
     }

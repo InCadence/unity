@@ -44,7 +44,7 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
             this._logLocation = this.getSetting("Unity.config",
                                                 "Unity/Settings/LogLocation",
                                                 LogDirectory.getAbsolutePath(),
-                                                SettingType.stString.toString(),
+                                                SettingType.ST_STRING.toString(),
                                                 true);
         }
         return this._logLocation;
@@ -157,7 +157,7 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
         }
         else
         {
-            return SettingType.stUnknown;
+            return SettingType.ST_UNKNOWN;
         }
     }
 

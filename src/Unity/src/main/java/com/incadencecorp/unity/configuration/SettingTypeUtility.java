@@ -17,23 +17,23 @@ public class SettingTypeUtility {
         switch (type.toUpperCase()) {
 
         case "STSTRING":
-            settingType = SettingType.stString;
+            settingType = SettingType.ST_STRING;
             break;
 
         case "STBOOLEAN":
-            settingType = SettingType.stBoolean;
+            settingType = SettingType.ST_BOOLEAN;
             break;
 
         case "STENCRYPTEDSTRING":
-            settingType = SettingType.stEncryptedString;
+            settingType = SettingType.ST_ENCRYPTED_STRING;
             break;
 
         case "STINTEGER":
-            settingType = SettingType.stInteger;
+            settingType = SettingType.ST_INTEGER;
             break;
 
         default:
-            settingType = SettingType.stUnknown;
+            settingType = SettingType.ST_UNKNOWN;
             break;
         }
         return settingType;
