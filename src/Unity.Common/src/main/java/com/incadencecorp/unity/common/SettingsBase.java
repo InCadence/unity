@@ -20,8 +20,8 @@ import java.util.Hashtable;
  -----------------------------------------------------------------------------*/
 
 /**
- * SettingsBase is the base class for all setting contexts which allow an application to store and retrieve setting values
- * from a local or remote source. The SettingBase class encapsulates a connector and uses a cache to temporary store setting values.
+ * {@link com.incadencecorp.unity.common.SettingsBase} is the base class for all setting contexts which allow an application to store and retrieve setting values
+ * from a local or remote source. The {@link com.incadencecorp.unity.common.SettingsBase} class encapsulates a connector and uses a cache to temporary store setting values.
  * 
  * @author InCadence
  *
