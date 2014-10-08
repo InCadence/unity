@@ -57,7 +57,7 @@ public enum SettingType
     /**
      * Sets the integer value of SettingType.
      * 
-     * @param integer value of SettingType.
+     * @param value integer value of SettingType.
      */
     public void setSettingType(int value)
     {

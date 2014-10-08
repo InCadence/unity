@@ -63,9 +63,9 @@ public class CallResult {
     };
 
     /**
-     * Initializes the connector to use for logging {@link com.incadencecorp.unity.common.CallResult}s
+     * Initializes the connector to use for logging {@link com.incadencecorp.unity.common.CallResult.CallResults}
      * 
-     * @param connector the connector to use for logging {@link com.incadencecorp.unity.common.CallResult}s
+     * @param connector the connector to use for logging {@link com.incadencecorp.unity.common.CallResult.CallResults}
      * */
     public static void initialize(IConfigurationsConnector connector)
     {
@@ -618,9 +618,8 @@ public class CallResult {
     /**
      * Parses information into the {@link com.incadencecorp.unity.common.CallResult} object from a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @see This method will return a {@link com.incadencecorp.unity.common.CallResult}s status of SUCCESS if Parsing is successful; FAILLED_ERROR otherwise.
      * @param xml the callResult in XML format
-     * @return the result of the call
+     * @return the result of the call returns a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if Parsing is successful; FAILED_ERROR otherwise.
      */
     public CallResults fromXML(String xml)
     {
@@ -676,9 +675,8 @@ public class CallResult {
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult} as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @see This method will return a {@link com.incadencecorp.unity.common.CallResult}s status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
      * @param callResult the {@link com.incadencecorp.unity.common.CallResult} to be logged
-     * @return the result of the call
+     * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResult callResult)
     {
@@ -687,11 +685,10 @@ public class CallResult {
     }
 
     /**
-     * Logs the {@link com.incadencecorp.unity.common.CallResult}s status as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @see This method will return a {@link com.incadencecorp.unity.common.CallResult}s status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
-     * @param result the {@link com.incadencecorp.unity.common.CallResult}s status
-     * @return the result of the call
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
+     * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result)
     {
@@ -699,13 +696,12 @@ public class CallResult {
     }
 
     /**
-     * Logs the {@link com.incadencecorp.unity.common.CallResult}s status, message and Module Object as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, message and Module Object as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @see This method will return a {@link com.incadencecorp.unity.common.CallResult}s status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
-     * @param result the {@link com.incadencecorp.unity.common.CallResult}s status
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
      * @param message the message to be logged
      * @param moduleObject the module Object of the calling method
-     * @return the result of the call
+     * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, String message, Object moduleObject)
     {
@@ -714,13 +710,12 @@ public class CallResult {
     }
 
     /**
-     * Logs the {@link com.incadencecorp.unity.common.CallResult}s status, message and class of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, message and class of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @see This method will return a {@link com.incadencecorp.unity.common.CallResult}s status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
-     * @param result the {@link com.incadencecorp.unity.common.CallResult}s status
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
      * @param message the message to be logged
      * @param objectType the class of the calling method
-     * @return the result of the call
+     * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, String message, Class<?> objectType)
     {
@@ -729,13 +724,12 @@ public class CallResult {
     }
 
     /**
-     * Logs the {@link com.incadencecorp.unity.common.CallResult}s status, message and Module Name of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, message and Module Name of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @see This method will return a {@link com.incadencecorp.unity.common.CallResult}s status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
-     * @param result the {@link com.incadencecorp.unity.common.CallResult}s status
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
      * @param message the message to be logged
      * @param moduleName the Module name of the calling method
-     * @return the result of the call
+     * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, String message, String moduleName)
     {
@@ -743,13 +737,12 @@ public class CallResult {
     }
 
     /**
-     * Logs the {@link com.incadencecorp.unity.common.CallResult}s status, exception and the module Object of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception and the module Object of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @see This method will return a {@link com.incadencecorp.unity.common.CallResult}s status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
-     * @param result the {@link com.incadencecorp.unity.common.CallResult}s status
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
      * @param ex the exception to be logged
      * @param moduleObject the module Object of the calling method
-     * @return the result of the call
+     * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, Exception ex, Object moduleObject)
     {
@@ -757,13 +750,12 @@ public class CallResult {
     }
 
     /**
-     * Logs the {@link com.incadencecorp.unity.common.CallResult}s status, exception and the class of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception and the class of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @see This method will return a {@link com.incadencecorp.unity.common.CallResult}s status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
-     * @param result the {@link com.incadencecorp.unity.common.CallResult}s status
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
      * @param ex the exception to be logged
      * @param objectType the class of the calling method
-     * @return the result of the call
+     * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, Exception ex, Class<?> objectType)
     {
@@ -771,15 +763,14 @@ public class CallResult {
     }
 
     /**
-     * Logs the {@link com.incadencecorp.unity.common.CallResult}s status, exception, message and the module name of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as
+     * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception, message and the module name of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as
      * XML.
      * 
-     * @see This method will return a {@link com.incadencecorp.unity.common.CallResult}s status of SUCCESS if logging is successful; FAILLED_ERROR otherwise.
-     * @param result the {@link com.incadencecorp.unity.common.CallResult}s status
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
      * @param ex the exception to be logged
      * @param message the message from the calling method
      * @param moduleName the module name of the calling method
-     * @return the result of the call
+     * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, Exception ex, String message, String moduleName)
     {
