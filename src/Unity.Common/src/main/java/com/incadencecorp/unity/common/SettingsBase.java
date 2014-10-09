@@ -20,8 +20,10 @@ import java.util.Hashtable;
  -----------------------------------------------------------------------------*/
 
 /**
- * {@link com.incadencecorp.unity.common.SettingsBase} is the base class for all setting contexts which allow an application to store and retrieve setting values
- * from a local or remote source. The {@link com.incadencecorp.unity.common.SettingsBase} class encapsulates a connector and uses a cache to temporary store setting values.
+ * {@link com.incadencecorp.unity.common.SettingsBase} is the base class for all setting contexts which allow an application
+ * to store and retrieve setting values from a local or remote source. The
+ * {@link com.incadencecorp.unity.common.SettingsBase} class encapsulates a connector and uses a cache to temporary store
+ * setting values.
  * 
  * @author InCadence
  *
@@ -38,21 +40,30 @@ public class SettingsBase {
     private static Object _cacheLock = new Object();
 
     /*--------------------------------------------------------------------------
+        Constructor
+    --------------------------------------------------------------------------*/
+
+    protected SettingsBase()
+    {
+        // Do Nothing
+    }
+
+    /*--------------------------------------------------------------------------
     	Public Functions
     --------------------------------------------------------------------------*/
 
     /**
-     * Initializes the connector
+     * Initializes the connector.
      * 
-     * @param connector the connector to use for storing and retrieving setting values 
+     * @param connector the connector to use for storing and retrieving setting values.
      */
-    public static void initialize(IConfigurationsConnector connector)
+    public static void initialize(final IConfigurationsConnector connector)
     {
         SettingsBase._connector = connector;
     }
 
     /**
-     * Remove all entries in the cache 
+     * Remove all entries in the cache.
      */
     public static void clearCache()
     {
@@ -66,96 +77,120 @@ public class SettingsBase {
     	Protected Functions
     --------------------------------------------------------------------------*/
 
-    protected static int getSettingWithMin(String ConfigurationFileName,
-                                           String SettingPath,
-                                           int DefaultValue,
-                                           int MinValue,
-                                           boolean SetIfNotFound)
+    protected static int getSettingWithMin(final String configurationFileName,
+                                           final String settingPath,
+                                           final int defaultValue,
+                                           final int minValue,
+                                           final boolean setIfNotFound)
     {
 
-        // Ensure Default Value Meets Requirement
-        if (DefaultValue < MinValue) DefaultValue = MinValue;
+        int value;
 
-        // Get Setting
-        int value = SettingsBase.getSetting(ConfigurationFileName, SettingPath, DefaultValue, SetIfNotFound);
+        // Ensure Default Value Meets Requirement
+        if (defaultValue < minValue)
+        {
+            value = SettingsBase.getSetting(configurationFileName, settingPath, minValue, setIfNotFound);
+        }
+        else
+        {
+            value = SettingsBase.getSetting(configurationFileName, settingPath, defaultValue, setIfNotFound);
+        }
 
         // Ensure Setting Meets Requirement
-        if (value < MinValue) value = MinValue;
+        if (value < minValue)
+        {
+            value = minValue;
+        }
 
         return value;
 
     }
 
-    protected static int getSettingWithMax(String ConfigurationFileName,
-                                           String SettingPath,
-                                           int DefaultValue,
-                                           int MaxValue,
-                                           boolean SetIfNotFound)
+    protected static int getSettingWithMax(final String configurationFileName,
+                                           final String settingPath,
+                                           final int defaultValue,
+                                           final int maxValue,
+                                           final boolean setIfNotFound)
     {
+        int value;
 
         // Ensure Default Value Meets Requirement
-        if (DefaultValue > MaxValue) DefaultValue = MaxValue;
-
-        // Get Setting
-        int value = SettingsBase.getSetting(ConfigurationFileName, SettingPath, DefaultValue, SetIfNotFound);
+        if (defaultValue > maxValue)
+        {
+            value = SettingsBase.getSetting(configurationFileName, settingPath, maxValue, setIfNotFound);
+        }
+        else
+        {
+            value = SettingsBase.getSetting(configurationFileName, settingPath, defaultValue, setIfNotFound);
+        }
 
         // Ensure Setting Meets Requirement
-        if (value > MaxValue) value = MaxValue;
+        if (value > maxValue)
+        {
+            value = maxValue;
+        }
 
         return value;
 
     }
 
-    protected static int getSetting(String ConfigurationFileName, String SettingPath, int DefaultValue, boolean SetIfNotFound)
+    protected static int getSetting(final String configurationFileName,
+                                    final String settingPath,
+                                    final int defaultValue,
+                                    final boolean setIfNotFound)
     {
 
-        return Integer.parseInt(SettingsBase.getSetting(ConfigurationFileName,
-                                                        SettingPath,
-                                                        Integer.toString(DefaultValue),
+        return Integer.parseInt(SettingsBase.getSetting(configurationFileName,
+                                                        settingPath,
+                                                        Integer.toString(defaultValue),
                                                         SettingType.ST_INTEGER,
-                                                        SetIfNotFound));
+                                                        setIfNotFound));
 
     }
 
-    protected static boolean getSetting(String ConfigurationFileName,
-                                        String SettingPath,
-                                        boolean DefaultValue,
-                                        boolean SetIfNotFound)
+    protected static boolean getSetting(final String configurationFileName,
+                                        final String settingPath,
+                                        final boolean defaultValue,
+                                        final boolean setIfNotFound)
     {
 
-        return Boolean.parseBoolean(SettingsBase.getSetting(ConfigurationFileName,
-                                                            SettingPath,
-                                                            Boolean.toString(DefaultValue),
+        return Boolean.parseBoolean(SettingsBase.getSetting(configurationFileName,
+                                                            settingPath,
+                                                            Boolean.toString(defaultValue),
                                                             SettingType.ST_BOOLEAN,
-                                                            SetIfNotFound));
+                                                            setIfNotFound));
 
     }
 
-    protected static String getSetting(String ConfigurationFileName,
-                                       String SettingPath,
-                                       String DefaultValue,
-                                       boolean SetIfNotFound)
+    protected static String getSetting(final String configurationFileName,
+                                       final String settingPath,
+                                       final String defaultValue,
+                                       final boolean setIfNotFound)
     {
 
-        return SettingsBase.getSetting(ConfigurationFileName, SettingPath, DefaultValue, SettingType.ST_STRING, SetIfNotFound);
+        return SettingsBase.getSetting(configurationFileName,
+                                       settingPath,
+                                       defaultValue,
+                                       SettingType.ST_STRING,
+                                       setIfNotFound);
 
     }
 
-    protected static String getSetting(String ConfigurationFileName,
-                                       String SettingPath,
-                                       String DefaultValue,
-                                       SettingType Type,
-                                       boolean SetIfNotFound)
+    protected static String getSetting(final String configurationFileName,
+                                       final String settingPath,
+                                       final String defaultValue,
+                                       final SettingType type,
+                                       final boolean setIfNotFound)
     {
         String value = null;
 
         synchronized (_cacheLock)
         {
             // Normalize Key
-            String CacheKey = SettingsBase.normalizeCacheKey(ConfigurationFileName, SettingPath);
+            String cacheKey = SettingsBase.normalizeCacheKey(configurationFileName, settingPath);
 
             // Read Value From Cache
-            value = SettingsBase.getCache().get(CacheKey);
+            value = SettingsBase.getCache().get(cacheKey);
 
             // Value Cached?
             if (value == null)
@@ -164,15 +199,15 @@ public class SettingsBase {
                 if (_connector != null)
                 {
                     // Yes; Read Configuration
-                    value = _connector.getSetting(ConfigurationFileName, SettingPath, DefaultValue, Type, SetIfNotFound);
+                    value = _connector.getSetting(configurationFileName, settingPath, defaultValue, type, setIfNotFound);
 
                     // Add to Cache
-                    SettingsBase.getCache().put(CacheKey, value);
+                    SettingsBase.getCache().put(cacheKey, value);
                 }
                 else
                 {
                     // No; Use Default
-                    value = DefaultValue;
+                    value = defaultValue;
                 }
 
             }
@@ -181,63 +216,66 @@ public class SettingsBase {
         return value;
     }
 
-    protected static boolean setSetting(String ConfigurationFileName, String SettingPath, int Value)
+    protected static boolean setSetting(final String configurationFileName, final String settingPath, final int value)
     {
 
-        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Integer.toString(Value), SettingType.ST_INTEGER);
+        return SettingsBase.setSetting(configurationFileName, settingPath, Integer.toString(value), SettingType.ST_INTEGER);
 
     }
 
-    protected static boolean setSetting(String ConfigurationFileName, String SettingPath, boolean Value)
+    protected static boolean setSetting(final String configurationFileName, final String settingPath, final boolean value)
     {
 
-        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Boolean.toString(Value), SettingType.ST_BOOLEAN);
+        return SettingsBase.setSetting(configurationFileName, settingPath, Boolean.toString(value), SettingType.ST_BOOLEAN);
 
     }
 
-    protected static boolean setSetting(String ConfigurationFileName, String SettingPath, String Value)
+    protected static boolean setSetting(final String configurationFileName, final String settingPath, final String value)
     {
 
-        return SettingsBase.setSetting(ConfigurationFileName, SettingPath, Value, SettingType.ST_STRING);
+        return SettingsBase.setSetting(configurationFileName, settingPath, value, SettingType.ST_STRING);
 
     }
 
-    protected static boolean setSetting(String ConfigurationFileName, String SettingPath, String Value, SettingType Type)
+    protected static boolean setSetting(final String configurationFileName,
+                                        final String settingPath,
+                                        final String value,
+                                        final SettingType type)
     {
 
-        boolean Updated = true;
+        boolean updated = true;
 
         synchronized (_cacheLock)
         {
             // Normalize Key
-            String CacheKey = SettingsBase.normalizeCacheKey(ConfigurationFileName, SettingPath);
+            String cacheKey = SettingsBase.normalizeCacheKey(configurationFileName, settingPath);
 
             // Setting Not Cached or Modified?
-            if (!SettingsBase.getCache().containsKey(CacheKey) || SettingsBase.getCache().get(CacheKey) != Value)
+            if (!SettingsBase.getCache().containsKey(cacheKey) || SettingsBase.getCache().get(cacheKey) != value)
             {
 
                 // Yes; Replace Cached Value
-                SettingsBase.getCache().put(CacheKey, Value);
+                SettingsBase.getCache().put(cacheKey, value);
 
                 // Update Configuration File
                 if (_connector != null)
                 {
-                    Updated = _connector.setSetting(ConfigurationFileName, SettingPath, Value, Type);
+                    updated = _connector.setSetting(configurationFileName, settingPath, value, type);
                 }
 
             }
         }
 
-        return Updated;
+        return updated;
 
     }
 
-    protected static String normalizeCacheKey(String ConfigurationFileName, String SettingPath)
+    protected static String normalizeCacheKey(final String configurationFileName, final String settingPath)
     {
 
-        String CacheKey = ConfigurationFileName + "." + SettingPath;
-        CacheKey = CacheKey.replace("/", ".").toUpperCase();
-        return CacheKey;
+        String cacheKey = configurationFileName + "." + settingPath;
+        cacheKey = cacheKey.replace("/", ".").toUpperCase();
+        return cacheKey;
 
     }
 

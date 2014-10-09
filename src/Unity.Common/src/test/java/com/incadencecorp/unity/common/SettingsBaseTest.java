@@ -10,7 +10,7 @@ public class SettingsBaseTest {
     //private static int _testIntValue;
 
     @BeforeClass
-    public static void Initialize()
+    public static void initialize()
     {
         //Random randomGenerator = new Random();
         //_testIntValue = randomGenerator.nextInt(100);

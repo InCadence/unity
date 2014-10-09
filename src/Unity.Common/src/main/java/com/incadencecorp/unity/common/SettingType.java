@@ -27,29 +27,29 @@ public enum SettingType
 {
 
     /**
-     * Type String
+     * Type String.
      */
     ST_STRING(0),
     /**
-     * Type Boolean
+     * Type Boolean.
      */
     ST_BOOLEAN(1),
     /**
-     * Type Integer
+     * Type Integer.
      */
     ST_INTEGER(2),
     /**
-     * Type EncryptedString
+     * Type EncryptedString.
      */
     ST_ENCRYPTED_STRING(3),
     /**
-     * Type Unknown
+     * Type Unknown.
      */
     ST_UNKNOWN(99);
 
     private int _value;
 
-    private SettingType(int value)
+    private SettingType(final int value)
     {
         this._value = value;
     }
@@ -59,7 +59,7 @@ public enum SettingType
      * 
      * @param value integer value of SettingType.
      */
-    public void setSettingType(int value)
+    public void setSettingType(final int value)
     {
         this._value = value;
     }

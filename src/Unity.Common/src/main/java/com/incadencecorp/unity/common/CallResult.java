@@ -892,14 +892,16 @@ public class CallResult {
         }
     }
 
-    private boolean isNumeric(String string)
+    private final boolean isNumeric(String string)
     {
         if (string.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+"))
         {
             return true;
         }
         else
+        {
             return false;
+        }
     }
 
     private boolean isDate(String dateString)
