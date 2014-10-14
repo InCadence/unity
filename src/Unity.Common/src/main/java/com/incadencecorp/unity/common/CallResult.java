@@ -41,9 +41,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * {@link com.incadencecorp.unity.common.CallResult} is designed for providing uniform error handling and result messages across calling methods. {@link com.incadencecorp.unity.common.CallResult}
- * encapsulates success, failure or cancel states, as well as error messages and class- and method-level resolution to allow
- * the caller to identify the faulting call.
+ * {@link com.incadencecorp.unity.common.CallResult} is designed for providing uniform error handling and result messages across calling methods. 
+ * {@link com.incadencecorp.unity.common.CallResult} encapsulates success, failure or cancel states, as well as error messages and class- and method-level resolution to allow the caller to identify the faulting call.
  * 
  * @author InCadence
  *
@@ -63,9 +62,9 @@ public class CallResult {
     };
 
     /**
-     * Initializes the connector to use for logging {@link com.incadencecorp.unity.common.CallResult.CallResults}
+     * Initializes the connector to use for logging {@link com.incadencecorp.unity.common.CallResult.CallResults}.
      * 
-     * @param connector the connector to use for logging {@link com.incadencecorp.unity.common.CallResult.CallResults}
+     * @param connector the connector to use for logging {@link com.incadencecorp.unity.common.CallResult.CallResults}.
      * */
     public static void initialize(IConfigurationsConnector connector)
     {
@@ -104,15 +103,15 @@ public class CallResult {
     // private static DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
     // private static Date date = new Date();
 
-    private CallResults _Result;
-    private Date _DateTimeGMT = new Date();
-    private String _Message;
-    private String _ModuleName;
-    private String _MethodName;
-    private int _LineNumber;
-    private String _StackTrace;
-    private Object _ReturnValue;
-    private Exception _Exception;
+    private CallResults _result;
+    private Date _dateTimeGMT = new Date();
+    private String _message;
+    private String _moduleName;
+    private String _methodName;
+    private int _lineNumber;
+    private String _stackTrace;
+    private Object _returnValue;
+    private Exception _exception;
 
     /***************************
      * Public Shared Variables *
@@ -125,7 +124,7 @@ public class CallResult {
      ****************/
 
     /**
-     * Constructs a {@link com.incadencecorp.unity.common.CallResult} with the state unknown
+     * Constructs a {@link com.incadencecorp.unity.common.CallResult} with the state unknown.
      */
     public CallResult()
     {
@@ -133,33 +132,33 @@ public class CallResult {
     }
 
     /**
-     * Constructs a {@link com.incadencecorp.unity.common.CallResult}
+     * Constructs a {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param result the state of the call
-     * @param ex an exception to be stored in the {@link com.incadencecorp.unity.common.CallResult}
-     * @param moduleName the name of the module
+     * @param result the state of the call.
+     * @param ex an exception to be stored in the {@link com.incadencecorp.unity.common.CallResult}.
+     * @param moduleName the name of the module.
      */
     public CallResult(CallResults result, Exception ex, String moduleName)
     {
 
         this(result, ex.getMessage(), moduleName);
-        this._Exception = ex;
+        this._exception = ex;
 
     }
 
     /**
-     * Constructs a {@link com.incadencecorp.unity.common.CallResult}
+     * Constructs a {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param result the state of the call
-     * @param message a message to provide details regarding the state of the {@link com.incadencecorp.unity.common.CallResult}
-     * @param moduleName the name of the module
+     * @param result the state of the call.
+     * @param message a message to provide details regarding the state of the {@link com.incadencecorp.unity.common.CallResult}.
+     * @param moduleName the name of the module.
      */
     public CallResult(CallResults result, String message, String moduleName)
     {
 
-        this._Result = result;
-        this._Message = message;
-        this._ModuleName = moduleName;
+        this._result = result;
+        this._message = message;
+        this._moduleName = moduleName;
         this.setDateTimeGMT();
 
         // get stack trace
@@ -168,9 +167,9 @@ public class CallResult {
         // need n to get last element in stack trace
         int n = Trace.length - 1;
 
-        this._MethodName = Trace[n].getMethodName();
-        this._LineNumber = Trace[n].getLineNumber();
-        this._StackTrace = stackTracetoString(Trace);
+        this._methodName = Trace[n].getMethodName();
+        this._lineNumber = Trace[n].getLineNumber();
+        this._stackTrace = stackTracetoString(Trace);
 
         if (result == CallResults.FAILED_ERROR)
         {
@@ -180,11 +179,11 @@ public class CallResult {
     }
 
     /**
-     * Constructs a {@link com.incadencecorp.unity.common.CallResult}
+     * Constructs a {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult}
-     * @param ex an exception to be stored in the {@link com.incadencecorp.unity.common.CallResult}
-     * @param moduleObject the module object
+     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult}.
+     * @param ex an exception to be stored in the {@link com.incadencecorp.unity.common.CallResult}.
+     * @param moduleObject the module object.
      */
     public CallResult(CallResults result, Exception ex, Object moduleObject)
     {
@@ -192,11 +191,11 @@ public class CallResult {
     }
 
     /**
-     * Constructs a {@link com.incadencecorp.unity.common.CallResult}
+     * Constructs a {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult}
-     * @param message a message to provide details regarding the state of the {@link com.incadencecorp.unity.common.CallResult}
-     * @param moduleObject the module object
+     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult}.
+     * @param message a message to provide details regarding the state of the {@link com.incadencecorp.unity.common.CallResult}.
+     * @param moduleObject the module object.
      */
     public CallResult(CallResults result, String message, Object moduleObject)
     {
@@ -204,9 +203,9 @@ public class CallResult {
     }
 
     /**
-     * Constructs a {@link com.incadencecorp.unity.common.CallResult}
+     * Constructs a {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult}
+     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public CallResult(CallResults result)
     {
@@ -214,10 +213,10 @@ public class CallResult {
     }
 
     /**
-     * Constructs a {@link com.incadencecorp.unity.common.CallResult}
+     * Constructs a {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult}
-     * @param value the object to be stored in the {@link com.incadencecorp.unity.common.CallResult}
+     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult}.
+     * @param value the object to be stored in the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public CallResult(CallResults result, Object value)
     {
@@ -226,7 +225,7 @@ public class CallResult {
 
         if (result == CallResults.SUCCESS)
         {
-            this._ReturnValue = value;
+            this._returnValue = value;
         }
 
     }
@@ -236,9 +235,9 @@ public class CallResult {
      **************/
 
     /**
-     * Returns the name of the product
+     * Returns the name of the product.
      * 
-     * @return the name of the product
+     * @return the name of the product.
      */
     public static String productName()
     {
@@ -247,147 +246,147 @@ public class CallResult {
     }
 
     /**
-     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Success
+     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Success.
      * 
-     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Success; <code>false</code> otherwise
+     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Success; <code>false</code> otherwise.
      */
     public boolean isSuccess()
     {
-        return (this._Result == CallResults.SUCCESS);
+        return (this._result == CallResults.SUCCESS);
     }
 
     /**
-     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed
+     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed.
      * 
-     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed; <code>false</code> otherwise
+     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed; <code>false</code> otherwise.
      */
     public boolean isFailed()
     {
-        return (this._Result == CallResults.FAILED);
+        return (this._result == CallResults.FAILED);
     }
 
     /**
-     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed Error
+     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed Error.
      * 
-     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed Error; <code>false</code> otherwise
+     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed Error; <code>false</code> otherwise.
      */
     public boolean isFailedError()
     {
-        return (this._Result == CallResults.FAILED_ERROR);
+        return (this._result == CallResults.FAILED_ERROR);
     }
 
     /**
-     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Canceled
+     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Canceled.
      * 
-     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Canceled; <code>false</code> otherwise
+     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Canceled; <code>false</code> otherwise.
      */
     public boolean isCanceled()
     {
-        return (this._Result == CallResults.CANCELED);
+        return (this._result == CallResults.CANCELED);
     }
 
     /**
-     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Info
+     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Info.
      * 
-     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Info; <code>false</code> otherwise
+     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Info; <code>false</code> otherwise.
      */
     public boolean isInfo()
     {
-        return (this._Result == CallResults.INFO);
+        return (this._result == CallResults.INFO);
     }
 
     /**
-     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Login Status
+     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Login Status.
      * 
-     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Login Status; <code>false</code> otherwise
+     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Login Status; <code>false</code> otherwise.
      */
     public boolean isLoginStatus()
     {
-        return (this._Result == CallResults.LOGIN_STATUS);
+        return (this._result == CallResults.LOGIN_STATUS);
     }
 
     /**
-     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Debug Status
+     * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Debug Status.
      * 
-     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Debug Status; <code>false</code> otherwise
+     * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Debug Status; <code>false</code> otherwise.
      */
     public boolean isDebugStatus()
     {
-        return (this._Result == CallResults.DEBUG);
+        return (this._result == CallResults.DEBUG);
     }
 
     /**
-     * Returns the stack trace of the {@link com.incadencecorp.unity.common.CallResult}
+     * Returns the stack trace of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @return the stack trace of the {@link com.incadencecorp.unity.common.CallResult}
+     * @return the stack trace of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public String getStackTrace()
     {
-        return this._StackTrace;
+        return this._stackTrace;
     }
 
     /**
-     * Returns the state of the {@link com.incadencecorp.unity.common.CallResult}
+     * Returns the state of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @return the state of the {@link com.incadencecorp.unity.common.CallResult}
+     * @return the state of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public CallResults getCallResults()
     {
-        return this._Result;
+        return this._result;
     }
 
     /**
-     * Returns the object from the calling method
+     * Returns the object from the calling method.
      * 
-     * @return the object from the calling method
+     * @return the object from the calling method.
      */
     public Object getValue()
     {
-        return this._ReturnValue;
+        return this._returnValue;
     }
 
     /**
-     * Sets the state of the {@link com.incadencecorp.unity.common.CallResult}
+     * Sets the state of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult} to be set
+     * @param result the state of the {@link com.incadencecorp.unity.common.CallResult} to be set.
      */
     public void setCallResults(CallResults result)
     {
-        this._Result = result;
+        this._result = result;
     }
 
     /**
-     * Returns the message from the {@link com.incadencecorp.unity.common.CallResult}
+     * Returns the message from the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @return the message from the {@link com.incadencecorp.unity.common.CallResult}
+     * @return the message from the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public String getMessage()
     {
-        return this._Message;
+        return this._message;
     }
 
     /**
-     * Sets the message in the {@link com.incadencecorp.unity.common.CallResult}
+     * Sets the message in the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param message the message to be stored in the {@link com.incadencecorp.unity.common.CallResult}
+     * @param message the message to be stored in the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public void setMessage(String message)
     {
-        this._Message = message;
+        this._message = message;
     }
 
     /**
-     * Returns the DateTime stamp of the {@link com.incadencecorp.unity.common.CallResult} in GMT
+     * Returns the DateTime stamp of the {@link com.incadencecorp.unity.common.CallResult} in GMT.
      * 
-     * @return the DateTime stamp of the {@link com.incadencecorp.unity.common.CallResult} in GMT
+     * @return the DateTime stamp of the {@link com.incadencecorp.unity.common.CallResult} in GMT.
      */
     public Date getDateTimeGMT()
     {
-        return this._DateTimeGMT;
+        return this._dateTimeGMT;
     }
 
     /**
-     * Sets the DateTime stamp of the {@link com.incadencecorp.unity.common.CallResult} as the current instant in GMT
+     * Sets the DateTime stamp of the {@link com.incadencecorp.unity.common.CallResult} as the current instant in GMT.
      */
     public void setDateTimeGMT()
     {
@@ -396,106 +395,106 @@ public class CallResult {
         Date tempDate = new Date();
         try
         {
-            this._DateTimeGMT = dateFormat.parse(dateFormat.format(tempDate));
+            this._dateTimeGMT = dateFormat.parse(dateFormat.format(tempDate));
         }
         catch (ParseException e)
         {
-            this._DateTimeGMT = tempDate;
+            this._dateTimeGMT = tempDate;
         }
     }
 
     /**
-     * Returns the Exception of the {@link com.incadencecorp.unity.common.CallResult}
+     * Returns the Exception of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @return the Exception of the {@link com.incadencecorp.unity.common.CallResult}
+     * @return the Exception of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public Exception getException()
     {
-        return this._Exception;
+        return this._exception;
     }
 
     /**
-     * Sets the Exception of the {@link com.incadencecorp.unity.common.CallResult}
+     * Sets the Exception of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param ex the Exception of the {@link com.incadencecorp.unity.common.CallResult}
+     * @param ex the Exception of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public void setException(Exception ex)
     {
-        this._Exception = ex;
+        this._exception = ex;
         if (ex != null)
         {
-            this._StackTrace = ex.getStackTrace().toString();
+            this._stackTrace = ex.getStackTrace().toString();
         }
     }
 
     /**
-     * Returns the Module Name of the {@link com.incadencecorp.unity.common.CallResult}
+     * Returns the Module Name of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @return the Module Name of the {@link com.incadencecorp.unity.common.CallResult}
+     * @return the Module Name of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public String getaModuleName()
     {
-        return this._ModuleName;
+        return this._moduleName;
     }
 
     /**
-     * Sets the Module Name of the {@link com.incadencecorp.unity.common.CallResult}
+     * Sets the Module Name of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param name the Module Name of the {@link com.incadencecorp.unity.common.CallResult}
+     * @param name the Module Name of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public void setModuleName(String name)
     {
-        this._ModuleName = name;
+        this._moduleName = name;
     }
 
     /**
-     * Returns the Method Name of the {@link com.incadencecorp.unity.common.CallResult}
+     * Returns the Method Name of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @return the Method Name of the {@link com.incadencecorp.unity.common.CallResult}
+     * @return the Method Name of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public String getMethodName()
     {
-        return this._MethodName;
+        return this._methodName;
     }
 
     /**
-     * Sets the Method Name of the {@link com.incadencecorp.unity.common.CallResult}
+     * Sets the Method Name of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param name the Method Name of the {@link com.incadencecorp.unity.common.CallResult}
+     * @param name the Method Name of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public void setMethodName(String name)
     {
-        this._MethodName = name;
+        this._methodName = name;
     }
 
     /**
-     * Returns the Line Number of the {@link com.incadencecorp.unity.common.CallResult}
+     * Returns the Line Number of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @return the Line Number of the {@link com.incadencecorp.unity.common.CallResult}
+     * @return the Line Number of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public int getLineNumber()
     {
-        return this._LineNumber;
+        return this._lineNumber;
     }
 
     /**
-     * Sets the Line Number of the {@link com.incadencecorp.unity.common.CallResult}
+     * Sets the Line Number of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param lineNumber the Line Number of the {@link com.incadencecorp.unity.common.CallResult}
+     * @param lineNumber the Line Number of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public void setLineNumer(int lineNumber)
     {
-        this._LineNumber = lineNumber;
+        this._lineNumber = lineNumber;
     }
 
     /**
-     * Sets the status of the {@link com.incadencecorp.unity.common.CallResult}
+     * Sets the status of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
-     * @param _result the status of the {@link com.incadencecorp.unity.common.CallResult}
+     * @param _result the status of the {@link com.incadencecorp.unity.common.CallResult}.
      */
     public void setResult(CallResults _result)
     {
-        this._Result = _result;
+        this._result = _result;
     }
 
     /*
@@ -521,11 +520,10 @@ public class CallResult {
     }
 
     /**
-     * Returns the {@link com.incadencecorp.unity.common.CallResult} formatted as XML
+     * Returns the {@link com.incadencecorp.unity.common.CallResult} formatted as XML.
      * 
-     * @param includeDebugInformation whether to include the module name, method name, line number and stacktrace in the
-     *            {@link com.incadencecorp.unity.common.CallResult} XML
-     * @return the {@link com.incadencecorp.unity.common.CallResult} formatted as XML
+     * @param includeDebugInformation whether to include the module name, method name, line number and stacktrace in the {@link com.incadencecorp.unity.common.CallResult} XML.
+     * @return the {@link com.incadencecorp.unity.common.CallResult} formatted as XML.
      */
     public String toXML(boolean includeDebugInformation)
     {
@@ -549,15 +547,15 @@ public class CallResult {
 
             // Basic info
             Element result = doc.createElement("Result");
-            result.appendChild(doc.createTextNode(Integer.toString(this._Result.ordinal())));
-            if (this._Message == null)
+            result.appendChild(doc.createTextNode(Integer.toString(this._result.ordinal())));
+            if (this._message == null)
             {
-                this._Message = "null";
+                this._message = "null";
             }
             Element message = doc.createElement("Message");
-            message.appendChild(doc.createTextNode(this._Message));
+            message.appendChild(doc.createTextNode(this._message));
             Element dateTimeGMT = doc.createElement("DateTimeGMT");
-            dateTimeGMT.appendChild(doc.createTextNode(dateFormat.format(this._DateTimeGMT).toString()));
+            dateTimeGMT.appendChild(doc.createTextNode(dateFormat.format(this._dateTimeGMT).toString()));
             rootElement.appendChild(result);
             rootElement.appendChild(message);
             rootElement.appendChild(dateTimeGMT);
@@ -566,20 +564,20 @@ public class CallResult {
             if (includeDebugInformation)
             {
                 Element moduleName = doc.createElement("ModuleName");
-                moduleName.appendChild(doc.createTextNode(this._ModuleName));
+                moduleName.appendChild(doc.createTextNode(this._moduleName));
 
                 Element methodName = doc.createElement("MethodName");
-                methodName.appendChild(doc.createTextNode(this._MethodName));
+                methodName.appendChild(doc.createTextNode(this._methodName));
 
                 Element lineNumber = doc.createElement("LineNumber");
-                lineNumber.appendChild(doc.createTextNode(Integer.toString(this._LineNumber)));
+                lineNumber.appendChild(doc.createTextNode(Integer.toString(this._lineNumber)));
 
-                if (this._StackTrace == null)
+                if (this._stackTrace == null)
                 {
-                    this._StackTrace = "No Value";
+                    this._stackTrace = "No Value";
                 }
                 Element stackTrace = doc.createElement("StackTrace");
-                stackTrace.appendChild(doc.createTextNode(this._StackTrace));
+                stackTrace.appendChild(doc.createTextNode(this._stackTrace));
 
                 rootElement.appendChild(moduleName);
                 rootElement.appendChild(methodName);
@@ -618,7 +616,7 @@ public class CallResult {
     /**
      * Parses information into the {@link com.incadencecorp.unity.common.CallResult} object from a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @param xml the callResult in XML format
+     * @param xml the callResult in XML format.
      * @return the result of the call returns a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if Parsing is successful; FAILED_ERROR otherwise.
      */
     public CallResults fromXML(String xml)
@@ -640,26 +638,26 @@ public class CallResult {
             {
                 int temp;
                 temp = Integer.parseInt(val);
-                this._Result = intToEnum(temp);
+                this._result = intToEnum(temp);
             }
 
             val = getText(xmlDoc, "//CallResult/DateTimeGMT");
             if (isDate(val))
             {
-                this._DateTimeGMT = intToDate(val);
+                this._dateTimeGMT = intToDate(val);
             }
 
             val = getText(xmlDoc, "//CallResult/LineNumber");
             if (isNumeric(val))
             {
-                this._LineNumber = Integer.parseInt(val);
+                this._lineNumber = Integer.parseInt(val);
             }
 
             // Extended debug info
-            this._Message = getText(xmlDoc, "//CallResult/Message");
-            this._ModuleName = getText(xmlDoc, "//CallResult/ModuleName");
-            this._MethodName = getText(xmlDoc, "//CallResult/MethodName");
-            this._StackTrace = getText(xmlDoc, "//CallResult/StackTrace");
+            this._message = getText(xmlDoc, "//CallResult/Message");
+            this._moduleName = getText(xmlDoc, "//CallResult/ModuleName");
+            this._methodName = getText(xmlDoc, "//CallResult/MethodName");
+            this._stackTrace = getText(xmlDoc, "//CallResult/StackTrace");
 
             // return success indicator
             return CallResults.SUCCESS;
@@ -675,7 +673,7 @@ public class CallResult {
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult} as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @param callResult the {@link com.incadencecorp.unity.common.CallResult} to be logged
+     * @param callResult the {@link com.incadencecorp.unity.common.CallResult} to be logged.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResult callResult)
@@ -687,7 +685,7 @@ public class CallResult {
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result)
@@ -698,9 +696,9 @@ public class CallResult {
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, message and Module Object as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
-     * @param message the message to be logged
-     * @param moduleObject the module Object of the calling method
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
+     * @param message the message to be logged.
+     * @param moduleObject the module Object of the calling method.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, String message, Object moduleObject)
@@ -712,9 +710,9 @@ public class CallResult {
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, message and class of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
-     * @param message the message to be logged
-     * @param objectType the class of the calling method
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
+     * @param message the message to be logged.
+     * @param objectType the class of the calling method.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, String message, Class<?> objectType)
@@ -726,9 +724,9 @@ public class CallResult {
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, message and Module Name of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
-     * @param message the message to be logged
-     * @param moduleName the Module name of the calling method
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
+     * @param message the message to be logged.
+     * @param moduleName the Module name of the calling method.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, String message, String moduleName)
@@ -739,9 +737,9 @@ public class CallResult {
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception and the module Object of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
-     * @param ex the exception to be logged
-     * @param moduleObject the module Object of the calling method
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
+     * @param ex the exception to be logged.
+     * @param moduleObject the module Object of the calling method.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, Exception ex, Object moduleObject)
@@ -752,9 +750,9 @@ public class CallResult {
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception and the class of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
-     * @param ex the exception to be logged
-     * @param objectType the class of the calling method
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
+     * @param ex the exception to be logged.
+     * @param objectType the class of the calling method.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, Exception ex, Class<?> objectType)
@@ -763,13 +761,12 @@ public class CallResult {
     }
 
     /**
-     * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception, message and the module name of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as
-     * XML.
+     * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception, message and the module name of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
      * 
-     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status
-     * @param ex the exception to be logged
-     * @param message the message from the calling method
-     * @param moduleName the module name of the calling method
+     * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
+     * @param ex the exception to be logged.
+     * @param message the message from the calling method.
+     * @param moduleName the module name of the calling method.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of SUCCESS if logging is successful; FAILED_ERROR otherwise.
      */
     public static CallResults log(CallResults result, Exception ex, String message, String moduleName)
@@ -826,7 +823,7 @@ public class CallResult {
 
             if (toDebugPrint && isDebug)
             {
-                switch (_Result) {
+                switch (_result) {
                 case DEBUG:
                     System.out.println("Debug: " + this.getMessage());
                     break;
