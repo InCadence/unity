@@ -147,7 +147,6 @@ public class ConfigurationFile implements IConfigurationFile {
 
     protected Boolean openFromRestoreFile(String fileName)
     {
-        // TODO Auto-generated method stub
         try
         {
             File file = new File(fileName);
@@ -476,7 +475,6 @@ public class ConfigurationFile implements IConfigurationFile {
     @Override
     public String[] getSectionList(String sectionPath)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 

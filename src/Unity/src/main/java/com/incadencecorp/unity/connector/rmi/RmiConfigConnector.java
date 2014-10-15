@@ -29,8 +29,7 @@ public class RmiConfigConnector {
         {
             if (_connector == null)
             {
-                // TODO: set up ConfigurationsConnector with port and address, address is hard coded for now...
-                _connector = new RmiConfigurationsConnector(1099, RmiConfigConnectorSettings.getAddress());
+                _connector = new RmiConfigurationsConnector(RmiConfigConnectorSettings.getPort(), RmiConfigConnectorSettings.getAddress());
             }
         }
         catch (Exception ex)

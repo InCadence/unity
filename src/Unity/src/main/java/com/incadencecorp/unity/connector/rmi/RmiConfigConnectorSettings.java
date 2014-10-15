@@ -30,6 +30,14 @@ public class RmiConfigConnectorSettings extends SettingsBase {
                                                      "127.0.0.1",
                                                      true);
     }
+    
+    public static int getPort()
+    {
+        return RmiConfigConnectorSettings.getSetting(ConfigurationFileName,
+                                                     "unity/addresses/UnityPort",
+                                                     1099,
+                                                     true);
+    }
 
     public static Boolean getRemotingEnabled()
     {

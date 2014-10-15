@@ -1,9 +1,12 @@
 package com.incadencecorp.unity.connector.rmi;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import com.incadencecorp.unity.common.CallResult;
+import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.IConfigurationsConnector;
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.configuration.rmi.IRmiConfigurationFiles;
@@ -21,40 +24,30 @@ public class RmiConfigurationsConnector implements IConfigurationsConnector {
      *********************/
     public RmiConfigurationsConnector(Integer port, String address)
     {
-        comInitialize(port, address);
+        try
+        {
+            comInitialize(port, address);
+        }
+        catch (RemoteException | NotBoundException e)
+        {
+            CallResult.log(CallResults.DEBUG, e, this);
+        }
     }
 
-    public void comInitialize(Integer port, String address)
+    public void comInitialize(Integer port, String address) throws RemoteException, NotBoundException
     {
 
         if (address == null || address.isEmpty())
         {
-            try
-            {
-                this._configurations = new RmiConfigurationFiles();
-            }
-            catch (RemoteException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            this._configurations = new RmiConfigurationFiles();
         }
         else
         {
-
-            try
-            {
-                // look up the Registry where the unity service is listening to
-                Registry unityRegistry = LocateRegistry.getRegistry(address);
-                // get remote interface to gain access to call ConfigurationFiles methods remotely
-                this._configurations = (IRmiConfigurationFiles) unityRegistry.lookup("configurations");
-                System.out.println("look up success!");
-            }
-            catch (Exception e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            // look up the Registry where the unity service is listening to
+            Registry unityRegistry = LocateRegistry.getRegistry(address);
+            // get remote interface to gain access to call ConfigurationFiles methods remotely
+            this._configurations = (IRmiConfigurationFiles) unityRegistry.lookup("configurations");
+            System.out.println("look up success!");
         }
     }
 
