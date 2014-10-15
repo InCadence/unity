@@ -11,32 +11,36 @@ import com.incadencecorp.unity.configuration.rmi.RmiConfigurationFiles;
 
 public class RMIService {
 
+    public static void main(String[] args)
+    {
 
-	public static void main(String[] args) {
-
-		System.setProperty("java.rmi.server.hostname", args[0]);
-		
-		CallResult.log(CallResults.INFO, "Address set to: " + args[0], "RMI Service");
-		
-		ConfigurationFiles configurationFiles = new ConfigurationFiles();
-		configurationFiles.setSetting("unity.config", "unity/addresses/UnityAddress", args[0], SettingType.ST_STRING);
-		
         try
         {
-        	LocateRegistry.createRegistry(Integer.parseInt(args[1]));
+            System.setProperty("java.rmi.server.hostname", args[0]);
+
+            CallResult.log(CallResults.INFO, "Address set to: " + args[0], "RMI Service");
+
+            ConfigurationFiles configurationFiles = new ConfigurationFiles();
+            configurationFiles.setSetting("unity.config", "unity/addresses/UnityAddress", args[0], SettingType.ST_STRING);
+
+            LocateRegistry.createRegistry(Integer.parseInt(args[1]));
 
             CallResult.log(CallResults.INFO, "Port set to: " + args[1], "RMI Service");
 
-        	RmiConfigurationFiles remoteConfigurationFiles = new RmiConfigurationFiles();
-        	Naming.rebind("configurations", remoteConfigurationFiles);
+            RmiConfigurationFiles remoteConfigurationFiles = new RmiConfigurationFiles();
+            Naming.rebind("configurations", remoteConfigurationFiles);
 
-            CallResult.log(CallResults.INFO,"Unity RMI service is running...", "RMI Service");
+            CallResult.log(CallResults.INFO, "Unity RMI service is running...", "RMI Service");
         }
-        catch(Exception ex)
+        catch (IndexOutOfBoundsException ex)
         {
-            ex.printStackTrace();
+            CallResult.log(CallResults.FAILED_ERROR, "Input Arg: {Address} {port}", "RMI Service");
+        }
+        catch (Exception ex)
+        {
+            CallResult.log(CallResults.FAILED_ERROR, ex, ex.getMessage(), "RMI Service");
             System.exit(1);
         }
 
-	}
+    }
 }

@@ -35,9 +35,24 @@
 			<groupId>com.incadencecorp.unity</groupId>
 			<artifactId>unity-common</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.incadencecorp.unity</groupId>
+			<artifactId>unity-rmiconnector</artifactId>
+		</dependency>
 	</dependencies>
 	<properties>
 		<start-class>unity.rmi.server.RMIService</start-class>
 	</properties>
-	<groupId>com.incadencecorp.unity</groupId>
+	<parent>
+		<groupId>com.incadencecorp.unity</groupId>
+		<artifactId>unity-pom</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../Unity.Pom</relativePath>
+	</parent>
 </project>

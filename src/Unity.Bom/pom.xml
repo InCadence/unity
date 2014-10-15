@@ -11,6 +11,9 @@
 		<unityRMIVersion>0.0.1-SNAPSHOT</unityRMIVersion>
 		<unityRestVersion>0.0.1-SNAPSHOT</unityRestVersion>
 		<unityCommonVersion>0.0.1-SNAPSHOT</unityCommonVersion>
+		<unityLocalConnectorVersion>0.0.1-SNAPSHOT</unityLocalConnectorVersion>
+		<unityRestConnectorVersion>0.0.1-SNAPSHOT</unityRestConnectorVersion>
+		<unityRmiConnectorVersion>0.0.1-SNAPSHOT</unityRmiConnectorVersion>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -23,6 +26,21 @@
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-common</artifactId>
 				<version>${unityCommonVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.incadencecorp.unity</groupId>
+				<artifactId>unity-localconnector</artifactId>
+				<version>${unityLocalConnectorVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.incadencecorp.unity</groupId>
+				<artifactId>unity-restconnector</artifactId>
+				<version>${unityRestConnectorVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.incadencecorp.unity</groupId>
+				<artifactId>unity-rmiconnector</artifactId>
+				<version>${unityRmiConnectorVersion}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

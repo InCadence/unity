@@ -37,6 +37,10 @@
 			<groupId>com.incadencecorp.unity</groupId>
 			<artifactId>unity-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.incadencecorp.unity</groupId>
+			<artifactId>unity-localconnector</artifactId>
+		</dependency>
 	</dependencies>
 
 	<properties>

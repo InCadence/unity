@@ -285,7 +285,7 @@ public class CallResult {
      * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed Error.
      * 
      * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Failed Error;
-     *         <code>false</code> otherwise.
+     *         <code>false</code> otherwise
      */
     public final boolean isFailedError()
     {
@@ -296,7 +296,7 @@ public class CallResult {
      * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Canceled.
      * 
      * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Canceled;
-     *         <code>false</code> otherwise. <code>false</code> otherwise.
+     *         <code>false</code> otherwise
      */
     public final boolean isCanceled()
     {
@@ -307,7 +307,7 @@ public class CallResult {
      * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Info.
      * 
      * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Info;
-     *         <code>false</code> otherwise. <code>false</code> otherwise.
+     *         <code>false</code> otherwise
      */
     public final boolean isInfo()
     {
@@ -318,7 +318,7 @@ public class CallResult {
      * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Login Status.
      * 
      * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Login Status;
-     *         <code>false</code> otherwise. <code>false</code> otherwise.
+     *         <code>false</code> otherwise
      */
     public final boolean isLoginStatus()
     {
@@ -329,7 +329,7 @@ public class CallResult {
      * Returns <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Debug Status.
      * 
      * @return <code>true</code> if the state of the {@link com.incadencecorp.unity.common.CallResult} is Debug Status;
-     *         <code>false</code> otherwise. <code>false</code> otherwise.
+     *         <code>false</code> otherwise
      */
     public final boolean isDebugStatus()
     {

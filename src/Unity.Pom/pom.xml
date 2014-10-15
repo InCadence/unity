@@ -6,8 +6,11 @@
 	<modules>
 		<module>../Unity</module>
 		<module>../Unity.Common</module>
-		<module>../Unity.RMIService</module>
+		<module>../Unity.RmiService</module>
 		<module>../Unity.RestService</module>
+		<module>../Unity.LocalConnector</module>
+		<module>../Unity.RestConnector</module>
+		<module>../Unity.RmiConnector</module>
 	</modules>
 	<parent>
 		<groupId>com.incadencecorp.unity</groupId>

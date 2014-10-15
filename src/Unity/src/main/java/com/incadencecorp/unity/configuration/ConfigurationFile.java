@@ -189,7 +189,6 @@ public class ConfigurationFile implements IConfigurationFile {
         }
         catch (Exception ex)
         {
-            System.out.println(ex.getMessage());
             ex.printStackTrace();
             return false;
         }
