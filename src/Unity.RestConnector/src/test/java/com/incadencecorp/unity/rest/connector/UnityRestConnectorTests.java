@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.Rest;
+package com.incadencecorp.unity.rest.connector;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,12 +9,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.incadencecorp.unity.common.CallResult;
+import com.incadencecorp.unity.common.SettingsBaseTest;
+import com.incadencecorp.unity.common.TestSettings;
 import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.SettingType;
-import com.incadencecorp.unity.common.tests.SettingsBaseTest;
-import com.incadencecorp.unity.common.tests.TestSettings;
-import com.incadencecorp.unity.connector.rest.RestConfigConnector;
-import com.incadencecorp.unity.connector.rest.RestConfigurationsConnector;
+import com.incadencecorp.unity.rest.connector.RestConfigConnector;
+import com.incadencecorp.unity.rest.connector.RestConfigurationsConnector;
 
 public class UnityRestConnectorTests extends SettingsBaseTest {
 

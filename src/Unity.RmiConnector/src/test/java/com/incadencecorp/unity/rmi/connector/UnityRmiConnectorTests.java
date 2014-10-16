@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.test.connector.rmi;
+package com.incadencecorp.unity.rmi.connector;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -7,8 +7,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.incadencecorp.unity.common.SettingType;
-import com.incadencecorp.unity.common.tests.SettingsBaseTest;
-import com.incadencecorp.unity.connector.rmi.RmiConfigConnector;
+import com.incadencecorp.unity.common.SettingsBaseTest;
+import com.incadencecorp.unity.rmi.connector.RmiConfigConnector;
 
 public class UnityRmiConnectorTests extends SettingsBaseTest {
 

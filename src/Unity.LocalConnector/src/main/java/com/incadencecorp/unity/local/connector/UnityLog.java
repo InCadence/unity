@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.connector.local;
+package com.incadencecorp.unity.local.connector;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

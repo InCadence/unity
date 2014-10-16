@@ -7,7 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../Unity.Pom</relativePath>
 	</parent>
-	<artifactId>unity-restconnector</artifactId>
+	<artifactId>unity-rest-connector</artifactId>
 	<version>${unityRestConnectorVersion}</version>
 	<dependencyManagement>
 		<dependencies>
@@ -49,7 +49,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.incadencecorp.unity</groupId>
-			<artifactId>unity-localconnector</artifactId>
+			<artifactId>unity-local-connector</artifactId>
 		</dependency>
 	</dependencies>
 </project>

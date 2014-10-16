@@ -1,36 +1,33 @@
-package com.incadencecorp.unity.connector.rest;
+package com.incadencecorp.unity.rmi.connector;
 
 import com.incadencecorp.unity.common.CallResult;
 import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.SettingType;
 
-public class RestConfigConnector {
+public class RmiConfigConnector {
 
-    /******************************
+    /****************************
+     * ' Class: Unity.Runtime.ConfigConnector ' Description: This class provides a shared method wrapper (singleton) ' around
+     * a connection to the Unity.Configuration Windows Service, which ' is used for persisting and retrieving application
+     * settings to and from ' XML config files. Because methods are shared, any Unity Core users ' can access the
+     * Configuration service without instantiating the inner ' ConfigurationsConnector directly. The wrapper methods also
+     * modify ' the behavior of the interface by passing and returning values by reference, ' and return a CallResult instead
+     * of the value directly, for better error ' handling behavior in the calling code.
+     ***************************/
+
+    /****************************
      * Private Member Variables
-     ******************************/
+     ***************************/
+    // TODO: this should not be hard coded
+    private static RmiConfigurationsConnector _connector = null;
 
-    private static RestConfigurationsConnector _connector = null;
-
-    /*********************
+    /****************************
      * Public Functions
-     *********************/
+     ***************************/
 
     public static void initialize(String address, int port)
     {
-
-        _connector = new RestConfigurationsConnector(address, port);
-
-    }
-
-    public static String getAddress()
-    {
-        return _connector.getAddress();
-    }
-
-    public static int getPort()
-    {
-        return _connector.getPort();
+        _connector = new RmiConfigurationsConnector(address, port);
     }
 
     public static String getSetting(String configurationFileName, String settingPath, String defaultValue, SettingType type)
@@ -46,7 +43,7 @@ public class RestConfigConnector {
     {
         try
         {
-
+            // call on the connector, convert setting type to string because only serializable objects are allowed over RMI
             String value = _connector.getSetting(configurationFileName, settingPath, defaultValue, type, setIfNotFound);
 
             // return success
@@ -55,29 +52,9 @@ public class RestConfigConnector {
         }
         catch (Exception ex)
         {
-            // Log Failed Error
-            CallResult.log(CallResults.FAILED_ERROR, ex, "Unity.Connector.Rest.RestConfigConnector");
-            return defaultValue;
-        }
-    }
-
-    public static boolean setSetting(String configurationFileName, String settingPath, String value, SettingType type)
-    {
-        try
-        {
-            // call on the connector
-            _connector.setSetting(configurationFileName, settingPath, value, type);
-
-            return true;
-
-        }
-        catch (Exception ex)
-        {
-            // Log Failed Error
-
-            CallResult.log(CallResults.FAILED_ERROR, ex, "Unity.Connector.Rest.RestConfigConnector");
-
-            return false;
+            // Return Failed Error
+            new CallResult(CallResults.FAILED_ERROR, ex, "Unity.Runtime.ConfigConnector");
+            return null;
         }
     }
 
@@ -110,6 +87,24 @@ public class RestConfigConnector {
      * return CallResult.successCallResult; } catch (Exception ex) { // Return Failed Error return new
      * CallResult(CallResults.FAILED_ERROR, ex, "Unity.Runtime.ConfigConnector"); } }
      */
+
+    public static Boolean setSetting(String configurationFileName, String settingPath, String value, SettingType type)
+    {
+        try
+        {
+            // call on the connector
+            _connector.setSetting(configurationFileName, settingPath, value, type);
+            // return Success
+            return true;
+        }
+        catch (Exception ex)
+        {
+            // Return Failed Error
+            new CallResult(CallResults.FAILED_ERROR, ex, "Unity.Runtime.ConfigConnector");
+            return false;
+        }
+    }
+
     // public static CallResult deleteSetting(String configurationFileName,
     // String settingPath) {
     // try {
@@ -122,7 +117,7 @@ public class RestConfigConnector {
     // return new CallResult(CallResults.FAILED_ERROR, ex,"Unity.Runtime.ConfigConnector");
     // }
     // }
-
+    //
     // public static CallResult deleteSection(String configurationFileName,
     // String sectionPath) {
     // try {
@@ -136,13 +131,13 @@ public class RestConfigConnector {
     // }
     // }
 
-    public static boolean log(String AppName, String callResultXml)
+    public static Boolean log(String logName, String callResultXml)
     {
 
         try
         {
 
-            if (_connector.log(AppName, callResultXml))
+            if (_connector.log(logName, callResultXml))
             {
 
                 return true;
@@ -155,10 +150,9 @@ public class RestConfigConnector {
         }
         catch (Exception ex)
         {
-            // Return Failed Error
             CallResult.log(CallResults.FAILED_ERROR, ex, "Unity.Runtime.ConfigConnector");
-
             return false;
         }
     }
+
 }

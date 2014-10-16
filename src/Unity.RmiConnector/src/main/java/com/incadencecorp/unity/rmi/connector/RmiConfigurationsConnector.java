@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.connector.rmi;
+package com.incadencecorp.unity.rmi.connector;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -9,8 +9,8 @@ import com.incadencecorp.unity.common.CallResult;
 import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.IConfigurationsConnector;
 import com.incadencecorp.unity.common.SettingType;
-import com.incadencecorp.unity.configuration.rmi.IRmiConfigurationFiles;
-import com.incadencecorp.unity.configuration.rmi.RmiConfigurationFiles;
+import com.incadencecorp.unity.rmi.configuration.IRmiConfigurationFiles;
+import com.incadencecorp.unity.rmi.configuration.RmiConfigurationFiles;
 
 public class RmiConfigurationsConnector implements IConfigurationsConnector {
 

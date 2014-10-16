@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.connector.local;
+package com.incadencecorp.unity.local.connector;
 
 import com.incadencecorp.unity.common.IConfigurationsConnector;
 import com.incadencecorp.unity.common.SettingType;

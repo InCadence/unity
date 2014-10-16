@@ -1,4 +1,4 @@
-package com.incadencecorp.unity;
+package com.incadencecorp.unity.local.connector;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -7,10 +7,10 @@ import org.junit.After;
 import org.junit.Test;
 
 import com.incadencecorp.unity.common.CallResult;
+import com.incadencecorp.unity.common.SettingsBaseTest;
 import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.SettingType;
-import com.incadencecorp.unity.common.tests.SettingsBaseTest;
-import com.incadencecorp.unity.connector.local.LocalConfigConnector;
+import com.incadencecorp.unity.local.connector.LocalConfigConnector;
 
 public class UnityLocalConnectorTests extends SettingsBaseTest {
 

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.incadencecorp.unity</groupId>
-	<artifactId>unity-restservice</artifactId>
+	<artifactId>unity-rest-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<parent>
@@ -39,7 +39,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.incadencecorp.unity</groupId>
-			<artifactId>unity-localconnector</artifactId>
+			<artifactId>unity-local-connector</artifactId>
 		</dependency>
 	</dependencies>
 

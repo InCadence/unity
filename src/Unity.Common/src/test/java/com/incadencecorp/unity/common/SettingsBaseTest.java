@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.common.tests;
+package com.incadencecorp.unity.common;
 
 import static org.junit.Assert.assertTrue;
 

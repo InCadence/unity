@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.connector.rmi;
+package com.incadencecorp.unity.rmi.connector;
 
 import com.incadencecorp.unity.common.SettingsBase;
 

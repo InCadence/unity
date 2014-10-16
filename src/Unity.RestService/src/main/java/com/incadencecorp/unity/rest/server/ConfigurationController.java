@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.incadencecorp.unity.configuration.ConfigurationValue;
-import com.incadencecorp.unity.connector.local.UnityLog;
+import com.incadencecorp.unity.local.connector.UnityLog;
 
 @RestController
 public class ConfigurationController {

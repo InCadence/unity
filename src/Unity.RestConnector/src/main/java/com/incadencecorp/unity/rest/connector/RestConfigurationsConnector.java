@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.connector.rest;
+package com.incadencecorp.unity.rest.connector;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import com.incadencecorp.unity.common.IConfigurationsConnector;
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.configuration.ConfigurationValue;
 import com.incadencecorp.unity.configuration.SettingTypeUtility;
-import com.incadencecorp.unity.connector.local.UnityLog;
+import com.incadencecorp.unity.local.connector.UnityLog;
 
 public class RestConfigurationsConnector implements IConfigurationsConnector {
 

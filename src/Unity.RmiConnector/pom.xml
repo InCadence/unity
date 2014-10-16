@@ -7,7 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../Unity.Pom</relativePath>
 	</parent>
-  <artifactId>unity-rmiconnector</artifactId>
+  <artifactId>unity-rmi-connector</artifactId>
   <version>${unityRmiConnectorVersion}</version>
     <dependencyManagement>
   	<dependencies>

@@ -1,4 +1,4 @@
-package com.incadencecorp.unity.configuration.rmi;
+package com.incadencecorp.unity.rmi.configuration;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

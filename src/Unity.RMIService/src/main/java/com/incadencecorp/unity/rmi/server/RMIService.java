@@ -7,7 +7,7 @@ import com.incadencecorp.unity.common.CallResult;
 import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.configuration.ConfigurationFiles;
-import com.incadencecorp.unity.configuration.rmi.RmiConfigurationFiles;
+import com.incadencecorp.unity.rmi.configuration.RmiConfigurationFiles;
 
 public class RMIService {
 

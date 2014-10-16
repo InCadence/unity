@@ -7,7 +7,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../Unity.Pom</relativePath>
 	</parent>
-  <artifactId>unity-localconnector</artifactId>
+  <artifactId>unity-local-connector</artifactId>
   <version>${unityLocalConnectorVersion}</version>
   <dependencyManagement>
   	<dependencies>
