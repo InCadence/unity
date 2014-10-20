@@ -134,6 +134,39 @@ public class SettingsBase {
 
     }
 
+    protected static int getSettingWithMinMax(final String configurationFileName,
+                                              final String settingPath,
+                                              final int defaultValue,
+                                              final int minValue,
+                                              final int maxValue,
+                                              final boolean setIfNotFound)
+    {
+        int value;
+
+        // Ensure Default Value Meets Requirement
+        if (defaultValue < minValue || defaultValue > maxValue)
+        {
+            value = SettingsBase.getSetting(configurationFileName, settingPath, maxValue, setIfNotFound);
+        }
+        else
+        {
+            value = SettingsBase.getSetting(configurationFileName, settingPath, defaultValue, setIfNotFound);
+        }
+
+        // Ensure Setting Meets Requirement
+        if (value > maxValue)
+        {
+            value = maxValue;
+        }
+        else if (value < minValue)
+        {
+            value = minValue;
+        }
+
+        return value;
+
+    }
+
     protected static int getSetting(final String configurationFileName,
                                     final String settingPath,
                                     final int defaultValue,
