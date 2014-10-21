@@ -3,30 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>unity-common</artifactId>
 	<version>${unityCommonVersion}</version>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.5</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>test-jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	<parent>
+		<groupId>com.incadencecorp.unity</groupId>
+		<artifactId>unity-pom</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../Unity.Pom</relativePath>
+	</parent>
 	<dependencies>
 		<dependency>
 			<groupId>org.jdom</groupId>
@@ -34,10 +16,4 @@
 			<version>2.0.5</version>
 		</dependency>
 	</dependencies>
-	<parent>
-		<groupId>com.incadencecorp.unity</groupId>
-		<artifactId>unity-pom</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../Unity.Pom</relativePath>
-	</parent>
 </project>

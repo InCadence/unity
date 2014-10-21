@@ -12,12 +12,6 @@
 		<module>../Unity.RestConnector</module>
 		<module>../Unity.RmiConnector</module>
 	</modules>
-	<parent>
-		<groupId>com.incadencecorp.unity</groupId>
-		<artifactId>unity-bom</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../Unity.Bom</relativePath>
-	</parent>
 	<build>
 		<plugins>
 			<plugin>
@@ -30,6 +24,12 @@
 			</plugin>
 		</plugins>
 	</build>
+	<parent>
+		<groupId>com.incadencecorp.unity</groupId>
+		<artifactId>unity-bom</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../Unity.Bom</relativePath>
+	</parent>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

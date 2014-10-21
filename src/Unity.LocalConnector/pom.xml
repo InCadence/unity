@@ -1,25 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<artifactId>unity-local-connector</artifactId>
+	<version>${unityLocalConnectorVersion}</version>
 	<parent>
 		<groupId>com.incadencecorp.unity</groupId>
 		<artifactId>unity-pom</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../Unity.Pom</relativePath>
 	</parent>
-	<artifactId>unity-local-connector</artifactId>
-	<version>${unityLocalConnectorVersion}</version>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.incadencecorp.unity</groupId>
-				<artifactId>unity-bom</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>com.incadencecorp.unity</groupId>
@@ -30,12 +19,6 @@
 			<groupId>com.incadencecorp.unity</groupId>
 			<artifactId>unity-common</artifactId>
 			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
