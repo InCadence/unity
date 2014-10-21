@@ -40,14 +40,6 @@ public class LocalConfigurationsConnector implements IConfigurationsConnector {
         return this._localConfigurations.getSettingType(configurationFileName, settingPath);
     }
 
-    /*
-     * public ConfigurationNode getSection(String configurationFileName,String sectionPath) {
-     * 
-     * } public String[] getSectionList(String configurationFileName,String sectionPath) {
-     * 
-     * }
-     */
-
     @Override
     public boolean setSetting(String configurationFileName, String settingPath, String value, SettingType type)
     {
@@ -70,4 +62,23 @@ public class LocalConfigurationsConnector implements IConfigurationsConnector {
         return _localConfigurations.log(logName, callResultXml);
     }
 
+    @Override
+    public String getAddress()
+    {
+        return "127.0.0.1";
+    }
+
+    @Override
+    public int getPort()
+    {
+        return 0;
+    }
+
+    /*
+     * public ConfigurationNode getSection(String configurationFileName,String sectionPath) {
+     * 
+     * } public String[] getSectionList(String configurationFileName,String sectionPath) {
+     * 
+     * }
+     */
 }

@@ -11,7 +11,7 @@ import java.util.TimeZone;
 
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.configuration.ConfigurationFile;
-import com.incadencecorp.unity.configuration.SettingTypeUtility;
+import com.incadencecorp.unity.configuration.SettingTypeHelper;
 import com.incadencecorp.unity.logger.log4j.CallResultLogger;
 
 public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiConfigurationFiles {
@@ -127,7 +127,7 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
 
         // convert string back to setting type
         // TODO: SettingTypeutility needs to be a helper
-        SettingType settingType = SettingTypeUtility.stringToSettingType(type);
+        SettingType settingType = SettingTypeHelper.stringToSettingType(type);
 
         if (configFile != null)
         {
@@ -169,7 +169,7 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
         configFile = getConfigurationFile(configurationFileName);
 
         // convert string back to setting type
-        SettingType settingType = SettingTypeUtility.stringToSettingType(type);
+        SettingType settingType = SettingTypeHelper.stringToSettingType(type);
 
         // set the setting
         if (configFile != null)

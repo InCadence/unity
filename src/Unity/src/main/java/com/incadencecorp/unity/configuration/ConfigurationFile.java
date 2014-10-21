@@ -52,11 +52,13 @@ public class ConfigurationFile implements IConfigurationFile {
      * Public Properties *
      ***************************/
 
+    @Override
     public String getFileName()
     {
         return _fileName;
     }
 
+    @Override
     public void setFileName(String fileName)
     {
         this._fileName = fileName;

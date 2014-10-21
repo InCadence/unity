@@ -45,5 +45,11 @@
 			<groupId>com.incadencecorp.unity</groupId>
 			<artifactId>unity-local-connector</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.incadencecorp.unity</groupId>
+			<artifactId>unity-common</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

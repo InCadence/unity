@@ -10,13 +10,20 @@ import java.util.TimeZone;
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.logger.log4j.CallResultLogger;
 
+/**
+ * A Wrapper that allows accessing and manipulating multiple configuration file objects that implements the
+ * {@link com.incadencecorp.unity.configuration.IConfigurationFile} interface.
+ * 
+ * @author InCadence
+ *
+ */
 public class ConfigurationFiles {
 
     /****************************
      * Private Member Variables
      ***************************/
 
-    private Hashtable<String, ConfigurationFile> _configurationFiles;
+    private Hashtable<String, IConfigurationFile> _configurationFiles;
 
     private String _logLocation;
 
@@ -24,6 +31,11 @@ public class ConfigurationFiles {
      * Public Properties
      *********************/
 
+    /**
+     * Returns the full path where the log is located
+     * 
+     * @return the full path where the log is located
+     */
     public String getLogLocation()
     {
 
@@ -40,9 +52,8 @@ public class ConfigurationFiles {
         return this._logLocation;
     }
 
-    public void setLogLocation()
+    protected void setLogLocation()
     {
-
         File userDir = new File(System.getProperty("user.dir"));
         File logDir = new File(userDir, "logs");
         this._logLocation = logDir.getAbsolutePath();
@@ -54,29 +65,33 @@ public class ConfigurationFiles {
 
     public ConfigurationFiles()
     {
-
-        _configurationFiles = new Hashtable<String, ConfigurationFile>();
+        _configurationFiles = new Hashtable<String, IConfigurationFile>();
 
         // set log location
         this.setLogLocation();
     }
 
     /*********************
-     * Public Methods
+     * Private Methods
      *********************/
-    public void isServiceRunning()
-    {
 
-    }
-
-    public String getBasePath()
+    private String getBasePath()
     {
 
         File userDir = new File(System.getProperty("user.dir"));
         return userDir.getAbsolutePath();
     }
 
-    public void add(ConfigurationFile configFile)
+    /*********************
+     * Public Methods
+     *********************/
+
+    /**
+     * Adds a configuration file object
+     * 
+     * @param configFile the configuration file object
+     */
+    public void add(IConfigurationFile configFile)
     {
 
         File file = new File(configFile.getFileName());
@@ -89,6 +104,10 @@ public class ConfigurationFiles {
         }
     }
 
+    /**
+     * Creates and adds a {@link com.incadencecorp.unity.common.SettingType} object from the Fully Qualified Filename
+     * @param fileName the Fully Qualified Filename
+     */
     public void add(String fileName)
     {
         // Create the configuration file object
@@ -97,13 +116,24 @@ public class ConfigurationFiles {
         this.add(configFile);
     }
 
+    /**
+     * Returns the setting value from the specified configuration file and setting. The defaultValue will be returned if the setting does not exist
+     * in the configuration file. If the specified configuration file is not in the cache, it will be
+     *  
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
+     * @param settingPath the setting path separated by / or . characters
+     * @param defaultValue the Default Setting Value
+     * @param type the {@link com.incadencecorp.unity.common.SettingType} for the Setting Value
+     * @param setIfNotFound whether the setting should be added if not found
+     * @return the Setting Value for the specified configuration file and setting path
+     */
     public String getSetting(String configurationFileName,
                              String settingPath,
                              String defaultValue,
                              SettingType type,
                              Boolean setIfNotFound)
     {
-        ConfigurationFile configFile = null;
+        IConfigurationFile configFile = null;
         // Access the ConfigurationFile object
         configFile = getConfigurationFile(configurationFileName);
 
@@ -119,9 +149,16 @@ public class ConfigurationFiles {
         }
     }
 
+    /**
+     * Retrieves the {@link com.incadencecorp.unity.common.SettingType} for the specified configuration file and setting path.
+     * 
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
+     * @param settingPath the setting path separated by / or . characters
+     * @return the SettingType for the given setting path
+     */
     public SettingType getSettingType(String configurationFileName, String settingPath)
     {
-        ConfigurationFile configFile = null;
+        IConfigurationFile configFile = null;
         // Access the ConfigurationFile object
         configFile = getConfigurationFile(configurationFileName);
 
@@ -144,9 +181,18 @@ public class ConfigurationFiles {
      * public String[] getSectionList(String configurationFileName, String sectionPath) { //TODO: do this return null; }
      */
 
+    /**
+     * Sets or adds a setting in the specified configuration file.
+     * 
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
+     * @param settingPath the setting path separated by / or . characters
+     * @param value the setting value to be set
+     * @param type the {@link com.incadencecorp.unity.common.SettingType} for the setting value
+     * @return true if the setting was set successfully
+     */
     public boolean setSetting(String configurationFileName, String settingPath, String value, SettingType type)
     {
-        ConfigurationFile configFile = null;
+        IConfigurationFile configFile = null;
         // Access the ConfigurationFile object
         configFile = getConfigurationFile(configurationFileName);
 
@@ -159,9 +205,15 @@ public class ConfigurationFiles {
         return true;
     }
 
+    /**
+     * Deletes the setting in the specified configuration file.
+     * 
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
+     * @param settingPath the setting path separated by / or . characters
+     */
     public void deleteSetting(String configurationFileName, String settingPath)
     {
-        ConfigurationFile configFile = null;
+        IConfigurationFile configFile = null;
         // Access the ConfigurationFile object
         configFile = getConfigurationFile(configurationFileName);
 
@@ -172,9 +224,15 @@ public class ConfigurationFiles {
         }
     }
 
+    /**
+     * Deletes the section in the specified configuration file
+     * 
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
+     * @param sectionPath the section path separated by / or . characters
+     */
     public void deleteSection(String configurationFileName, String sectionPath)
     {
-        ConfigurationFile configFile = null;
+        IConfigurationFile configFile = null;
         // Access the ConfigurationFile object
         configFile = getConfigurationFile(configurationFileName);
 
@@ -185,7 +243,14 @@ public class ConfigurationFiles {
         }
     }
 
-    public ConfigurationFile getConfigurationFile(String configurationFileName)
+    /**
+     * Returns the specified configuration file object from the cache. If the specified configuration file object is not
+     * found in the cache, a new configuration file object will be created from the specified configuration file name.
+     * 
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
+     * @return the specified configuration file object
+     */
+    public IConfigurationFile getConfigurationFile(String configurationFileName)
     {
         // Check to see if our collection of ConfigurationFiles contains the Named file.
         if (!_configurationFiles.containsKey(configurationFileName))
@@ -208,6 +273,13 @@ public class ConfigurationFiles {
         }
     }
 
+    /**
+     * Persists the XML generated by {@link com.incadencecorp.unity.common.CallResult} to a log file.
+     * 
+     * @param logName the name of the log without the .log extension
+     * @param callResultXml the xml generated from a callResult
+     * @return true if the logging call is successful
+     */
     public Boolean log(String logName, String callResultXml)
     {
 
@@ -271,7 +343,7 @@ public class ConfigurationFiles {
         }
     }
 
-    public Boolean confirmDirectory(String path)
+    protected Boolean confirmDirectory(String path)
     {
 
         try

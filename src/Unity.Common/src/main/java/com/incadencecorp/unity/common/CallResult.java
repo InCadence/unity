@@ -43,7 +43,10 @@ import org.w3c.dom.Element;
 /**
  * {@link com.incadencecorp.unity.common.CallResult} is designed for providing uniform error handling and result messages
  * across calling methods. {@link com.incadencecorp.unity.common.CallResult} encapsulates success, failure or cancel states,
- * as well as error messages and class- and method-level resolution to allow the caller to identify the faulting call.
+ * as well as error messages and class- and method-level resolution to allow the caller to identify the faulting call. A
+ * {@link com.incadencecorp.unity.common.IConfigurationsConnector} must be passed into the
+ * {@link #initialize(IConfigurationsConnector, String) initialize(IConfigurationsConnector, String)} method to enable
+ * logging.
  * 
  * @author InCadence
  *
@@ -58,35 +61,39 @@ public class CallResult {
     public enum CallResults
     {
         /**
-         * 
+         * Result types of UNKNOWN will be logged to file. If a debugger is attached to the application, the callResult XML
+         * will be printed to console
          */
         UNKNOWN,
         /**
-         * 
+         * Result types of SUCCESS will be logged to file.
          */
         SUCCESS,
         /**
-         * 
+         * Result types of FAILED will be logged to file. If a debugger is attached to the application, the CallResult
+         * message will be printed to console.
          */
         FAILED,
         /**
-         * 
+         * Result types of FAILED_ERROR will be logged to file. If a debugger is attached to the application, the callResult
+         * XML will be printed to console.
          */
         FAILED_ERROR,
         /**
-         * 
+         * Result types of CANCELED will be logged to file.
          */
         CANCELED,
         /**
-         * 
+         * Result types of LOGIN_STATUS will be logged to file.
          */
         LOGIN_STATUS,
         /**
-         * 
+         * Result types of INFO will be logged to file. If a debugger is attached to the application, the CallResult message
+         * will be printed to console.
          */
         INFO,
         /**
-         * 
+         * Result types of DEBUG will print the CallResult message to console if a debugger is attached to the application
          */
         DEBUG;
 
@@ -97,6 +104,7 @@ public class CallResult {
     --------------------------------------------------------------------------*/
 
     private static IConfigurationsConnector _connector = null;
+    private static String _appName = null;
     private CallResults _result;
     private Date _dateTimeGMT = new Date();
     private String _message;
@@ -114,11 +122,13 @@ public class CallResult {
     /**
      * Initializes the connector to use for logging {@link com.incadencecorp.unity.common.CallResult.CallResults}.
      * 
-     * @param connector the connector to use for logging {@link com.incadencecorp.unity.common.CallResult.CallResults}.
+     * @param connector the connector to use for logging {@link com.incadencecorp.unity.common.CallResult.CallResults}
+     * @param appName the unique name of the application that is generating the logs
      * */
-    public static void initialize(final IConfigurationsConnector connector)
+    public static void initialize(final IConfigurationsConnector connector, final String appName)
     {
         _connector = connector;
+        _appName = appName;
     }
 
     /**
@@ -133,11 +143,23 @@ public class CallResult {
     Public Functions
     --------------------------------------------------------------------------*/
 
+    /**
+     * Returns a new {@link com.incadencecorp.unity.common.CallResult} with a
+     * {@link com.incadencecorp.unity.common.CallResult.CallResults} type of SUCCESS
+     * 
+     * @return a new CallResult with a CallResults type of SUCCESS
+     */
     public static final CallResult successCallResult()
     {
         return new CallResult(CallResults.SUCCESS);
     }
 
+    /**
+     * Returns a new {@link com.incadencecorp.unity.common.CallResult} with a
+     * {@link com.incadencecorp.unity.common.CallResult.CallResults} type of FAILED
+     * 
+     * @return a new CallResult with a CallResults type of FAILED
+     */
     public static final CallResult failedCallResult()
     {
         return new CallResult(CallResults.FAILED);
@@ -425,6 +447,20 @@ public class CallResult {
     }
 
     /**
+     * Sets the DateTime stamp of the {@link com.incadencecorp.unity.common.CallResult} as the input string. The Date string
+     * should be in GMT.
+     * 
+     * @param inputDate the date time string in the format: MM/dd/yyyy HH:mm:ss a
+     * @throws ParseException
+     */
+    public final void setDateTimeGMT(String inputDate) throws ParseException
+    {
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        this._dateTimeGMT = dateFormat.parse(inputDate);
+    }
+
+    /**
      * Returns the Exception of the {@link com.incadencecorp.unity.common.CallResult}.
      * 
      * @return the Exception of the {@link com.incadencecorp.unity.common.CallResult}.
@@ -698,8 +734,9 @@ public class CallResult {
     }
 
     /**
-     * Logs the {@link com.incadencecorp.unity.common.CallResult} as a {@link com.incadencecorp.unity.common.CallResult}
-     * formated as XML.
+     * Logs the {@link com.incadencecorp.unity.common.CallResult} as XML. A
+     * {@link com.incadencecorp.unity.common.IConfigurationsConnector} must be initialized using the
+     * {@link #initialize(IConfigurationsConnector, String) initialize(IConfigurationsConnector, String)} method.
      * 
      * @param callResult the {@link com.incadencecorp.unity.common.CallResult} to be logged.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of
@@ -713,7 +750,9 @@ public class CallResult {
 
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status as a
-     * {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * {@link com.incadencecorp.unity.common.CallResult} formated as XML. A
+     * {@link com.incadencecorp.unity.common.IConfigurationsConnector} must be initialized using the
+     * {@link #initialize(IConfigurationsConnector, String) initialize(IConfigurationsConnector, String)} method.
      * 
      * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
      * @return the result of the call will return a {@link com.incadencecorp.unity.common.CallResult.CallResults} status of
@@ -726,7 +765,9 @@ public class CallResult {
 
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, message and Module Object as a
-     * {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * {@link com.incadencecorp.unity.common.CallResult} formated as XML. A
+     * {@link com.incadencecorp.unity.common.IConfigurationsConnector} must be initialized using the
+     * {@link #initialize(IConfigurationsConnector, String) initialize(IConfigurationsConnector, String)} method.
      * 
      * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
      * @param message the message to be logged.
@@ -742,7 +783,9 @@ public class CallResult {
 
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, message and class of the calling method
-     * as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * as a {@link com.incadencecorp.unity.common.CallResult} formated as XML. A
+     * {@link com.incadencecorp.unity.common.IConfigurationsConnector} must be initialized using the
+     * {@link #initialize(IConfigurationsConnector, String) initialize(IConfigurationsConnector, String)} method.
      * 
      * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
      * @param message the message to be logged.
@@ -758,7 +801,9 @@ public class CallResult {
 
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, message and Module Name of the calling
-     * method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML. A
+     * {@link com.incadencecorp.unity.common.IConfigurationsConnector} must be initialized using the
+     * {@link #initialize(IConfigurationsConnector, String) initialize(IConfigurationsConnector, String)} method.
      * 
      * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
      * @param message the message to be logged.
@@ -773,7 +818,9 @@ public class CallResult {
 
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception and the module Object of the
-     * calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML. A
+     * {@link com.incadencecorp.unity.common.IConfigurationsConnector} must be initialized using the
+     * {@link #initialize(IConfigurationsConnector, String) initialize(IConfigurationsConnector, String)} method.
      * 
      * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
      * @param ex the exception to be logged.
@@ -788,7 +835,9 @@ public class CallResult {
 
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception and the class of the calling
-     * method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML. A
+     * {@link com.incadencecorp.unity.common.IConfigurationsConnector} must be initialized using the
+     * {@link #initialize(IConfigurationsConnector, String) initialize(IConfigurationsConnector, String)} method.
      * 
      * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
      * @param ex the exception to be logged.
@@ -803,7 +852,9 @@ public class CallResult {
 
     /**
      * Logs the {@link com.incadencecorp.unity.common.CallResult.CallResults} status, exception, message and the module name
-     * of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML.
+     * of the calling method as a {@link com.incadencecorp.unity.common.CallResult} formated as XML. A
+     * {@link com.incadencecorp.unity.common.IConfigurationsConnector} must be initialized using the
+     * {@link #initialize(IConfigurationsConnector, String) initialize(IConfigurationsConnector, String)} method.
      * 
      * @param result the {@link com.incadencecorp.unity.common.CallResult.CallResults} status.
      * @param ex the exception to be logged.
@@ -855,10 +906,7 @@ public class CallResult {
              * if (MaskArgs.MaskException){ return callResults.FAILED; }
              */
 
-            /*
-             * String appName = this.Application.Info.ProductName;//TODO: find equivalent/fix
-             */
-            String appName = "Unity";
+            String appName = _appName;
             String xml = this.toXML(true);
 
             /*

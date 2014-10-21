@@ -8,14 +8,14 @@ import org.junit.Test;
 
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.common.SettingsBaseTest;
-import com.incadencecorp.unity.rmi.connector.RmiConfigConnector;
+import com.incadencecorp.unity.configuration.ConfigConnector;
 
 public class UnityRmiConnectorTests extends SettingsBaseTest {
 
     @BeforeClass
     public static void initialize()
     {
-        RmiConfigConnector.initialize("127.0.0.1", 1099);
+        ConfigConnector.initialize(new RmiConfigurationsConnector("127.0.0.1", 1099));
         SettingsBaseTest.initialize();
     }
 
@@ -29,19 +29,19 @@ public class UnityRmiConnectorTests extends SettingsBaseTest {
             int intValue;
 
             // RMI Configuration
-            RmiConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.ST_STRING);
+            ConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.ST_STRING);
 
-            RmiConfigConnector.setSetting("app.config",
-                                          "app/section1/random",
-                                          Integer.toString(_testIntValue),
-                                          SettingType.ST_INTEGER);
+            ConfigConnector.setSetting("app.config",
+                                       "app/section1/random",
+                                       Integer.toString(_testIntValue),
+                                       SettingType.ST_INTEGER);
 
-            value = RmiConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.ST_STRING, false);
-            intValue = Integer.parseInt(RmiConfigConnector.getSetting("app.config",
-                                                                      "app/section1/random",
-                                                                      "",
-                                                                      SettingType.ST_INTEGER,
-                                                                      false));
+            value = ConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.ST_STRING, false);
+            intValue = Integer.parseInt(ConfigConnector.getSetting("app.config",
+                                                                   "app/section1/random",
+                                                                   "",
+                                                                   SettingType.ST_INTEGER,
+                                                                   false));
 
             assertTrue("Mismatch", value.equals(_testStringValue));
             assertTrue("Mismatch", _testIntValue == intValue);

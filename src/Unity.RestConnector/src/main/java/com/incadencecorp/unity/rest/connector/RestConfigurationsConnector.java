@@ -11,7 +11,7 @@ import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.IConfigurationsConnector;
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.configuration.ConfigurationValue;
-import com.incadencecorp.unity.configuration.SettingTypeUtility;
+import com.incadencecorp.unity.configuration.SettingTypeHelper;
 import com.incadencecorp.unity.local.connector.UnityLog;
 
 public class RestConfigurationsConnector implements IConfigurationsConnector {
@@ -31,18 +31,18 @@ public class RestConfigurationsConnector implements IConfigurationsConnector {
     public RestConfigurationsConnector()
     {
 
-        Initialize("localhost", 8080);
+        initialize("127.0.0.1", 8080);
 
     }
 
     public RestConfigurationsConnector(String address, int port)
     {
 
-        Initialize(address, port);
+        initialize(address, port);
 
     }
 
-    private void Initialize(String address, int port)
+    private void initialize(String address, int port)
     {
 
         try
@@ -88,7 +88,7 @@ public class RestConfigurationsConnector implements IConfigurationsConnector {
         settingPath = settingPath.replace('/', '-');
         settingPath = settingPath.replace('\\', '-');
         settingPath = settingPath.replace('.', '-');
-        String type = SettingTypeUtility.settingTypeToString(settingType);
+        String type = SettingTypeHelper.settingTypeToString(settingType);
 
         Map<String, String> hashMap = new HashMap<String, String>();
 
@@ -124,7 +124,7 @@ public class RestConfigurationsConnector implements IConfigurationsConnector {
         settingPath = settingPath.replace('/', '-');
         settingPath = settingPath.replace('\\', '-');
         settingPath = settingPath.replace('.', '-');
-        String type = SettingTypeUtility.settingTypeToString(settingType);
+        String type = SettingTypeHelper.settingTypeToString(settingType);
 
         Map<String, String> hashMap = new HashMap<String, String>();
 

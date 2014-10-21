@@ -9,12 +9,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.incadencecorp.unity.common.CallResult;
-import com.incadencecorp.unity.common.SettingsBaseTest;
-import com.incadencecorp.unity.common.TestSettings;
 import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.SettingType;
-import com.incadencecorp.unity.rest.connector.RestConfigConnector;
-import com.incadencecorp.unity.rest.connector.RestConfigurationsConnector;
+import com.incadencecorp.unity.common.SettingsBaseTest;
+import com.incadencecorp.unity.common.TestSettings;
+import com.incadencecorp.unity.configuration.ConfigConnector;
 
 public class UnityRestConnectorTests extends SettingsBaseTest {
 
@@ -23,7 +22,7 @@ public class UnityRestConnectorTests extends SettingsBaseTest {
     {
 
         SettingsBaseTest.initialize();
-        RestConfigConnector.initialize("localhost", 8080);
+        ConfigConnector.initialize(new RestConfigurationsConnector("localhost", 8080));
         TestSettings.initialize(new RestConfigurationsConnector("localhost", 8080));
     }
 
@@ -38,18 +37,18 @@ public class UnityRestConnectorTests extends SettingsBaseTest {
             int intValue;
 
             // REST Configuration
-            RestConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.ST_STRING);
-            RestConfigConnector.setSetting("app.config",
-                                           "app/section1/random",
-                                           Integer.toString(_testIntValue),
-                                           SettingType.ST_INTEGER);
+            ConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.ST_STRING);
+            ConfigConnector.setSetting("app.config",
+                                       "app/section1/random",
+                                       Integer.toString(_testIntValue),
+                                       SettingType.ST_INTEGER);
 
-            value = RestConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.ST_STRING, false);
-            intValue = Integer.parseInt(RestConfigConnector.getSetting("app.config",
-                                                                       "app/section1/random",
-                                                                       "",
-                                                                       SettingType.ST_INTEGER,
-                                                                       false));
+            value = ConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.ST_STRING, false);
+            intValue = Integer.parseInt(ConfigConnector.getSetting("app.config",
+                                                                   "app/section1/random",
+                                                                   "",
+                                                                   SettingType.ST_INTEGER,
+                                                                   false));
 
             assertTrue("Mismatch", value.equals(_testStringValue));
             assertTrue("Mismatch", _testIntValue == intValue);
@@ -72,16 +71,16 @@ public class UnityRestConnectorTests extends SettingsBaseTest {
             String Stringvalue;
             int intValue;
 
-            Stringvalue = RestConfigConnector.getSetting("app.config",
-                                                         "app/section1/firstname",
-                                                         "",
-                                                         SettingType.ST_STRING,
-                                                         false);
-            intValue = Integer.parseInt(RestConfigConnector.getSetting("app.config",
-                                                                       "app/section1/random",
-                                                                       "",
-                                                                       SettingType.ST_INTEGER,
-                                                                       false));
+            Stringvalue = ConfigConnector.getSetting("app.config",
+                                                     "app/section1/firstname",
+                                                     "",
+                                                     SettingType.ST_STRING,
+                                                     false);
+            intValue = Integer.parseInt(ConfigConnector.getSetting("app.config",
+                                                                   "app/section1/random",
+                                                                   "",
+                                                                   SettingType.ST_INTEGER,
+                                                                   false));
 
             assertTrue("Mismatch", Stringvalue.equals(_testStringValue));
             assertTrue("Mismatch", _testIntValue == intValue);
@@ -102,7 +101,7 @@ public class UnityRestConnectorTests extends SettingsBaseTest {
         {
 
             CallResult rst = new CallResult(CallResults.SUCCESS);
-            RestConfigConnector.log("TestLogName.log", rst.toXML(true));
+            ConfigConnector.log("TestLogName.log", rst.toXML(true));
 
         }
         catch (Exception ex)

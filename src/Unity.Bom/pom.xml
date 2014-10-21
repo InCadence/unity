@@ -29,6 +29,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>
+				<artifactId>unity-common</artifactId>
+				<version>${unityCommonVersion}</version>
+				<type>test-jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-local-connector</artifactId>
 				<version>${unityLocalConnectorVersion}</version>
 			</dependency>

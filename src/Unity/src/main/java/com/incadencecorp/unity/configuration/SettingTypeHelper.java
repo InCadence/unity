@@ -2,7 +2,7 @@ package com.incadencecorp.unity.configuration;
 
 import com.incadencecorp.unity.common.SettingType;
 
-public class SettingTypeUtility {
+public class SettingTypeHelper {
 
     public static String settingTypeToString(SettingType type)
     {

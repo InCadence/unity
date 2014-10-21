@@ -23,6 +23,10 @@ package com.incadencecorp.unity.common;
  */
 public interface IConfigurationsConnector {
 
+    String getAddress();
+    
+    int getPort();
+    
     /**
      * Returns a setting value from the specified configuration file.
      * 

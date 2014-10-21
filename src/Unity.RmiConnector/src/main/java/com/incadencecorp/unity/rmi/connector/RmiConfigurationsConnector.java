@@ -18,15 +18,17 @@ public class RmiConfigurationsConnector implements IConfigurationsConnector {
      * Private Member Variables
      ***************************/
     private IRmiConfigurationFiles _configurations = null;
+    private String _address;
+    private int _port;
 
     /*********************
      * Constructors
      *********************/
-    public RmiConfigurationsConnector(String address, Integer port)
+    public RmiConfigurationsConnector()
     {
         try
         {
-            comInitialize(port, address);
+            rmiInitialize("127.0.0.1", 8080);
         }
         catch (RemoteException | NotBoundException e)
         {
@@ -34,7 +36,22 @@ public class RmiConfigurationsConnector implements IConfigurationsConnector {
         }
     }
 
-    public void comInitialize(Integer port, String address) throws RemoteException, NotBoundException
+    public RmiConfigurationsConnector(String address, int port)
+    {
+        _address = address;
+        _port = port;
+
+        try
+        {
+            rmiInitialize(address, port);
+        }
+        catch (RemoteException | NotBoundException e)
+        {
+            CallResult.log(CallResults.DEBUG, e, this);
+        }
+    }
+
+    private void rmiInitialize(String address, int port) throws RemoteException, NotBoundException
     {
 
         if (address == null || address.isEmpty())
@@ -45,6 +62,7 @@ public class RmiConfigurationsConnector implements IConfigurationsConnector {
         {
             // look up the Registry where the unity service is listening to
             Registry unityRegistry = LocateRegistry.getRegistry(address);
+            
             // get remote interface to gain access to call ConfigurationFiles methods remotely
             this._configurations = (IRmiConfigurationFiles) unityRegistry.lookup("configurations");
         }
@@ -53,30 +71,6 @@ public class RmiConfigurationsConnector implements IConfigurationsConnector {
     /*********************
      * Public Functions
      *********************/
-    // public SettingType getSettingType(String configurationFileName,String
-    // settingPath) throws RemoteException {
-    // return this._configurations.getSettingType(configurationFileName,
-    // settingPath);
-    // }
-    //
-    // public ConfigurationNode getSection(String configurationFileName,String
-    // sectionPath) {
-    //
-    // }
-    // public String[] getSectionList(String configurationFileName,String
-    // sectionPath) {
-    //
-    // }
-
-    // public void deleteSetting(String configurationFileName,String
-    // settingPath) throws RemoteException {
-    // this._configurations.deleteSetting(configurationFileName, settingPath);
-    // }
-
-    // public void deleteSection(String configurationFileName,String
-    // sectionPath) throws RemoteException {
-    // this._configurations.deleteSection(configurationFileName, sectionPath);
-    // }
 
     @Override
     public boolean log(String logName, String callResultXml)
@@ -126,4 +120,40 @@ public class RmiConfigurationsConnector implements IConfigurationsConnector {
         }
     }
 
+    @Override
+    public String getAddress()
+    {
+        return _address;
+    }
+
+    @Override
+    public int getPort()
+    {
+        return _port;
+    }
+
+    // public SettingType getSettingType(String configurationFileName,String
+    // settingPath) throws RemoteException {
+    // return this._configurations.getSettingType(configurationFileName,
+    // settingPath);
+    // }
+    //
+    // public ConfigurationNode getSection(String configurationFileName,String
+    // sectionPath) {
+    //
+    // }
+    // public String[] getSectionList(String configurationFileName,String
+    // sectionPath) {
+    //
+    // }
+
+    // public void deleteSetting(String configurationFileName,String
+    // settingPath) throws RemoteException {
+    // this._configurations.deleteSetting(configurationFileName, settingPath);
+    // }
+
+    // public void deleteSection(String configurationFileName,String
+    // sectionPath) throws RemoteException {
+    // this._configurations.deleteSection(configurationFileName, sectionPath);
+    // }
 }

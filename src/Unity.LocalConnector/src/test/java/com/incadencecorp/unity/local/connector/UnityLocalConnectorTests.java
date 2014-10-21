@@ -77,9 +77,17 @@ public class UnityLocalConnectorTests extends SettingsBaseTest {
     {
 
         CallResult rst = new CallResult(CallResults.SUCCESS);
-        LocalConfigConnector.log("TestLogName.log", rst.toXML(true));
+        LocalConfigConnector.log("TestLogName", rst.toXML(true));
     }
 
+    
+    @Test
+    public void logTest()
+    {
+        CallResult.initialize(new LocalConfigurationsConnector(),"testtest");
+        CallResult.failedCallResult();
+    }
+    
     @After
     public void Finalize()
     {
