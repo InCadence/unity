@@ -10,7 +10,7 @@ import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.common.SettingsBaseTest;
 import com.incadencecorp.unity.configuration.ConfigConnector;
 
-public class UnityRmiConnectorTests extends SettingsBaseTest {
+public class UnityRmiConnectorTest extends SettingsBaseTest {
 
     @BeforeClass
     public static void initialize()

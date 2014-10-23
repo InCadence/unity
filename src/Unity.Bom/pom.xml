@@ -7,9 +7,10 @@
 	<packaging>pom</packaging>
 	<name>Unity.bom</name>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<unityVersion>0.0.1-SNAPSHOT</unityVersion>
 		<unityRMIVersion>0.0.1-SNAPSHOT</unityRMIVersion>
-		<unityRestVersion>0.0.1-SNAPSHOT</unityRestVersion>
+		<unityRestServiceVersion>0.0.1-SNAPSHOT</unityRestServiceVersion>
 		<unityCommonVersion>0.0.1-SNAPSHOT</unityCommonVersion>
 		<unityLocalConnectorVersion>0.0.1-SNAPSHOT</unityLocalConnectorVersion>
 		<unityRestConnectorVersion>0.0.1-SNAPSHOT</unityRestConnectorVersion>
@@ -37,6 +38,11 @@
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-local-connector</artifactId>
 				<version>${unityLocalConnectorVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.incadencecorp.unity</groupId>
+				<artifactId>unity-rest-service</artifactId>
+				<version>${unityRestServiceVersion}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>

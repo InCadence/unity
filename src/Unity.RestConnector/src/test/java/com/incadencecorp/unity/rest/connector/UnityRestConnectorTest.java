@@ -15,7 +15,7 @@ import com.incadencecorp.unity.common.SettingsBaseTest;
 import com.incadencecorp.unity.common.TestSettings;
 import com.incadencecorp.unity.configuration.ConfigConnector;
 
-public class UnityRestConnectorTests extends SettingsBaseTest {
+public class UnityRestConnectorTest extends SettingsBaseTest {
 
     @BeforeClass
     public static void initialize()
