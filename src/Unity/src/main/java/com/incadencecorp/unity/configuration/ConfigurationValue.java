@@ -3,7 +3,7 @@ package com.incadencecorp.unity.configuration;
 import com.incadencecorp.unity.common.SettingType;
 
 /**
- * Wrapper class that wraps {@link com.incadencecorp.unity.configuration.ConfigurationFiles} 
+ * Wrapper class that wraps {@link com.incadencecorp.unity.configuration.ConfigurationFiles}. 
  * 
  * @author InCadence
  *
@@ -11,17 +11,17 @@ import com.incadencecorp.unity.common.SettingType;
 public class ConfigurationValue {
 
     private ConfigurationFiles _configurationFiles = new ConfigurationFiles();
-    private String result;
+    private String _result;
 
     /**
-     * Constructs a ConfigurationValue object
+     * Constructs a ConfigurationValue object.
      */
     public ConfigurationValue()
     {
     }
 
     /**
-     * Constructs a ConfigurationValue object with 
+     * Constructs a ConfigurationValue object with. 
      */
     public ConfigurationValue(String configurationFileNameRest,
                               String settingPathRest,
@@ -36,7 +36,7 @@ public class ConfigurationValue {
         SettingType settingType = SettingTypeHelper.stringToSettingType(type);
         Boolean setIfNotFoundBool = Boolean.parseBoolean(setIfNotFound);
 
-        result = _configurationFiles.getSetting(configurationFileName,
+        _result = _configurationFiles.getSetting(configurationFileName,
                                                 settingPath,
                                                 defaultValue,
                                                 settingType,
@@ -52,12 +52,12 @@ public class ConfigurationValue {
         SettingType settingType = SettingTypeHelper.stringToSettingType(type);
 
         _configurationFiles.setSetting(configurationFileName, settingPath, value, settingType);
-        result = "true";
+        _result = "true";
     }
 
     public String getResult()
     {
-        return this.result;
+        return this._result;
     }
 
 }

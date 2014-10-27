@@ -7,24 +7,24 @@ import com.incadencecorp.unity.common.CallResult.CallResults;
 
 public class CallResultLogger {
 
-    private static Logger filelogger = LogManager.getLogger("filelogger");
-    private static Logger consolelogger = LogManager.getLogger("consolelogger");
-    private static Logger emaillogger = LogManager.getLogger("emaillogger");
-    private static Logger xmllogger = LogManager.getLogger("xmllogger");
+    private static Logger _filelogger = LogManager.getLogger("filelogger");
+    private static Logger _consolelogger = LogManager.getLogger("consolelogger");
+    private static Logger _emaillogger = LogManager.getLogger("emaillogger");
+    private static Logger _xmllogger = LogManager.getLogger("xmllogger");
 
     public static void toFileLog(CallResults logLevel, String logFileLocation, String logEntry)
     {
-        toLog(filelogger, logLevel, logEntry);
+        toLog(_filelogger, logLevel, logEntry);
     }
 
     public static void toConsoleLog(CallResults logLevel, String logEntry)
     {
-        toLog(consolelogger, logLevel, logEntry);
+        toLog(_consolelogger, logLevel, logEntry);
     }
 
     public static void toEmailLog(CallResults logLevel, String logEntry)
     {
-        toLog(emaillogger, logLevel, logEntry);
+        toLog(_emaillogger, logLevel, logEntry);
     }
 
     public static void toXmlFileLog(String logFilename, String callResultXml)
@@ -34,7 +34,7 @@ public class CallResultLogger {
         org.apache.logging.log4j.core.LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
         context.reconfigure();
 
-        xmllogger.info(callResultXml);
+        _xmllogger.info(callResultXml);
     }
 
     private static void toLog(Logger logger, CallResults logLevel, String logEntry)

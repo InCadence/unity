@@ -38,10 +38,10 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
         if (this._logLocation == null && this._logLocation.isEmpty())
         {
             File basePath = new File(getBasePath());
-            File LogDirectory = new File(basePath, "logs");
+            File logDirectory = new File(basePath, "logs");
             this._logLocation = this.getSetting("Unity.config",
                                                 "Unity/Settings/LogLocation",
-                                                LogDirectory.getAbsolutePath(),
+                                                logDirectory.getAbsolutePath(),
                                                 SettingType.ST_STRING.toString(),
                                                 true);
         }

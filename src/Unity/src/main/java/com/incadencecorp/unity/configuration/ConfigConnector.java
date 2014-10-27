@@ -88,13 +88,13 @@ public class ConfigConnector {
         }
     }
 
-    public static boolean log(String AppName, String callResultXml)
+    public static boolean log(String appName, String callResultXml)
     {
 
         try
         {
 
-            if (_connector.log(AppName, callResultXml))
+            if (_connector.log(appName, callResultXml))
             {
 
                 return true;

@@ -93,7 +93,7 @@ public class CallResult {
          */
         INFO,
         /**
-         * Result types of DEBUG will print the CallResult message to console if a debugger is attached to the application
+         * Result types of DEBUG will print the CallResult message to console if a debugger is attached to the application.
          */
         DEBUG;
 
@@ -145,9 +145,9 @@ public class CallResult {
 
     /**
      * Returns a new {@link com.incadencecorp.unity.common.CallResult} with a
-     * {@link com.incadencecorp.unity.common.CallResult.CallResults} type of SUCCESS
+     * {@link com.incadencecorp.unity.common.CallResult.CallResults} type of SUCCESS.
      * 
-     * @return a new CallResult with a CallResults type of SUCCESS
+     * @return a new CallResult with a CallResults type of SUCCESS.
      */
     public static final CallResult successCallResult()
     {
@@ -156,9 +156,9 @@ public class CallResult {
 
     /**
      * Returns a new {@link com.incadencecorp.unity.common.CallResult} with a
-     * {@link com.incadencecorp.unity.common.CallResult.CallResults} type of FAILED
+     * {@link com.incadencecorp.unity.common.CallResult.CallResults} type of FAILED.
      * 
-     * @return a new CallResult with a CallResults type of FAILED
+     * @return a new CallResult with a CallResults type of FAILED.
      */
     public static final CallResult failedCallResult()
     {

@@ -27,7 +27,7 @@ public class UnityRestConnectorTest extends SettingsBaseTest {
     }
 
     @Test
-    public void TestSetSettings()
+    public void testSetSettings()
     {
 
         try
@@ -62,16 +62,16 @@ public class UnityRestConnectorTest extends SettingsBaseTest {
     }
 
     @Test
-    public void TestGetSettings()
+    public void testGetSettings()
     {
 
         try
         {
 
-            String Stringvalue;
+            String stringvalue;
             int intValue;
 
-            Stringvalue = ConfigConnector.getSetting("app.config",
+            stringvalue = ConfigConnector.getSetting("app.config",
                                                      "app/section1/firstname",
                                                      "",
                                                      SettingType.ST_STRING,
@@ -82,7 +82,7 @@ public class UnityRestConnectorTest extends SettingsBaseTest {
                                                                    SettingType.ST_INTEGER,
                                                                    false));
 
-            assertTrue("Mismatch", Stringvalue.equals(_testStringValue));
+            assertTrue("Mismatch", stringvalue.equals(_testStringValue));
             assertTrue("Mismatch", _testIntValue == intValue);
 
         }
@@ -94,7 +94,7 @@ public class UnityRestConnectorTest extends SettingsBaseTest {
     }
 
     @Test
-    public void TestAddLogEntry()
+    public void testAddLogEntry()
     {
 
         try
@@ -111,7 +111,7 @@ public class UnityRestConnectorTest extends SettingsBaseTest {
     }
 
     @Test
-    public void TestSettingsClass()
+    public void testSettingsClass()
     {
 
         try

@@ -5,7 +5,7 @@ import com.incadencecorp.unity.common.SettingsBase;
 public class RmiConfigConnectorSettings extends SettingsBase {
 
     private static final String ConfigurationFileName = "unity.config";
-    private static Boolean _RemotingEnabled = true;
+    private static Boolean _remotingEnabled = true;
 
     public static void initialize(String address, int port)
     {
@@ -40,11 +40,11 @@ public class RmiConfigConnectorSettings extends SettingsBase {
 
     public static Boolean getRemotingEnabled()
     {
-        return _RemotingEnabled;
+        return _remotingEnabled;
     }
 
     public static void toggleRemoting(Boolean value)
     {
-        RmiConfigConnectorSettings._RemotingEnabled = value;
+        RmiConfigConnectorSettings._remotingEnabled = value;
     }
 }

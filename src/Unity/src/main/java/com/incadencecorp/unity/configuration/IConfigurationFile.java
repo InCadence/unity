@@ -28,7 +28,7 @@ public interface IConfigurationFile {
     public void save();
 
     /**
-     * Sets or adds a setting in the opened configuration file
+     * Sets or adds a setting in the opened configuration file.
      * 
      * @param settingPath the setting path separated by / or . characters
      * @param value the setting value to be set
@@ -49,7 +49,7 @@ public interface IConfigurationFile {
     public String getSetting(String settingPath, String defaultValue, SettingType type, Boolean setIfNotFound);
 
     /**
-     * Retrieves the {@link com.incadencecorp.unity.common.SettingType} for the given setting path in the opened configuration file
+     * Retrieves the {@link com.incadencecorp.unity.common.SettingType} for the given setting path in the opened configuration file.
      * 
      * @param settingPath
      * @return the SettingType for the given setting path
@@ -57,14 +57,14 @@ public interface IConfigurationFile {
     public SettingType getSettingType(String settingPath);
 
     /**
-     * Deletes the setting in the opened configuration file
+     * Deletes the setting in the opened configuration file.
      * 
      * @param settingPath the setting path separated by / or . characters
      */
     public void deleteSetting(String settingPath);
 
     /**
-     * Retrieves the Configuration Node for a given section path in the opened configuration file
+     * Retrieves the Configuration Node for a given section path in the opened configuration file.
      * 
      * @param sectionPath the section path separated by / or . characters
      * @return the Configuration Node for a given section path
@@ -72,7 +72,7 @@ public interface IConfigurationFile {
     public ConfigurationNode getSection(String sectionPath);
 
     /**
-     * Retrieves the child sections from the given section path in the opened configuration file
+     * Retrieves the child sections from the given section path in the opened configuration file.
      * 
      * @param sectionPath the parent section path separated by / or . characters
      * @return an array of child sections from the given section path
@@ -80,20 +80,20 @@ public interface IConfigurationFile {
     public String[] getSectionList(String sectionPath);
 
     /**
-     * Deletes the section in the opened configuration file
+     * Deletes the section in the opened configuration file.
      * 
      * @param sectionPath the section path separated by / or . characters
      */
     public void deleteSection(String sectionPath);
     
     /**
-     * Returns the Fully Qualified Filename of the opened configuration file
+     * Returns the Fully Qualified Filename of the opened configuration file.
      * 
      */
     public String getFileName();
     
     /**
-     * Sets the Fully Qualified Filename of the opened configuration file
+     * Sets the Fully Qualified Filename of the opened configuration file.
      * 
      * @param fileName the new Fully Qualified Filename of the opened configuration file
      */

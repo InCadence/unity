@@ -32,7 +32,7 @@ public class ConfigurationFiles {
      *********************/
 
     /**
-     * Returns the full path where the log is located
+     * Returns the full path where the log is located.
      * 
      * @return the full path where the log is located
      */
@@ -42,10 +42,10 @@ public class ConfigurationFiles {
         if (this._logLocation == null && this._logLocation.isEmpty())
         {
             File basePath = new File(getBasePath());
-            File LogDirectory = new File(basePath, "logs");
+            File logDirectory = new File(basePath, "logs");
             this._logLocation = this.getSetting("Unity.config",
                                                 "Unity/Settings/LogLocation",
-                                                LogDirectory.getAbsolutePath(),
+                                                logDirectory.getAbsolutePath(),
                                                 SettingType.ST_STRING,
                                                 true);
         }
@@ -87,7 +87,7 @@ public class ConfigurationFiles {
      *********************/
 
     /**
-     * Adds a configuration file object
+     * Adds a configuration file object.
      * 
      * @param configFile the configuration file object
      */
@@ -105,7 +105,7 @@ public class ConfigurationFiles {
     }
 
     /**
-     * Creates and adds a {@link com.incadencecorp.unity.common.SettingType} object from the Fully Qualified Filename
+     * Creates and adds a {@link com.incadencecorp.unity.common.SettingType} object from the Fully Qualified Filename.
      * @param fileName the Fully Qualified Filename
      */
     public void add(String fileName)
@@ -225,7 +225,7 @@ public class ConfigurationFiles {
     }
 
     /**
-     * Deletes the section in the specified configuration file
+     * Deletes the section in the specified configuration file.
      * 
      * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
      * @param sectionPath the section path separated by / or . characters

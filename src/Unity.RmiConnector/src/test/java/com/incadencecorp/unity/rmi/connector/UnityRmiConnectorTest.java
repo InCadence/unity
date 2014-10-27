@@ -20,7 +20,7 @@ public class UnityRmiConnectorTest extends SettingsBaseTest {
     }
 
     @Test
-    public void TestSetSettings()
+    public void testSetSettings()
     {
         try
         {
