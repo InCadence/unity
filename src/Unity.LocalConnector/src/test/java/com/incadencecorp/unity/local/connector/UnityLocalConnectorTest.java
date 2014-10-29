@@ -1,31 +1,21 @@
 package com.incadencecorp.unity.local.connector;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.incadencecorp.unity.common.CallResult;
+import com.incadencecorp.unity.common.SettingsBaseTest;
 import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.SettingType;
-import com.incadencecorp.unity.common.SettingsBaseTest;
-import com.incadencecorp.unity.configuration.ConfigConnector;
+import com.incadencecorp.unity.local.connector.LocalConfigConnector;
 
-public class UnityLocalConnectorTest extends SettingsBaseTest {
-
-    @BeforeClass
-    public static void initialize()
-    {
-
-        SettingsBaseTest.initialize();
-        ConfigConnector.initialize(new LocalConfigurationsConnector());
-    }
+public class UnityLocalConnectorTests extends SettingsBaseTest {
 
     @Test
-    public void setSettingsTest()
+    public void TestSetSettings()
     {
 
         try
@@ -35,18 +25,18 @@ public class UnityLocalConnectorTest extends SettingsBaseTest {
             int intValue;
 
             // Local Configuration
-            ConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.ST_STRING);
-            ConfigConnector.setSetting("app.config",
-                                       "app/section1/random",
-                                       Integer.toString(_testIntValue),
-                                       SettingType.ST_INTEGER);
+            LocalConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.ST_STRING);
+            LocalConfigConnector.setSetting("app.config",
+                                            "app/section1/random",
+                                            Integer.toString(_testIntValue),
+                                            SettingType.ST_INTEGER);
 
-            value = ConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.ST_STRING, false);
-            intValue = Integer.parseInt(ConfigConnector.getSetting("app.config",
-                                                                   "app/section1/random",
-                                                                   "",
-                                                                   SettingType.ST_INTEGER,
-                                                                   false));
+            value = LocalConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.ST_STRING, false);
+            intValue = Integer.parseInt(LocalConfigConnector.getSetting("app.config",
+                                                                        "app/section1/random",
+                                                                        "",
+                                                                        SettingType.ST_INTEGER,
+                                                                        false));
 
             assertTrue("Mismatch", value.equals(_testStringValue));
             assertTrue("Mismatch", _testIntValue == intValue);
@@ -60,37 +50,34 @@ public class UnityLocalConnectorTest extends SettingsBaseTest {
     }
 
     @Test
-    public void getSettingsTest()
+    public void TestGetSettings()
     {
 
-        String value;
+        String Stringvalue;
         int intValue;
 
-        // Local Configuration
-        ConfigConnector.setSetting("app.config", "app/section1/firstname", _testStringValue, SettingType.ST_STRING);
-        ConfigConnector.setSetting("app.config",
-                                   "app/section1/random",
-                                   Integer.toString(_testIntValue),
-                                   SettingType.ST_INTEGER);
+        Stringvalue = LocalConfigConnector.getSetting("app.config",
+                                                      "app/section1/firstname",
+                                                      "",
+                                                      SettingType.ST_STRING,
+                                                      false);
+        intValue = Integer.parseInt(LocalConfigConnector.getSetting("app.config",
+                                                                    "app/section1/random",
+                                                                    "",
+                                                                    SettingType.ST_INTEGER,
+                                                                    false));
 
-        value = ConfigConnector.getSetting("app.config", "app/section1/firstname", "", SettingType.ST_STRING, false);
-        intValue = Integer.parseInt(ConfigConnector.getSetting("app.config",
-                                                               "app/section1/random",
-                                                               "",
-                                                               SettingType.ST_INTEGER,
-                                                               false));
-
-        assertEquals(_testStringValue, value);
-        assertEquals(_testIntValue, intValue);
+        assertTrue("Mismatch", Stringvalue.equals(_testStringValue));
+        assertTrue("Mismatch", _testIntValue == intValue);
 
     }
 
     @Test
-    public void addLogEntryTest()
+    public void TestAddLogEntry()
     {
 
         CallResult rst = new CallResult(CallResults.SUCCESS);
-        ConfigConnector.log("TestLogName", rst.toXML(true));
+        LocalConfigConnector.log("TestLogName", rst.toXML(true));
     }
 
     @Test
@@ -101,7 +88,7 @@ public class UnityLocalConnectorTest extends SettingsBaseTest {
     }
 
     @After
-    public void finalize()
+    public void Finalize()
     {
 
     }
