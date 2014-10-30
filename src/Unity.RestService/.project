@@ -45,11 +45,4 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/unity/java</name>
-			<type>2</type>
-			<location>C:/Users/InCadence/Documents/JavaProjects/IREMS/Unity/src</location>
-		</link>
-	</linkedResources>
 </projectDescription>
