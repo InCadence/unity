@@ -12,7 +12,7 @@ import com.incadencecorp.unity.common.CallResult.CallResults;
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.local.connector.LocalConfigConnector;
 
-public class UnityLocalConnectorTests extends SettingsBaseTest {
+public class UnityLocalConnectorTest extends SettingsBaseTest {
 
     @Test
     public void TestSetSettings()
