@@ -12,6 +12,7 @@ import org.apache.commons.configuration.tree.DefaultConfigurationNode;
 import org.apache.commons.io.FileUtils;
 
 import com.incadencecorp.unity.common.SettingType;
+import com.incadencecorp.unity.encryption.UnityEncrypter;
 
 public class ConfigurationFile implements IConfigurationFile {
 
@@ -22,9 +23,8 @@ public class ConfigurationFile implements IConfigurationFile {
     private String _fileName;
     private XMLConfiguration _xmlDoc;
 
-    // TODO: Implement Encryption
-    // private Byte _key;
-    // private Byte _IV;
+    private static UnityEncrypter _crypto;
+    private final static String PASSPHASE = "9UFAF8FI98BDLQEZ";
 
     /***************************
      * Constructors *
@@ -32,20 +32,26 @@ public class ConfigurationFile implements IConfigurationFile {
 
     public ConfigurationFile()
     {
-        // TODO: intializeCrypto()
+        intializeCrypto();
         _xmlDoc = new XMLConfiguration();
     }
 
     public ConfigurationFile(String fileName)
     {
-        // TODO: intializeCrypto()
+        intializeCrypto();
         open(fileName);
     }
 
     protected void intializeCrypto()
     {
-
-        // TODO: IntializeCrypto stuff
+        try
+        {
+            _crypto = new UnityEncrypter(PASSPHASE);
+        }
+        catch (Exception e)
+        {
+            // Do nothing
+        }
     }
 
     /***************************
@@ -298,8 +304,18 @@ public class ConfigurationFile implements IConfigurationFile {
             // Update Value
             if (type == SettingType.ST_ENCRYPTED_STRING)
             {
-                // TODO: encryption stuff
-                rtn = true;
+                try
+                {
+                    String encryptedValue = _crypto.encryptValueToBase64(value);
+
+                    rtn = createOrUpdateAttribute(settingPath, "value", encryptedValue);
+                    if (rtn == false) return;
+                }
+                catch (Exception e)
+                {
+                    // Something failed, return
+                    return;
+                }
             }
             else
             {
@@ -374,7 +390,9 @@ public class ConfigurationFile implements IConfigurationFile {
                     // check if value is encrypted
                     if (type == SettingType.ST_ENCRYPTED_STRING)
                     {
-                        // TODO: Decrypt String
+                        String decryptedValue = _crypto.decryptValue(attribute.getValue().toString());
+
+                        return decryptedValue;
                     }
                     else
                     {
@@ -399,8 +417,6 @@ public class ConfigurationFile implements IConfigurationFile {
         {
             return defaultValue;
         }
-
-        return null;
     }
 
     @Override

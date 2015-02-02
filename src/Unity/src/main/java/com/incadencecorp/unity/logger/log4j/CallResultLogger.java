@@ -12,9 +12,24 @@ public class CallResultLogger {
     private static Logger _emaillogger = LogManager.getLogger("emaillogger");
     private static Logger _xmllogger = LogManager.getLogger("xmllogger");
 
-    public static void toFileLog(CallResults logLevel, String logFileLocation, String logEntry)
+    public static void toFileLog(CallResults logLevel, String logFilename, String logEntry)
     {
-        toLog(_filelogger, logLevel, logEntry);
+        // check if the logFilename is in the log4j xml config
+        if (isLogFilenameSet(logFilename))
+        {
+            // it is there so log file
+            toLog(_filelogger, logLevel, logEntry);
+        }
+        else
+        {
+            // not there so persist the logFilename to log4j xml config
+            System.setProperty("logFilename", logFilename);
+            org.apache.logging.log4j.core.LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+            context.reconfigure();
+
+            // log file
+            toLog(_filelogger, logLevel, logEntry);
+        }
     }
 
     public static void toConsoleLog(CallResults logLevel, String logEntry)
@@ -29,12 +44,22 @@ public class CallResultLogger {
 
     public static void toXmlFileLog(String logFilename, String callResultXml)
     {
-        System.setProperty("logFilename", logFilename);
+        // check if the logFilename is in the log4j xml config
+        if (isLogFilenameSet(logFilename))
+        {
+            // it is there so log file
+            _xmllogger.info(callResultXml);
+        }
+        else
+        {
+            // not there so persist the logFilename to log4j xml config
+            System.setProperty("logFilename", logFilename);
+            org.apache.logging.log4j.core.LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+            context.reconfigure();
 
-        org.apache.logging.log4j.core.LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
-        context.reconfigure();
-
-        _xmllogger.info(callResultXml);
+            // log file
+            _xmllogger.info(callResultXml);
+        }
     }
 
     private static void toLog(Logger logger, CallResults logLevel, String logEntry)
@@ -54,5 +79,25 @@ public class CallResultLogger {
         default:
             logger.info(logEntry);
         }
+    }
+
+    private static Boolean isLogFilenameSet(String logFilename)
+    {
+        if (System.getProperty("logFilename") != null)
+        {
+            if (System.getProperty("logFilename").equals(logFilename))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }
