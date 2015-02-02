@@ -4,6 +4,9 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.List;
+
+import org.joda.time.DateTime;
 
 import com.incadencecorp.unity.common.CallResult;
 import com.incadencecorp.unity.common.CallResult.CallResults;
@@ -62,7 +65,7 @@ public class RmiConfigurationsConnector implements IConfigurationsConnector {
         {
             // look up the Registry where the unity service is listening to
             Registry unityRegistry = LocateRegistry.getRegistry(address);
-            
+
             // get remote interface to gain access to call ConfigurationFiles methods remotely
             this._configurations = (IRmiConfigurationFiles) unityRegistry.lookup("configurations");
         }
@@ -82,6 +85,58 @@ public class RmiConfigurationsConnector implements IConfigurationsConnector {
         catch (RemoteException e)
         {
             return false;
+        }
+    }
+
+    @Override
+    public List<CallResult> getLogs(String logName)
+    {
+        try
+        {
+            return _configurations.getLogs(logName);
+        }
+        catch (RemoteException e)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public List<CallResult> getLogs(String logName, long maxMillisBack)
+    {
+        try
+        {
+            return _configurations.getLogs(logName, maxMillisBack);
+        }
+        catch (RemoteException e)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public List<CallResult> getLogsAfter(String logName, DateTime afterTime, long maxMillisForward)
+    {
+        try
+        {
+            return _configurations.getLogsAfter(logName, afterTime, maxMillisForward);
+        }
+        catch (RemoteException e)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public List<CallResult> getLogsBefore(String logName, DateTime beforeTime, long maxMillisBefore)
+    {
+        try
+        {
+            return _configurations.getLogsBefore(logName, beforeTime, maxMillisBefore);
+        }
+        catch (RemoteException e)
+        {
+            return null;
         }
     }
 

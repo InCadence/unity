@@ -1,5 +1,10 @@
 package com.incadencecorp.unity.local.connector;
 
+import java.util.List;
+
+import org.joda.time.DateTime;
+
+import com.incadencecorp.unity.common.CallResult;
 import com.incadencecorp.unity.common.IConfigurationsConnector;
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.configuration.ConfigurationFiles;
@@ -60,6 +65,30 @@ public class LocalConfigurationsConnector implements IConfigurationsConnector {
     public boolean log(String logName, String callResultXml)
     {
         return _localConfigurations.log(logName, callResultXml);
+    }
+
+    @Override
+    public List<CallResult> getLogs(String logName)
+    {
+        return _localConfigurations.getLogs(logName);
+    }
+
+    @Override
+    public List<CallResult> getLogs(String logName, long maxMillisBack)
+    {
+        return _localConfigurations.getLogs(logName, maxMillisBack);
+    }
+
+    @Override
+    public List<CallResult> getLogsAfter(String logName, DateTime afterTime, long maxMillisForward)
+    {
+        return _localConfigurations.getLogsAfter(logName, afterTime, maxMillisForward);
+    }
+
+    @Override
+    public List<CallResult> getLogsBefore(String logName, DateTime beforeTime, long maxMillisBefore)
+    {
+        return _localConfigurations.getLogsBefore(logName, beforeTime, maxMillisBefore);
     }
 
     @Override

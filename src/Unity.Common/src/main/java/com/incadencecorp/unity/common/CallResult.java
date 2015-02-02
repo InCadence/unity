@@ -489,7 +489,7 @@ public class CallResult {
      * 
      * @return the Module Name of the {@link com.incadencecorp.unity.common.CallResult}.
      */
-    public final String getaModuleName()
+    public final String getModuleName()
     {
         return this._moduleName;
     }

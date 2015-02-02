@@ -1,5 +1,9 @@
 package com.incadencecorp.unity.common;
 
+import java.util.List;
+
+import org.joda.time.DateTime;
+
 /*-----------------------------------------------------------------------------'
  Copyright 2014 - InCadence Strategic Solutions Inc., All Rights Reserved
 
@@ -24,9 +28,9 @@ package com.incadencecorp.unity.common;
 public interface IConfigurationsConnector {
 
     String getAddress();
-    
+
     int getPort();
-    
+
     /**
      * Returns a setting value from the specified configuration file.
      * 
@@ -72,10 +76,56 @@ public interface IConfigurationsConnector {
     /**
      * Returns <code>true</code> if the String value is logged successfully; <code>false</code> otherwise.
      * 
-     * @param logName
+     * @param logName the name of the log file
      * @param callResultXml
      * @return the String value is logged successfully; <code>false</code> otherwise.
      */
     boolean log(String logName, String callResultXml);
 
+    /**
+     * Returns the full list of all log entries created in this log file. It is recommended that this method be used
+     * carefully due to the amount of time it may take to process as well as the amount of processing resources that could be
+     * taken up. Instead, consider using <
+     * 
+     * @param logName the name of the log file
+     * 
+     * @return the full list of all log entries created in this log file
+     */
+    List<CallResult> getLogs(String logName);
+
+    /**
+     * Returns the list of log entries created in this log file starting from the most recent and looking back the
+     * <code>maxMillisBack</code> amount inclusively.
+     * 
+     * @param logName the name of the log file
+     * @param maxTimeBack the maximum number of milliseconds to look back in the log file
+     * 
+     * @return the list of log entries created in this log file starting from the most recent and looking back the
+     *         <code>maxMillisBack</code> amount inclusively
+     */
+    List<CallResult> getLogs(String logName, long maxMillisBack);
+
+    /**
+     * Returns the list of log entries created in this log file starting after the <code>afterTime</code> provided and only
+     * including newer entries within <code>maxMillisForward</code> inclusively.
+     * 
+     * @param logName the name of the log file
+     * @param afterTime the time to start collecting log entries after in the log file
+     * @param maxMillisForward the maximum number of milliseconds after the <code>afterTime</code> to collect log entries for
+     * 
+     * @return the list of log entries
+     */
+    List<CallResult> getLogsAfter(String logName, DateTime afterTime, long maxMillisForward);
+
+    /**
+     * Returns the list of log entries created in this log file starting before the <code>beforeTime</code> provided and only
+     * including older entries within <code>maxMillisBefore</code> inclusively.
+     * 
+     * @param logName the name of the log file
+     * @param beforeTime the time to start collecting log entries before in the log file
+     * @param maxMillisBefore the maximum number of milliseconds before the <code>beforeTime</code> to collect log entries for
+     * 
+     * @return the list of log entries
+     */
+    List<CallResult> getLogsBefore(String logName, DateTime beforeTime, long maxMillisBefore);
 }
