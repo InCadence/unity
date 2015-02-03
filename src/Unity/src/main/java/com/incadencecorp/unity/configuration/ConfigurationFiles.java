@@ -741,7 +741,7 @@ public class ConfigurationFiles {
     {
         DateTime oldTime = new DateTime(logEntry.getDateTimeGMT());
 
-        DateTime firstTime = getNewestLogTimeStamp(logEntries, startTime);
+        DateTime firstTime = getNewestLogTimeStamp(logEntries, startTime, oldTime);
 
         if (firstTime == null)
         {
@@ -767,7 +767,7 @@ public class ConfigurationFiles {
 
     }
 
-    private DateTime getNewestLogTimeStamp(List<CallResult> logEntries, DateTime startTime)
+    private DateTime getNewestLogTimeStamp(List<CallResult> logEntries, DateTime startTime, DateTime pendingTime)
     {
 
         DateTime firstTime = startTime;
@@ -776,7 +776,11 @@ public class ConfigurationFiles {
         {
             CallResult firstLogEntry = logEntries.get(0);
 
-            firstTime = new DateTime(firstLogEntry.getDateTimeGMT());
+            firstTime = new DateTime(firstLogEntry.getDateTimeGMT()).plusMillis(1);
+        }
+        else if (pendingTime.isBefore(startTime))
+        {
+            firstTime = pendingTime.plusMillis(1);
         }
 
         return firstTime;
