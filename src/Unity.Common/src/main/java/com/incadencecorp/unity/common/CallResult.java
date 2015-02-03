@@ -176,7 +176,7 @@ public class CallResult {
     {
 
         this(result, ex.getMessage(), moduleName);
-        this._exception = ex;
+        _exception = ex;
 
     }
 
@@ -191,9 +191,9 @@ public class CallResult {
     public CallResult(final CallResults result, final String message, final String moduleName)
     {
 
-        this._result = result;
-        this._message = message;
-        this._moduleName = moduleName;
+        _result = result;
+        _message = message;
+        _moduleName = moduleName;
         this.setDateTimeGMT();
 
         // get stack trace
@@ -202,9 +202,9 @@ public class CallResult {
         // need n to get last element in stack trace
         int n = trace.length - 1;
 
-        this._methodName = trace[n].getMethodName();
-        this._lineNumber = trace[n].getLineNumber();
-        this._stackTrace = stackTracetoString(trace);
+        _methodName = trace[n].getMethodName();
+        _lineNumber = trace[n].getLineNumber();
+        _stackTrace = stackTracetoString(trace);
 
         if (result == CallResults.FAILED_ERROR)
         {
@@ -261,7 +261,7 @@ public class CallResult {
 
         if (result == CallResults.SUCCESS)
         {
-            this._returnValue = value;
+            _returnValue = value;
         }
 
     }
@@ -289,7 +289,7 @@ public class CallResult {
      */
     public final boolean isSuccess()
     {
-        return (this._result == CallResults.SUCCESS);
+        return (_result == CallResults.SUCCESS);
     }
 
     /**
@@ -300,7 +300,7 @@ public class CallResult {
      */
     public final boolean isFailed()
     {
-        return (this._result == CallResults.FAILED);
+        return (_result == CallResults.FAILED);
     }
 
     /**
@@ -311,7 +311,7 @@ public class CallResult {
      */
     public final boolean isFailedError()
     {
-        return (this._result == CallResults.FAILED_ERROR);
+        return (_result == CallResults.FAILED_ERROR);
     }
 
     /**
@@ -322,7 +322,7 @@ public class CallResult {
      */
     public final boolean isCanceled()
     {
-        return (this._result == CallResults.CANCELED);
+        return (_result == CallResults.CANCELED);
     }
 
     /**
@@ -333,7 +333,7 @@ public class CallResult {
      */
     public final boolean isInfo()
     {
-        return (this._result == CallResults.INFO);
+        return (_result == CallResults.INFO);
     }
 
     /**
@@ -344,7 +344,7 @@ public class CallResult {
      */
     public final boolean isLoginStatus()
     {
-        return (this._result == CallResults.LOGIN_STATUS);
+        return (_result == CallResults.LOGIN_STATUS);
     }
 
     /**
@@ -355,7 +355,7 @@ public class CallResult {
      */
     public final boolean isDebugStatus()
     {
-        return (this._result == CallResults.DEBUG);
+        return (_result == CallResults.DEBUG);
     }
 
     /**
@@ -365,7 +365,7 @@ public class CallResult {
      */
     public final String getStackTrace()
     {
-        return this._stackTrace;
+        return _stackTrace;
     }
 
     /**
@@ -375,7 +375,7 @@ public class CallResult {
      */
     public final CallResults getCallResults()
     {
-        return this._result;
+        return _result;
     }
 
     /**
@@ -385,7 +385,7 @@ public class CallResult {
      */
     public final Object getValue()
     {
-        return this._returnValue;
+        return _returnValue;
     }
 
     /**
@@ -395,7 +395,7 @@ public class CallResult {
      */
     public final void setCallResults(final CallResults result)
     {
-        this._result = result;
+        _result = result;
     }
 
     /**
@@ -405,7 +405,7 @@ public class CallResult {
      */
     public final String getMessage()
     {
-        return this._message;
+        return _message;
     }
 
     /**
@@ -415,7 +415,7 @@ public class CallResult {
      */
     public final void setMessage(final String message)
     {
-        this._message = message;
+        _message = message;
     }
 
     /**
@@ -425,7 +425,7 @@ public class CallResult {
      */
     public final Date getDateTimeGMT()
     {
-        return this._dateTimeGMT;
+        return _dateTimeGMT;
     }
 
     /**
@@ -438,11 +438,11 @@ public class CallResult {
         Date tempDate = new Date();
         try
         {
-            this._dateTimeGMT = dateFormat.parse(dateFormat.format(tempDate));
+            _dateTimeGMT = dateFormat.parse(dateFormat.format(tempDate));
         }
         catch (ParseException e)
         {
-            this._dateTimeGMT = tempDate;
+            _dateTimeGMT = tempDate;
         }
     }
 
@@ -457,7 +457,7 @@ public class CallResult {
     {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        this._dateTimeGMT = dateFormat.parse(inputDate);
+        _dateTimeGMT = dateFormat.parse(inputDate);
     }
 
     /**
@@ -467,7 +467,7 @@ public class CallResult {
      */
     public final Exception getException()
     {
-        return this._exception;
+        return _exception;
     }
 
     /**
@@ -477,10 +477,10 @@ public class CallResult {
      */
     public final void setException(final Exception ex)
     {
-        this._exception = ex;
+        _exception = ex;
         if (ex != null)
         {
-            this._stackTrace = ex.getStackTrace().toString();
+            _stackTrace = ex.getStackTrace().toString();
         }
     }
 
@@ -491,7 +491,7 @@ public class CallResult {
      */
     public final String getModuleName()
     {
-        return this._moduleName;
+        return _moduleName;
     }
 
     /**
@@ -501,7 +501,7 @@ public class CallResult {
      */
     public final void setModuleName(final String name)
     {
-        this._moduleName = name;
+        _moduleName = name;
     }
 
     /**
@@ -511,7 +511,7 @@ public class CallResult {
      */
     public final String getMethodName()
     {
-        return this._methodName;
+        return _methodName;
     }
 
     /**
@@ -521,7 +521,7 @@ public class CallResult {
      */
     public final void setMethodName(final String name)
     {
-        this._methodName = name;
+        _methodName = name;
     }
 
     /**
@@ -531,7 +531,7 @@ public class CallResult {
      */
     public final int getLineNumber()
     {
-        return this._lineNumber;
+        return _lineNumber;
     }
 
     /**
@@ -541,7 +541,7 @@ public class CallResult {
      */
     public final void setLineNumer(final int lineNumber)
     {
-        this._lineNumber = lineNumber;
+        _lineNumber = lineNumber;
     }
 
     /**
@@ -551,7 +551,7 @@ public class CallResult {
      */
     public final void setResult(final CallResults result)
     {
-        this._result = result;
+        _result = result;
     }
 
     /*
@@ -606,15 +606,15 @@ public class CallResult {
 
             // Basic info
             Element result = doc.createElement("Result");
-            result.appendChild(doc.createTextNode(Integer.toString(this._result.ordinal())));
-            if (this._message == null)
+            result.appendChild(doc.createTextNode(Integer.toString(_result.ordinal())));
+            if (_message == null)
             {
-                this._message = "null";
+                _message = "null";
             }
             Element message = doc.createElement("Message");
-            message.appendChild(doc.createTextNode(this._message));
+            message.appendChild(doc.createTextNode(_message));
             Element dateTimeGMT = doc.createElement("DateTimeGMT");
-            dateTimeGMT.appendChild(doc.createTextNode(dateFormat.format(this._dateTimeGMT).toString()));
+            dateTimeGMT.appendChild(doc.createTextNode(dateFormat.format(_dateTimeGMT).toString()));
             rootElement.appendChild(result);
             rootElement.appendChild(message);
             rootElement.appendChild(dateTimeGMT);
@@ -623,20 +623,20 @@ public class CallResult {
             if (includeDebugInformation)
             {
                 Element moduleName = doc.createElement("ModuleName");
-                moduleName.appendChild(doc.createTextNode(this._moduleName));
+                moduleName.appendChild(doc.createTextNode(_moduleName));
 
                 Element methodName = doc.createElement("MethodName");
-                methodName.appendChild(doc.createTextNode(this._methodName));
+                methodName.appendChild(doc.createTextNode(_methodName));
 
                 Element lineNumber = doc.createElement("LineNumber");
-                lineNumber.appendChild(doc.createTextNode(Integer.toString(this._lineNumber)));
+                lineNumber.appendChild(doc.createTextNode(Integer.toString(_lineNumber)));
 
-                if (this._stackTrace == null)
+                if (_stackTrace == null)
                 {
-                    this._stackTrace = "No Value";
+                    _stackTrace = "No Value";
                 }
                 Element stackTrace = doc.createElement("StackTrace");
-                stackTrace.appendChild(doc.createTextNode(this._stackTrace));
+                stackTrace.appendChild(doc.createTextNode(_stackTrace));
 
                 rootElement.appendChild(moduleName);
                 rootElement.appendChild(methodName);
@@ -701,26 +701,26 @@ public class CallResult {
             {
                 int temp;
                 temp = Integer.parseInt(val);
-                this._result = intToEnum(temp);
+                _result = intToEnum(temp);
             }
 
             val = getText(xmlDoc, "//CallResult/DateTimeGMT");
             if (isDate(val))
             {
-                this._dateTimeGMT = intToDate(val);
+                _dateTimeGMT = intToDate(val);
             }
 
             val = getText(xmlDoc, "//CallResult/LineNumber");
             if (isNumeric(val))
             {
-                this._lineNumber = Integer.parseInt(val);
+                _lineNumber = Integer.parseInt(val);
             }
 
             // Extended debug info
-            this._message = getText(xmlDoc, "//CallResult/Message");
-            this._moduleName = getText(xmlDoc, "//CallResult/ModuleName");
-            this._methodName = getText(xmlDoc, "//CallResult/MethodName");
-            this._stackTrace = getText(xmlDoc, "//CallResult/StackTrace");
+            _message = getText(xmlDoc, "//CallResult/Message");
+            _moduleName = getText(xmlDoc, "//CallResult/ModuleName");
+            _methodName = getText(xmlDoc, "//CallResult/MethodName");
+            _stackTrace = getText(xmlDoc, "//CallResult/StackTrace");
 
             // return success indicator
             return CallResults.SUCCESS;
@@ -996,7 +996,7 @@ public class CallResult {
 
     private boolean isDate(final String dateString)
     {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         try
         {
@@ -1020,7 +1020,7 @@ public class CallResult {
     {
 
         Date date;
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         try
         {
