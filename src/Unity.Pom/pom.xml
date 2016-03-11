@@ -6,11 +6,11 @@
 	<modules>
 		<module>../Unity</module>
 		<module>../Unity.Common</module>
-		<module>../Unity.RmiService</module>
-		<module>../Unity.RestService</module>
-		<module>../Unity.LocalConnector</module>
-		<module>../Unity.RestConnector</module>
-		<module>../Unity.RmiConnector</module>
+<!-- 		<module>../Unity.RMIService</module> -->
+<!-- 		<module>../Unity.RestService</module> -->
+<!-- 		<module>../Unity.LocalConnector</module> -->
+<!-- 		<module>../Unity.RestConnector</module> -->
+<!-- 		<module>../Unity.RmiConnector</module> -->
 	</modules>
 	<build>
 		<plugins>
@@ -27,7 +27,7 @@
 	<parent>
 		<groupId>com.incadencecorp.unity</groupId>
 		<artifactId>unity-bom</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 		<relativePath>../Unity.Bom</relativePath>
 	</parent>
 	<dependencies>

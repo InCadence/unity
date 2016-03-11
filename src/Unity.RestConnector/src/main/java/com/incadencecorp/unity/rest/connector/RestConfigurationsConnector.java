@@ -2,11 +2,8 @@ package com.incadencecorp.unity.rest.connector;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.NotImplementedException;
-import org.joda.time.DateTime;
 import org.springframework.web.client.RestTemplate;
 
 import com.incadencecorp.unity.common.CallResult;
@@ -171,30 +168,6 @@ public class RestConfigurationsConnector implements IConfigurationsConnector {
             return false;
         }
 
-    }
-
-    @Override
-    public List<CallResult> getLogs(String logName)
-    {
-        throw new NotImplementedException(this.getClass().getSimpleName() + ".getLogs()");
-    }
-
-    @Override
-    public List<CallResult> getLogs(String logName, long maxMillisBack)
-    {
-        throw new NotImplementedException(this.getClass().getSimpleName() + ".getLogs(String logName, long maxMillisBack)");
-    }
-
-    @Override
-    public List<CallResult> getLogsAfter(String logName, DateTime afterTime, long maxMillisForward)
-    {
-        throw new NotImplementedException(this.getClass().getSimpleName() + ".getLogsAfter");
-    }
-
-    @Override
-    public List<CallResult> getLogsBefore(String logName, DateTime beforeTime, long maxMillisBefore)
-    {
-        throw new NotImplementedException(this.getClass().getSimpleName() + ".getLogsBefore");
     }
 
 }

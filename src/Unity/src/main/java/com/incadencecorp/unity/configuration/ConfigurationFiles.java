@@ -1,25 +1,12 @@
 package com.incadencecorp.unity.configuration;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FilenameFilter;
-import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.TimeZone;
 
-import org.joda.time.DateTime;
-
-import com.incadencecorp.unity.common.CallResult;
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.logger.log4j.CallResultLogger;
 
@@ -31,15 +18,6 @@ import com.incadencecorp.unity.logger.log4j.CallResultLogger;
  *
  */
 public class ConfigurationFiles {
-
-    private class CallResultComparator implements Comparator<CallResult> {
-
-        @Override
-        public int compare(CallResult o1, CallResult o2)
-        {
-            return (o1.getDateTimeGMT().compareTo(o2.getDateTimeGMT()));
-        }
-    }
 
     /****************************
      * Private Member Variables
@@ -128,7 +106,6 @@ public class ConfigurationFiles {
 
     /**
      * Creates and adds a {@link com.incadencecorp.unity.common.SettingType} object from the Fully Qualified Filename.
-     * 
      * @param fileName the Fully Qualified Filename
      */
     public void add(String fileName)
@@ -140,11 +117,10 @@ public class ConfigurationFiles {
     }
 
     /**
-     * Returns the setting value from the specified configuration file and setting. The defaultValue will be returned if the
-     * setting does not exist in the configuration file. If the specified configuration file is not in the cache, it will be
-     * 
-     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name
-     *            sequence
+     * Returns the setting value from the specified configuration file and setting. The defaultValue will be returned if the setting does not exist
+     * in the configuration file. If the specified configuration file is not in the cache, it will be
+     *  
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
      * @param settingPath the setting path separated by / or . characters
      * @param defaultValue the Default Setting Value
      * @param type the {@link com.incadencecorp.unity.common.SettingType} for the Setting Value
@@ -174,11 +150,9 @@ public class ConfigurationFiles {
     }
 
     /**
-     * Retrieves the {@link com.incadencecorp.unity.common.SettingType} for the specified configuration file and setting
-     * path.
+     * Retrieves the {@link com.incadencecorp.unity.common.SettingType} for the specified configuration file and setting path.
      * 
-     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name
-     *            sequence
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
      * @param settingPath the setting path separated by / or . characters
      * @return the SettingType for the given setting path
      */
@@ -210,8 +184,7 @@ public class ConfigurationFiles {
     /**
      * Sets or adds a setting in the specified configuration file.
      * 
-     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name
-     *            sequence
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
      * @param settingPath the setting path separated by / or . characters
      * @param value the setting value to be set
      * @param type the {@link com.incadencecorp.unity.common.SettingType} for the setting value
@@ -235,8 +208,7 @@ public class ConfigurationFiles {
     /**
      * Deletes the setting in the specified configuration file.
      * 
-     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name
-     *            sequence
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
      * @param settingPath the setting path separated by / or . characters
      */
     public void deleteSetting(String configurationFileName, String settingPath)
@@ -255,8 +227,7 @@ public class ConfigurationFiles {
     /**
      * Deletes the section in the specified configuration file.
      * 
-     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name
-     *            sequence
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
      * @param sectionPath the section path separated by / or . characters
      */
     public void deleteSection(String configurationFileName, String sectionPath)
@@ -276,8 +247,7 @@ public class ConfigurationFiles {
      * Returns the specified configuration file object from the cache. If the specified configuration file object is not
      * found in the cache, a new configuration file object will be created from the specified configuration file name.
      * 
-     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name
-     *            sequence
+     * @param configurationFileName the name of the configuration file, i.e. the last name of the file's pathname's name sequence
      * @return the specified configuration file object
      */
     public IConfigurationFile getConfigurationFile(String configurationFileName)
@@ -318,6 +288,9 @@ public class ConfigurationFiles {
             // We log to locations under the Unity's logs folder. Each application
             // gets its own subfolder automatically.
 
+            String logPath;
+            String logFileName;
+
             // get current date
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -325,11 +298,11 @@ public class ConfigurationFiles {
             String currentDate = dateFormat.format(tempDate);
 
             // Create the App Log Path and the Log Filename
-            File logPathFolder = new File(this._logLocation, logName);
-            String logPath = logPathFolder.getPath();
+            File logPathFile = new File(this._logLocation, logName);
+            logPath = logPathFile.getPath();
 
             File logFileNameFile = new File(logPath, logName + "_" + currentDate + ".log");
-            String logFileName = logFileNameFile.getCanonicalPath();
+            logFileName = logFileNameFile.getCanonicalPath();
 
             // Confirm Directory
             if (confirmDirectory(logPath))
@@ -370,96 +343,7 @@ public class ConfigurationFiles {
         }
     }
 
-    /**
-     * Returns the full list of all log entries created in this log file. It is recommended that this method be used
-     * carefully due to the amount of time it may take to process as well as the amount of processing resources that could be
-     * taken up. Instead, consider using <
-     * 
-     * @param logName the name of the log file
-     * 
-     * @return the full list of all log entries created in this log file
-     */
-    public List<CallResult> getLogs(String logName)
-    {
-        return getLogs(logName, null);
-    }
-
-    /**
-     * Returns the list of log entries created in this log file starting from the most recent and looking back the
-     * <code>maxMillisBack</code> amount inclusively.
-     * 
-     * @param logName the name of the log file
-     * @param maxMillisBefore the maximum number of milliseconds to look back in the log file
-     * 
-     * @return the list of log entries created in this log file starting from the most recent and looking back the
-     *         <code>maxMillisBack</code> amount inclusively
-     */
-    public List<CallResult> getLogs(String logName, Long maxMillisBefore)
-    {
-
-        return getLogsBefore(logName, null, maxMillisBefore);
-    }
-
-    /**
-     * Returns the list of log entries created in this log file starting after the <code>afterTime</code> provided and only
-     * including newer entries within <code>maxMillisForward</code> inclusively.
-     * 
-     * @param logName the name of the log file
-     * @param afterTime the time to start collecting log entries after in the log file
-     * @param maxMillisForward the maximum number of milliseconds after the <code>afterTime</code> to collect log entries for
-     * 
-     * @return the list of log entries
-     */
-    public List<CallResult> getLogsAfter(String logName, DateTime afterTime, long maxMillisForward)
-    {
-        List<File> sortedFiles = getSortedLogFiles(logName);
-
-        // Start at the beginning and work backwards
-        List<CallResult> logEntries = new ArrayList<CallResult>();
-        for (File file : sortedFiles)
-        {
-            if (addLogEntriesForwardAndCheckHasPassedDate(file, logEntries, afterTime))
-            {
-                break;
-            }
-        }
-
-        List<CallResult> filteredLogEntries = filterLogEntriesByFutureLimit(logEntries, afterTime, maxMillisForward);
-
-        return filteredLogEntries;
-
-    }
-
-    /**
-     * Returns the list of log entries created in this log file starting before the <code>beforeTime</code> provided and only
-     * including older entries within <code>maxMillisBefore</code> inclusively.
-     * 
-     * @param logName the name of the log file
-     * @param beforeTime the time to start collecting log entries before in the log file
-     * @param maxMillisBefore the maximum number of milliseconds before the <code>beforeTime</code> to collect log entries
-     *            for
-     * 
-     * @return the list of log entries
-     */
-    public List<CallResult> getLogsBefore(String logName, DateTime beforeTime, long maxMillisBefore)
-    {
-        List<File> sortedFiles = getSortedLogFiles(logName);
-
-        // Start at the beginning and work backwards
-        List<CallResult> logEntries = new ArrayList<CallResult>();
-        for (File file : sortedFiles)
-        {
-            if (!addLogEntriesAndHasNotReachLimitBack(file, logEntries, beforeTime, maxMillisBefore))
-            {
-                break;
-            }
-        }
-
-        return logEntries;
-
-    }
-
-    private Boolean confirmDirectory(String path)
+    protected Boolean confirmDirectory(String path)
     {
 
         try
@@ -500,290 +384,5 @@ public class ConfigurationFiles {
         {
             return false;
         }
-    }
-
-    private List<File> getSortedLogFiles(String logName)
-    {
-
-        // Create the App Log Path and the Log Filename
-        File logPathFolder = new File(this._logLocation, logName);
-        String logPath = logPathFolder.getPath();
-
-        // Confirm Directory
-        if (confirmDirectory(logPath))
-        {
-
-            File[] files = logPathFolder.listFiles(new FilenameFilter() {
-
-                @Override
-                public boolean accept(File dir, String name)
-                {
-                    return name.startsWith(name);
-                }
-            });
-
-            // Sort files
-            List<File> sortedFiles = sortFilesDescending(logName, files);
-
-            return sortedFiles;
-
-        }
-
-        return new ArrayList<File>();
-
-    }
-
-    private List<File> sortFilesDescending(String logName, File[] files)
-    {
-        HashMap<Date, File> filesByTimestamp = new HashMap<Date, File>();
-        for (File file : files)
-        {
-            Date tempDate = getFileDate(logName, file);
-
-            filesByTimestamp.put(tempDate, file);
-
-        }
-
-        List<Date> timestamps = new ArrayList<Date>(filesByTimestamp.keySet());
-
-        Collections.sort(timestamps);
-        Collections.reverse(timestamps);
-
-        List<File> sortedFiles = new ArrayList<File>();
-        for (Date timestamp : timestamps)
-        {
-            sortedFiles.add(filesByTimestamp.get(timestamp));
-        }
-
-        return sortedFiles;
-
-    }
-
-    private Date getFileDate(String logName, File file)
-    {
-        int startIndex = logName.length() + 1;
-        int endIndex = file.getName().length() - 4;
-
-        String fileTimeStamp = file.getName().substring(startIndex, endIndex);
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-
-        try
-        {
-            Date tempDate = dateFormat.parse(fileTimeStamp);
-            return tempDate;
-        }
-        catch (ParseException e)
-        {
-            return null;
-        }
-    }
-
-    private boolean addLogEntriesAndHasNotReachLimitBack(File logFile,
-                                                         List<CallResult> logEntries,
-                                                         DateTime dateBefore,
-                                                         Long maxMillisBack)
-    {
-        List<CallResult> tempLogEntries = loadLogEntriesFromFile(logFile);
-
-        for (CallResult callResult : tempLogEntries)
-        {
-            if (addLogEntryAndTestPastTimeLimit(logEntries, callResult, dateBefore, maxMillisBack))
-            {
-                return false;
-            }
-        }
-
-        return true;
-
-    }
-
-    private boolean addLogEntriesForwardAndCheckHasPassedDate(File logFile, List<CallResult> logEntries, DateTime dateAfter)
-    {
-        List<CallResult> tempLogEntries = loadLogEntriesFromFile(logFile);
-
-        Date dateLimit = null;
-        if (dateAfter != null)
-        {
-            dateLimit = dateAfter.toDate();
-        }
-
-        for (CallResult callResult : tempLogEntries)
-        {
-            if (dateLimit == null || callResult.getDateTimeGMT().after(dateLimit))
-            {
-                logEntries.add(callResult);
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        return false;
-
-    }
-
-    private List<CallResult> filterLogEntriesByFutureLimit(List<CallResult> logEntries,
-                                                           DateTime dateAfter,
-                                                           Long maxMillisForward)
-    {
-
-        if (logEntries.size() == 0)
-        {
-            return logEntries;
-        }
-
-        CallResult earlistEntry = logEntries.get(logEntries.size() - 1);
-
-        // Calculate the new dateBefore based on the new dateAfter time
-        Date dateBefore = moveDateToDateBeforePoint(earlistEntry.getDateTimeGMT(), maxMillisForward).toDate();
-
-        List<CallResult> filteredLogEntries = new ArrayList<CallResult>();
-        for (CallResult callResult : logEntries)
-        {
-
-            if (!callResult.getDateTimeGMT().after(dateBefore))
-            {
-                filteredLogEntries.add(callResult);
-            }
-        }
-
-        return filteredLogEntries;
-
-    }
-
-    private List<CallResult> loadLogEntriesFromFile(File logFile)
-    {
-        List<CallResult> logEntries = new ArrayList<CallResult>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(logFile)))
-        {
-            String line;
-            while ((line = br.readLine()) != null)
-            {
-                // Look for the open tag
-                if (line.trim().startsWith("<CallResult>"))
-                {
-                    String callResultString = line;
-
-                    while ((line = br.readLine()) != null)
-                    {
-                        callResultString += line;
-
-                        // Look for the closing tag
-                        if (line.trim().startsWith("</CallResult>"))
-                        {
-                            break;
-                        }
-                    }
-
-                    CallResult logEntry = new CallResult();
-                    logEntry.fromXML(callResultString);
-
-                    logEntries.add(logEntry);
-
-                }
-            }
-        }
-        catch (IOException e)
-        {
-        }
-
-        Collections.sort(logEntries, new CallResultComparator());
-
-        // Log entries are assumed to be oldest to newest so flip the list.
-        Collections.reverse(logEntries);
-
-        return logEntries;
-
-    }
-
-    private DateTime moveDateToDateBeforePoint(Date dateToMove, Long maxMillisForward)
-    {
-        if (maxMillisForward == null || maxMillisForward < 1)
-        {
-            return null;
-        }
-
-        DateTime newDateBefore = new DateTime(dateToMove);
-        if (maxMillisForward > Integer.MAX_VALUE)
-        {
-            long tempMillisForward = maxMillisForward;
-            int millisToAdd = Integer.MAX_VALUE;
-
-            do
-            {
-
-                newDateBefore = newDateBefore.plusMillis(millisToAdd);
-
-                tempMillisForward -= millisToAdd;
-
-            }
-            while (tempMillisForward > 0);
-
-        }
-        else
-        {
-            long millis = maxMillisForward;
-            newDateBefore = newDateBefore.plusMillis((int) millis);
-        }
-
-        return newDateBefore;
-
-    }
-
-    private boolean addLogEntryAndTestPastTimeLimit(List<CallResult> logEntries,
-                                                    CallResult logEntry,
-                                                    DateTime startTime,
-                                                    Long maxMillisBack)
-    {
-        DateTime oldTime = new DateTime(logEntry.getDateTimeGMT());
-
-        DateTime firstTime = getNewestLogTimeStamp(logEntries, startTime, oldTime);
-
-        if (firstTime == null)
-        {
-            logEntries.add(logEntry);
-            return false;
-        }
-
-        if (!oldTime.isBefore(firstTime))
-        {
-            return false;
-        }
-
-        long difference = firstTime.getMillis() - oldTime.getMillis();
-        if (maxMillisBack != null && difference > maxMillisBack)
-        {
-            return true;
-        }
-        else
-        {
-            logEntries.add(logEntry);
-            return false;
-        }
-
-    }
-
-    private DateTime getNewestLogTimeStamp(List<CallResult> logEntries, DateTime startTime, DateTime pendingTime)
-    {
-
-        DateTime firstTime = startTime;
-
-        if (logEntries.size() > 0)
-        {
-            CallResult firstLogEntry = logEntries.get(0);
-
-            firstTime = new DateTime(firstLogEntry.getDateTimeGMT()).plusMillis(1);
-        }
-        else if (pendingTime.isBefore(startTime))
-        {
-            firstTime = pendingTime.plusMillis(1);
-        }
-
-        return firstTime;
-
     }
 }

@@ -35,10 +35,10 @@
 			<groupId>com.incadencecorp.unity</groupId>
 			<artifactId>unity-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.incadencecorp.unity</groupId>
-			<artifactId>unity-local-connector</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>com.incadencecorp.unity</groupId>
+            <artifactId>unity-local-connector</artifactId>
+        </dependency>
 	</dependencies>
 
 	<properties>
@@ -72,40 +72,36 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>spring-releases</id>
-			<url>http://repo.spring.io/libs-release</url>
-		</repository>
-		<repository>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-			<id>public</id>
-			<url>http://10.15.0.70:8081/nexus/content/groups/public</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-releases</id>
-			<url>http://repo.spring.io/libs-release</url>
-		</pluginRepository>
-	</pluginRepositories>
-	<distributionManagement>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<url>http://10.15.0.70:8081/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-
+        <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>acint-releases</id>
+      <name>libs-release</name>
+      <url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release</url>
+    </repository>
+    <repository>
+      <snapshots />
+      <id>acint-snapshots</id>
+      <name>libs-snapshot</name>
+      <url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot</url>
+    </repository>
+  </repositories>
+<distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>acint-releases</id>
+      <name>ACINT Releases</name>
+      <url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release-local</url>
+    </repository>
+    <snapshotRepository>
+      <uniqueVersion>true</uniqueVersion>
+      <id>acint-snapshots</id>
+      <name>ACINT Snapshots</name>
+      <url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot-local</url>
+    </snapshotRepository>
+  </distributionManagement>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

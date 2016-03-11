@@ -3,21 +3,30 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.incadencecorp.unity</groupId>
 	<artifactId>unity-bom</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Unity.bom</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<unityVersion>0.0.1-SNAPSHOT</unityVersion>
+		<unityVersion>0.0.2-SNAPSHOT</unityVersion>
 		<unityRMIVersion>0.0.1-SNAPSHOT</unityRMIVersion>
 		<unityRestServiceVersion>0.0.1-SNAPSHOT</unityRestServiceVersion>
-		<unityCommonVersion>0.0.1-SNAPSHOT</unityCommonVersion>
+		<unityCommonVersion>0.0.2-SNAPSHOT</unityCommonVersion>
 		<unityLocalConnectorVersion>0.0.1-SNAPSHOT</unityLocalConnectorVersion>
 		<unityRestConnectorVersion>0.0.1-SNAPSHOT</unityRestConnectorVersion>
 		<unityRmiConnectorVersion>0.0.1-SNAPSHOT</unityRmiConnectorVersion>
+		<maven.bundle.version>2.3.7</maven.bundle.version>
+		<felix.osgi.version>1.4.0</felix.osgi.version>
 	</properties>
+
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>org.osgi.core</artifactId>
+				<version>${felix.osgi.version}</version>
+				<scope>provided</scope>
+			</dependency>
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-core</artifactId>
@@ -56,29 +65,62 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<!-- <repositories> <repository> <releases> <enabled>true</enabled> <updatePolicy>always</updatePolicy> 
+		<checksumPolicy>warn</checksumPolicy> </releases> <snapshots> <enabled>true</enabled> 
+		<updatePolicy>always</updatePolicy> <checksumPolicy>fail</checksumPolicy> 
+		</snapshots> <id>public</id> <url>http://10.15.0.70:8081/nexus/content/groups/public</url> 
+		</repository> </repositories> <distributionManagement> <snapshotRepository> 
+		<id>snapshots</id> <url>http://10.15.0.70:8081/nexus/content/repositories/snapshots</url> 
+		</snapshotRepository> </distributionManagement> -->
 	<repositories>
 		<repository>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
 			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
+				<enabled>false</enabled>
 			</snapshots>
-			<id>public</id>
-			<url>http://10.15.0.70:8081/nexus/content/groups/public</url>
+			<id>acint-releases</id>
+			<name>libs-release</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release</url>
+		</repository>
+		<repository>
+			<snapshots />
+			<id>acint-snapshots</id>
+			<name>libs-snapshot</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot</url>
 		</repository>
 	</repositories>
 	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>acint-releases</id>
+			<name>ACINT Releases</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release-local</url>
+		</repository>
 		<snapshotRepository>
-			<id>snapshots</id>
-			<url>http://10.15.0.70:8081/nexus/content/repositories/snapshots</url>
+			<uniqueVersion>true</uniqueVersion>
+			<id>acint-snapshots</id>
+			<name>ACINT Snapshots</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
 	</distributionManagement>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>acint-plugins-releases</id>
+			<name>plugins-release</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-release</url>
+		</pluginRepository>
+		<pluginRepository>
+			<snapshots />
+			<id>acint-plugins-snapshots</id>
+			<name>plugins-snapshot</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<modules>
 		<module>../Unity.Pom</module>
 	</modules>
+
+
 </project>

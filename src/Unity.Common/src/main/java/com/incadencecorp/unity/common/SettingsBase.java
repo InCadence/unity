@@ -20,13 +20,14 @@ import java.util.Hashtable;
  -----------------------------------------------------------------------------*/
 
 /**
- * {@link com.incadencecorp.unity.common.SettingsBase} is the base class for all setting contexts which allow an application
+ * {@link com.incadencecorp.unity.common.SettingsBase} is the base class for all setting contexts
+ * which allow an application
  * to store and retrieve setting values from a local or remote source. The
- * {@link com.incadencecorp.unity.common.SettingsBase} class encapsulates a connector and uses a cache to temporary store
+ * {@link com.incadencecorp.unity.common.SettingsBase} class encapsulates a connector and uses a
+ * cache to temporary store
  * setting values.
  * 
  * @author InCadence
- *
  */
 public class SettingsBase {
 
@@ -34,18 +35,22 @@ public class SettingsBase {
     	Private Member Variables
     --------------------------------------------------------------------------*/
 
-    private static Hashtable<String, String> _cache = null;
-    private static IConfigurationsConnector _connector = null;
+    private Hashtable<String, String> _cache = null;
+    private IConfigurationsConnector _connector = null;
 
-    private static Object _cacheLock = new Object();
+    private Object _cacheLock = new Object();
 
     /*--------------------------------------------------------------------------
         Constructor
     --------------------------------------------------------------------------*/
 
-    protected SettingsBase()
-    {
-        // Do Nothing
+    /**
+     * Specify the connector to be used. Pass <code>null</code> to use memory.
+     * 
+     * @param connector
+     */
+    public SettingsBase(final IConfigurationsConnector connector) {
+        _connector = connector;
     }
 
     /*--------------------------------------------------------------------------
@@ -53,23 +58,11 @@ public class SettingsBase {
     --------------------------------------------------------------------------*/
 
     /**
-     * Initializes the connector.
-     * 
-     * @param connector the connector to use for storing and retrieving setting values.
-     */
-    public static void initialize(final IConfigurationsConnector connector)
-    {
-        SettingsBase._connector = connector;
-    }
-
-    /**
      * Remove all entries in the cache.
      */
-    public static void clearCache()
-    {
-        synchronized (_cacheLock)
-        {
-            SettingsBase.getCache().clear();
+    public void clearCache() {
+        synchronized (_cacheLock) {
+            getCache().clear();
         }
     }
 
@@ -77,28 +70,31 @@ public class SettingsBase {
     	Protected Functions
     --------------------------------------------------------------------------*/
 
-    protected static int getSettingWithMin(final String configurationFileName,
-                                           final String settingPath,
-                                           final int defaultValue,
-                                           final int minValue,
-                                           final boolean setIfNotFound)
-    {
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     *            if less then the minValue then the min is used instead.
+     * @param minValue
+     *            minimal value for this setting.
+     * @param setIfNotFound
+     * @return the configuration setting. If the value is less then the minValue specified then the
+     *         min is returned instead.
+     */
+    public int getSettingWithMin(final String key, final String parameter, final int defaultValue,
+            final int minValue, final boolean setIfNotFound) {
 
         int value;
 
         // Ensure Default Value Meets Requirement
-        if (defaultValue < minValue)
-        {
-            value = SettingsBase.getSetting(configurationFileName, settingPath, minValue, setIfNotFound);
-        }
-        else
-        {
-            value = SettingsBase.getSetting(configurationFileName, settingPath, defaultValue, setIfNotFound);
+        if (defaultValue < minValue) {
+            value = getSetting(key, parameter, minValue, setIfNotFound);
+        } else {
+            value = getSetting(key, parameter, defaultValue, setIfNotFound);
         }
 
         // Ensure Setting Meets Requirement
-        if (value < minValue)
-        {
+        if (value < minValue) {
             value = minValue;
         }
 
@@ -106,60 +102,31 @@ public class SettingsBase {
 
     }
 
-    protected static int getSettingWithMax(final String configurationFileName,
-                                           final String settingPath,
-                                           final int defaultValue,
-                                           final int maxValue,
-                                           final boolean setIfNotFound)
-    {
-        int value;
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     *            if less then the minValue then the min is used instead.
+     * @param minValue
+     *            minimal value for this setting.
+     * @param setIfNotFound
+     * @return the configuration setting. If the value is less then the minValue specified then the
+     *         min is returned instead.
+     */
+    public double getSettingWithMin(final String key, final String parameter,
+            final double defaultValue, final double minValue, final boolean setIfNotFound) {
+
+        double value;
 
         // Ensure Default Value Meets Requirement
-        if (defaultValue > maxValue)
-        {
-            value = SettingsBase.getSetting(configurationFileName, settingPath, maxValue, setIfNotFound);
-        }
-        else
-        {
-            value = SettingsBase.getSetting(configurationFileName, settingPath, defaultValue, setIfNotFound);
+        if (defaultValue < minValue) {
+            value = getSetting(key, parameter, minValue, setIfNotFound);
+        } else {
+            value = getSetting(key, parameter, defaultValue, setIfNotFound);
         }
 
         // Ensure Setting Meets Requirement
-        if (value > maxValue)
-        {
-            value = maxValue;
-        }
-
-        return value;
-
-    }
-
-    protected static int getSettingWithMinMax(final String configurationFileName,
-                                              final String settingPath,
-                                              final int defaultValue,
-                                              final int minValue,
-                                              final int maxValue,
-                                              final boolean setIfNotFound)
-    {
-        int value;
-
-        // Ensure Default Value Meets Requirement
-        if (defaultValue < minValue || defaultValue > maxValue)
-        {
-            value = SettingsBase.getSetting(configurationFileName, settingPath, maxValue, setIfNotFound);
-        }
-        else
-        {
-            value = SettingsBase.getSetting(configurationFileName, settingPath, defaultValue, setIfNotFound);
-        }
-
-        // Ensure Setting Meets Requirement
-        if (value > maxValue)
-        {
-            value = maxValue;
-        }
-        else if (value < minValue)
-        {
+        if (value < minValue) {
             value = minValue;
         }
 
@@ -167,78 +134,365 @@ public class SettingsBase {
 
     }
 
-    protected static int getSetting(final String configurationFileName,
-                                    final String settingPath,
-                                    final int defaultValue,
-                                    final boolean setIfNotFound)
-    {
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     *            if less then the minValue then the min is used instead.
+     * @param minValue
+     *            minimal value for this setting.
+     * @param setIfNotFound
+     * @return the configuration setting. If the value is less then the minValue specified then the
+     *         min is returned instead.
+     */
+    public float getSettingWithMin(final String key, final String parameter,
+            final float defaultValue, final float minValue, final boolean setIfNotFound) {
 
-        return Integer.parseInt(SettingsBase.getSetting(configurationFileName,
-                                                        settingPath,
-                                                        Integer.toString(defaultValue),
-                                                        SettingType.ST_INTEGER,
-                                                        setIfNotFound));
+        float value;
 
-    }
+        // Ensure Default Value Meets Requirement
+        if (defaultValue < minValue) {
+            value = getSetting(key, parameter, minValue, setIfNotFound);
+        } else {
+            value = getSetting(key, parameter, defaultValue, setIfNotFound);
+        }
 
-    protected static boolean getSetting(final String configurationFileName,
-                                        final String settingPath,
-                                        final boolean defaultValue,
-                                        final boolean setIfNotFound)
-    {
+        // Ensure Setting Meets Requirement
+        if (value < minValue) {
+            value = minValue;
+        }
 
-        return Boolean.parseBoolean(SettingsBase.getSetting(configurationFileName,
-                                                            settingPath,
-                                                            Boolean.toString(defaultValue),
-                                                            SettingType.ST_BOOLEAN,
-                                                            setIfNotFound));
-
-    }
-
-    protected static String getSetting(final String configurationFileName,
-                                       final String settingPath,
-                                       final String defaultValue,
-                                       final boolean setIfNotFound)
-    {
-
-        return SettingsBase.getSetting(configurationFileName,
-                                       settingPath,
-                                       defaultValue,
-                                       SettingType.ST_STRING,
-                                       setIfNotFound);
+        return value;
 
     }
 
-    protected static String getSetting(final String configurationFileName,
-                                       final String settingPath,
-                                       final String defaultValue,
-                                       final SettingType type,
-                                       final boolean setIfNotFound)
-    {
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     *            if greater then maxValue then the max is used instead.
+     * @param maxValue
+     *            Maximum value for this setting.
+     * @param setIfNotFound
+     * @return the configuration setting. If the value is greater then the maxValue specified then
+     *         the max is returned instead.
+     */
+    public int getSettingWithMax(final String key, final String parameter, final int defaultValue,
+            final int maxValue, final boolean setIfNotFound) {
+        int value;
+
+        // Ensure Default Value Meets Requirement
+        if (defaultValue > maxValue) {
+            value = getSetting(key, parameter, maxValue, setIfNotFound);
+        } else {
+            value = getSetting(key, parameter, defaultValue, setIfNotFound);
+        }
+
+        // Ensure Setting Meets Requirement
+        if (value > maxValue) {
+            value = maxValue;
+        }
+
+        return value;
+
+    }
+
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     *            if greater then maxValue then the max is used instead.
+     * @param maxValue
+     *            Maximum value for this setting.
+     * @param setIfNotFound
+     * @return the configuration setting. If the value is greater then the maxValue specified then
+     *         the max is returned instead.
+     */
+    public double getSettingWithMax(final String key, final String parameter,
+            final double defaultValue, final double maxValue, final boolean setIfNotFound) {
+        double value;
+
+        // Ensure Default Value Meets Requirement
+        if (defaultValue > maxValue) {
+            value = getSetting(key, parameter, maxValue, setIfNotFound);
+        } else {
+            value = getSetting(key, parameter, defaultValue, setIfNotFound);
+        }
+
+        // Ensure Setting Meets Requirement
+        if (value > maxValue) {
+            value = maxValue;
+        }
+
+        return value;
+
+    }
+
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     *            if greater then maxValue then the max is used instead.
+     * @param maxValue
+     *            Maximum value for this setting.
+     * @param setIfNotFound
+     * @return the configuration setting. If the value is greater then the maxValue specified then
+     *         the max is returned instead.
+     */
+    public float getSettingWithMax(final String key, final String parameter,
+            final float defaultValue, final float maxValue, final boolean setIfNotFound) {
+        float value;
+
+        // Ensure Default Value Meets Requirement
+        if (defaultValue > maxValue) {
+            value = getSetting(key, parameter, maxValue, setIfNotFound);
+        } else {
+            value = getSetting(key, parameter, defaultValue, setIfNotFound);
+        }
+
+        // Ensure Setting Meets Requirement
+        if (value > maxValue) {
+            value = maxValue;
+        }
+
+        return value;
+
+    }
+
+    /**
+     * Gets parameter value. If value < min then the min is returned; if value > max then max is
+     * returned.
+     * 
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     *            if greater then the maxValue then max is used; if less then minValue then min is
+     *            used.
+     * @param minValue
+     * @param maxValue
+     * @param setIfNotFound
+     * @return the configuration setting. If the value is less then the minValue then the
+     *         min is returned; if value is greater then maxValue then max is returned.
+     */
+    public int getSettingWithMinMax(final String key, final String parameter,
+            final int defaultValue, final int minValue, final int maxValue,
+            final boolean setIfNotFound) {
+        int value;
+
+        // Ensure Default Value Meets Requirement
+        if (defaultValue < minValue || defaultValue > maxValue) {
+            value = getSetting(key, parameter, maxValue, setIfNotFound);
+        } else {
+            value = getSetting(key, parameter, defaultValue, setIfNotFound);
+        }
+
+        // Ensure Setting Meets Requirement
+        if (value > maxValue) {
+            value = maxValue;
+        } else if (value < minValue) {
+            value = minValue;
+        }
+
+        return value;
+
+    }
+
+    /**
+     * Gets parameter value. If value < min then the min is returned; if value > max then max is
+     * returned.
+     * 
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     *            if greater then the maxValue then max is used; if less then minValue then min is
+     *            used.
+     * @param minValue
+     * @param maxValue
+     * @param setIfNotFound
+     * @return the configuration setting. If the value is less then the minValue then the
+     *         min is returned; if value is greater then maxValue then max is returned.
+     */
+    public double getSettingWithMinMax(final String key, final String parameter,
+            final double defaultValue, final double minValue, final double maxValue,
+            final boolean setIfNotFound) {
+        double value;
+
+        // Ensure Default Value Meets Requirement
+        if (defaultValue < minValue || defaultValue > maxValue) {
+            value = getSetting(key, parameter, maxValue, setIfNotFound);
+        } else {
+            value = getSetting(key, parameter, defaultValue, setIfNotFound);
+        }
+
+        // Ensure Setting Meets Requirement
+        if (value > maxValue) {
+            value = maxValue;
+        } else if (value < minValue) {
+            value = minValue;
+        }
+
+        return value;
+
+    }
+
+    /**
+     * Gets parameter value. If value < min then the min is returned; if value > max then max is
+     * returned.
+     * 
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     *            if greater then the maxValue then max is used; if less then minValue then min is
+     *            used.
+     * @param minValue
+     * @param maxValue
+     * @param setIfNotFound
+     * @return the configuration setting. If the value is less then the minValue then the
+     *         min is returned; if value is greater then maxValue then max is returned.
+     */
+    public float getSettingWithMinMax(final String key, final String parameter,
+            final float defaultValue, final float minValue, final float maxValue,
+            final boolean setIfNotFound) {
+        float value;
+
+        // Ensure Default Value Meets Requirement
+        if (defaultValue < minValue || defaultValue > maxValue) {
+            value = getSetting(key, parameter, maxValue, setIfNotFound);
+        } else {
+            value = getSetting(key, parameter, defaultValue, setIfNotFound);
+        }
+
+        // Ensure Setting Meets Requirement
+        if (value > maxValue) {
+            value = maxValue;
+        } else if (value < minValue) {
+            value = minValue;
+        }
+
+        return value;
+
+    }
+
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     * @param setIfNotFound
+     * @return the configuration setting specified by key / parameter pair.
+     */
+    public int getSetting(final String key, final String parameter, final int defaultValue,
+            final boolean setIfNotFound) {
+
+        return Integer.parseInt(getSetting(key, parameter, Integer.toString(defaultValue),
+                                           SettingType.ST_INTEGER, setIfNotFound));
+
+    }
+
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     * @param setIfNotFound
+     * @return the configuration setting specified by key / parameter pair.
+     */
+    public long getSetting(final String key, final String parameter, final long defaultValue,
+            final boolean setIfNotFound) {
+
+        return Long.parseLong(getSetting(key, parameter, Long.toString(defaultValue),
+                                           SettingType.ST_LONG, setIfNotFound));
+
+    }
+    
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     * @param setIfNotFound
+     * @return the configuration setting specified by key / parameter pair.
+     */
+    public double getSetting(final String key, final String parameter, final double defaultValue,
+            final boolean setIfNotFound) {
+
+        return Double.parseDouble(getSetting(key, parameter, Double.toString(defaultValue),
+                                             SettingType.ST_DOUBLE, setIfNotFound));
+
+    }
+
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     * @param setIfNotFound
+     * @return the configuration setting specified by key / parameter pair.
+     */
+    public float getSetting(final String key, final String parameter, final float defaultValue,
+            final boolean setIfNotFound) {
+
+        return Float.parseFloat(getSetting(key, parameter, Float.toString(defaultValue),
+                                           SettingType.ST_FLOAT, setIfNotFound));
+
+    }
+
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     * @param setIfNotFound
+     * @return the configuration setting specified by key / parameter pair.
+     */
+    public boolean getSetting(final String key, final String parameter, final boolean defaultValue,
+            final boolean setIfNotFound) {
+
+        return Boolean.parseBoolean(getSetting(key, parameter, Boolean.toString(defaultValue),
+                                               SettingType.ST_BOOLEAN, setIfNotFound));
+
+    }
+
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     * @param setIfNotFound
+     * @return the configuration setting specified by key / parameter pair.
+     */
+    public String getSetting(final String key, final String parameter, final String defaultValue,
+            final boolean setIfNotFound) {
+
+        return getSetting(key, parameter, defaultValue, SettingType.ST_STRING, setIfNotFound);
+
+    }
+
+    /**
+     * @param key
+     * @param parameter
+     * @param defaultValue
+     * @param type
+     * @param setIfNotFound
+     * @return the configuration setting specified by key / parameter pair.
+     */
+    public String getSetting(final String key, final String parameter, final String defaultValue,
+            final SettingType type, final boolean setIfNotFound) {
         String value = null;
 
-        synchronized (_cacheLock)
-        {
+        synchronized (_cacheLock) {
             // Normalize Key
-            String cacheKey = SettingsBase.normalizeCacheKey(configurationFileName, settingPath);
+            String cacheKey = normalizeCacheKey(key, parameter);
 
             // Read Value From Cache
-            value = SettingsBase.getCache().get(cacheKey);
+            value = getCache().get(cacheKey);
 
             // Value Cached?
-            if (value == null)
-            {
+            if (value == null) {
                 // No; User Defined Connector?
-                if (_connector != null)
-                {
+                if (_connector != null) {
                     // Yes; Read Configuration
-                    value = _connector.getSetting(configurationFileName, settingPath, defaultValue, type, setIfNotFound);
+                    value =
+                            _connector
+                                    .getSetting(key, parameter, defaultValue, type, setIfNotFound);
 
                     // Add to Cache
-                    SettingsBase.getCache().put(cacheKey, value);
-                }
-                else
-                {
+                    getCache().put(cacheKey, value);
+                } else {
                     // No; Use Default
                     value = defaultValue;
                 }
@@ -249,51 +503,117 @@ public class SettingsBase {
         return value;
     }
 
-    protected static boolean setSetting(final String configurationFileName, final String settingPath, final int value)
-    {
+    /**
+     * Sets the configuration setting.
+     * 
+     * @param key
+     * @param parameter
+     * @param value
+     * @return <code>true</code> if successful.
+     */
+    public boolean setSetting(final String key, final String parameter, final int value) {
 
-        return SettingsBase.setSetting(configurationFileName, settingPath, Integer.toString(value), SettingType.ST_INTEGER);
+        return setSetting(key, parameter, Integer.toString(value), SettingType.ST_INTEGER);
+
+    }
+    
+    /**
+     * Sets the configuration setting.
+     * 
+     * @param key
+     * @param parameter
+     * @param value
+     * @return <code>true</code> if successful.
+     */
+    public boolean setSetting(final String key, final String parameter, final long value) {
+
+        return setSetting(key, parameter, Long.toString(value), SettingType.ST_LONG);
 
     }
 
-    protected static boolean setSetting(final String configurationFileName, final String settingPath, final boolean value)
-    {
+    /**
+     * Sets the configuration setting.
+     * 
+     * @param key
+     * @param parameter
+     * @param value
+     * @return <code>true</code> if successful.
+     */
+    public boolean setSetting(final String key, final String parameter, final double value) {
 
-        return SettingsBase.setSetting(configurationFileName, settingPath, Boolean.toString(value), SettingType.ST_BOOLEAN);
+        return setSetting(key, parameter, Double.toString(value), SettingType.ST_DOUBLE);
 
     }
 
-    protected static boolean setSetting(final String configurationFileName, final String settingPath, final String value)
-    {
+    /**
+     * Sets the configuration setting.
+     * 
+     * @param key
+     * @param parameter
+     * @param value
+     * @return <code>true</code> if successful.
+     */
+    public boolean setSetting(final String key, final String parameter, final float value) {
 
-        return SettingsBase.setSetting(configurationFileName, settingPath, value, SettingType.ST_STRING);
+        return setSetting(key, parameter, Float.toString(value), SettingType.ST_FLOAT);
 
     }
 
-    protected static boolean setSetting(final String configurationFileName,
-                                        final String settingPath,
-                                        final String value,
-                                        final SettingType type)
-    {
+    /**
+     * Sets the configuration setting.
+     * 
+     * @param key
+     * @param parameter
+     * @param value
+     * @return <code>true</code> if successful.
+     */
+    public boolean setSetting(final String key, final String parameter, final boolean value) {
+
+        return setSetting(key, parameter, Boolean.toString(value), SettingType.ST_BOOLEAN);
+
+    }
+
+    /**
+     * Sets the configuration setting.
+     * 
+     * @param key
+     * @param parameter
+     * @param value
+     * @return <code>true</code> if successful.
+     */
+    public boolean setSetting(final String key, final String parameter, final String value) {
+
+        return setSetting(key, parameter, value, SettingType.ST_STRING);
+
+    }
+
+    /**
+     * Sets the configuration setting.
+     * 
+     * @param key
+     * @param parameter
+     * @param value
+     * @param type
+     * @return <code>true</code> if successful.
+     */
+    public boolean setSetting(final String key, final String parameter, final String value,
+            final SettingType type) {
 
         boolean updated = true;
 
-        synchronized (_cacheLock)
-        {
+        synchronized (_cacheLock) {
             // Normalize Key
-            String cacheKey = SettingsBase.normalizeCacheKey(configurationFileName, settingPath);
+            String cacheKey = normalizeCacheKey(key, parameter);
 
             // Setting Not Cached or Modified?
-            if (!SettingsBase.getCache().containsKey(cacheKey) || SettingsBase.getCache().get(cacheKey) != value)
-            {
+            if (!getCache().containsKey(cacheKey) || getCache().get(cacheKey) != value) {
 
                 // Yes; Replace Cached Value
-                SettingsBase.getCache().put(cacheKey, value);
+                getCache().put(cacheKey, value);
 
                 // Update Configuration File
-                if (_connector != null)
-                {
-                    updated = _connector.setSetting(configurationFileName, settingPath, value, type);
+                if (_connector != null) {
+                    updated = _connector.setSetting(key, parameter, value, type);
                 }
 
             }
@@ -303,28 +623,25 @@ public class SettingsBase {
 
     }
 
-    protected static String normalizeCacheKey(final String configurationFileName, final String settingPath)
-    {
+    private String normalizeCacheKey(final String key, final String parameter) {
 
-        String cacheKey = configurationFileName + "." + settingPath;
+        String cacheKey = key + "." + parameter;
         cacheKey = cacheKey.replace("/", ".").toUpperCase();
         return cacheKey;
 
     }
 
-    private static Hashtable<String, String> getCache()
-    {
+    private Hashtable<String, String> getCache() {
 
         // Cache Initialized?
-        if (SettingsBase._cache == null)
-        {
+        if (_cache == null) {
 
             // No; Initialize
-            SettingsBase._cache = new Hashtable<String, String>();
+            _cache = new Hashtable<String, String>();
 
         }
 
-        return SettingsBase._cache;
+        return _cache;
 
     }
 

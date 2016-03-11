@@ -21,10 +21,8 @@ package com.incadencecorp.unity.common;
  * Enumeration that stores the configuration object type.
  * 
  * @author InCadence
- *
  */
-public enum SettingType
-{
+public enum SettingType {
 
     /**
      * Type String.
@@ -39,9 +37,21 @@ public enum SettingType
      */
     ST_INTEGER(2),
     /**
+     * Type Long.
+     */
+    ST_LONG(6),    
+    /**
      * Type EncryptedString.
      */
     ST_ENCRYPTED_STRING(3),
+    /**
+     * Type Double.
+     */
+    ST_DOUBLE(4),
+    /**
+     * Type Float.
+     */
+    ST_FLOAT(5),
     /**
      * Type Unknown.
      */
@@ -49,18 +59,17 @@ public enum SettingType
 
     private int _value;
 
-    private SettingType(final int value)
-    {
+    private SettingType(final int value) {
         this._value = value;
     }
 
     /**
      * Sets the integer value of SettingType.
      * 
-     * @param value integer value of SettingType.
+     * @param value
+     *            integer value of SettingType.
      */
-    public void setSettingType(final int value)
-    {
+    public void setSettingType(final int value) {
         this._value = value;
     }
 
@@ -69,8 +78,7 @@ public enum SettingType
      * 
      * @return the integer value of SettingType.
      */
-    public Integer getSettingType()
-    {
+    public Integer getSettingType() {
         return this._value;
     }
 }

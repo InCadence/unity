@@ -7,13 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.TimeZone;
 
-import org.apache.commons.lang.NotImplementedException;
-import org.joda.time.DateTime;
-
-import com.incadencecorp.unity.common.CallResult;
 import com.incadencecorp.unity.common.SettingType;
 import com.incadencecorp.unity.configuration.ConfigurationFile;
 import com.incadencecorp.unity.configuration.SettingTypeHelper;
@@ -299,30 +294,6 @@ public class RmiConfigurationFiles extends UnicastRemoteObject implements IRmiCo
         {
             return false;
         }
-    }
-
-    @Override
-    public List<CallResult> getLogs(String logName)
-    {
-        throw new NotImplementedException(this.getClass().getSimpleName() + ".getLogs()");
-    }
-
-    @Override
-    public List<CallResult> getLogs(String logName, long maxMillisBack)
-    {
-        throw new NotImplementedException(this.getClass().getSimpleName() + ".getLogs(String logName, long maxMillisBack)");
-    }
-
-    @Override
-    public List<CallResult> getLogsAfter(String logName, DateTime afterTime, long maxMillisForward)
-    {
-        throw new NotImplementedException(this.getClass().getSimpleName() + ".getLogsAfter");
-    }
-
-    @Override
-    public List<CallResult> getLogsBefore(String logName, DateTime beforeTime, long maxMillisBefore)
-    {
-        throw new NotImplementedException(this.getClass().getSimpleName() + ".getLogsBefore");
     }
 
     @Override
