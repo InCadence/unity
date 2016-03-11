@@ -72,52 +72,52 @@
 		</repository> </repositories> <distributionManagement> <snapshotRepository> 
 		<id>snapshots</id> <url>http://10.15.0.70:8081/nexus/content/repositories/snapshots</url> 
 		</snapshotRepository> </distributionManagement> -->
-	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>acint-releases</id>
-			<name>libs-release</name>
-			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release</url>
-		</repository>
-		<repository>
-			<snapshots />
-			<id>acint-snapshots</id>
-			<name>libs-snapshot</name>
-			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot</url>
-		</repository>
-	</repositories>
-	<distributionManagement>
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>acint-releases</id>
-			<name>ACINT Releases</name>
-			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release-local</url>
-		</repository>
-		<snapshotRepository>
-			<uniqueVersion>true</uniqueVersion>
-			<id>acint-snapshots</id>
-			<name>ACINT Snapshots</name>
-			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot-local</url>
-		</snapshotRepository>
-	</distributionManagement>
-	<pluginRepositories>
-		<pluginRepository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>acint-plugins-releases</id>
-			<name>plugins-release</name>
-			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-release</url>
-		</pluginRepository>
-		<pluginRepository>
-			<snapshots />
-			<id>acint-plugins-snapshots</id>
-			<name>plugins-snapshot</name>
-			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-snapshot</url>
-		</pluginRepository>
-	</pluginRepositories>
+<!-- 	<repositories> -->
+<!-- 		<repository> -->
+<!-- 			<snapshots> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</snapshots> -->
+<!-- 			<id>acint-releases</id> -->
+<!-- 			<name>libs-release</name> -->
+<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release</url> -->
+<!-- 		</repository> -->
+<!-- 		<repository> -->
+<!-- 			<snapshots /> -->
+<!-- 			<id>acint-snapshots</id> -->
+<!-- 			<name>libs-snapshot</name> -->
+<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot</url> -->
+<!-- 		</repository> -->
+<!-- 	</repositories> -->
+<!-- 	<distributionManagement> -->
+<!-- 		<repository> -->
+<!-- 			<uniqueVersion>false</uniqueVersion> -->
+<!-- 			<id>acint-releases</id> -->
+<!-- 			<name>ACINT Releases</name> -->
+<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release-local</url> -->
+<!-- 		</repository> -->
+<!-- 		<snapshotRepository> -->
+<!-- 			<uniqueVersion>true</uniqueVersion> -->
+<!-- 			<id>acint-snapshots</id> -->
+<!-- 			<name>ACINT Snapshots</name> -->
+<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot-local</url> -->
+<!-- 		</snapshotRepository> -->
+<!-- 	</distributionManagement> -->
+<!-- 	<pluginRepositories> -->
+<!-- 		<pluginRepository> -->
+<!-- 			<snapshots> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</snapshots> -->
+<!-- 			<id>acint-plugins-releases</id> -->
+<!-- 			<name>plugins-release</name> -->
+<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-release</url> -->
+<!-- 		</pluginRepository> -->
+<!-- 		<pluginRepository> -->
+<!-- 			<snapshots /> -->
+<!-- 			<id>acint-plugins-snapshots</id> -->
+<!-- 			<name>plugins-snapshot</name> -->
+<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-snapshot</url> -->
+<!-- 		</pluginRepository> -->
+<!-- 	</pluginRepositories> -->
 	<modules>
 		<module>../Unity.Pom</module>
 	</modules>
