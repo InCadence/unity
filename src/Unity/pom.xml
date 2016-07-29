@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>unity-core</artifactId>
 	<parent>
-		<groupId>com.incadencecorp.unity</groupId>
-		<artifactId>unity-pom</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
-		<relativePath>../Unity.Pom/pom.xml</relativePath>
-	</parent>
+        <groupId>com.incadencecorp.unity</groupId>
+        <artifactId>unity-pom</artifactId>
+        <version>0.0.3</version>
+        <relativePath>../Unity.Pom/pom.xml</relativePath>
+    </parent>
 	<dependencies>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -48,11 +48,10 @@
 			<artifactId>jaxen</artifactId>
 			<version>1.1.6</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.birt.runtime.3_7_1</groupId>
-			<artifactId>org.apache.xerces</artifactId>
-			<version>2.9.0</version>
-		</dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.11.0</version>
+        </dependency>		
 	</dependencies>
 </project>

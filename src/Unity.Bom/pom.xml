@@ -3,18 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.incadencecorp.unity</groupId>
 	<artifactId>unity-bom</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3</version>
 	<packaging>pom</packaging>
 	<name>Unity.bom</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<unityVersion>0.0.2-SNAPSHOT</unityVersion>
-		<unityRMIVersion>0.0.1-SNAPSHOT</unityRMIVersion>
-		<unityRestServiceVersion>0.0.1-SNAPSHOT</unityRestServiceVersion>
-		<unityCommonVersion>0.0.2-SNAPSHOT</unityCommonVersion>
-		<unityLocalConnectorVersion>0.0.1-SNAPSHOT</unityLocalConnectorVersion>
-		<unityRestConnectorVersion>0.0.1-SNAPSHOT</unityRestConnectorVersion>
-		<unityRmiConnectorVersion>0.0.1-SNAPSHOT</unityRmiConnectorVersion>
 		<maven.bundle.version>2.3.7</maven.bundle.version>
 		<felix.osgi.version>1.4.0</felix.osgi.version>
 	</properties>
@@ -30,39 +23,41 @@
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-core</artifactId>
-				<version>${unityVersion}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-common</artifactId>
-				<version>${unityCommonVersion}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-common</artifactId>
-				<version>${unityCommonVersion}</version>
+				<version>${project.version}</version>
 				<type>test-jar</type>
 			</dependency>
+<!--
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-local-connector</artifactId>
-				<version>${unityLocalConnectorVersion}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-rest-service</artifactId>
-				<version>${unityRestServiceVersion}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-rest-connector</artifactId>
-				<version>${unityRestConnectorVersion}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.incadencecorp.unity</groupId>
 				<artifactId>unity-rmi-connector</artifactId>
-				<version>${unityRmiConnectorVersion}</version>
+				<version>${project.version}</version>
 			</dependency>
+-->
 		</dependencies>
 	</dependencyManagement>
 	<!-- <repositories> <repository> <releases> <enabled>true</enabled> <updatePolicy>always</updatePolicy> 
@@ -72,52 +67,52 @@
 		</repository> </repositories> <distributionManagement> <snapshotRepository> 
 		<id>snapshots</id> <url>http://10.15.0.70:8081/nexus/content/repositories/snapshots</url> 
 		</snapshotRepository> </distributionManagement> -->
-<!-- 	<repositories> -->
-<!-- 		<repository> -->
-<!-- 			<snapshots> -->
-<!-- 				<enabled>false</enabled> -->
-<!-- 			</snapshots> -->
-<!-- 			<id>acint-releases</id> -->
-<!-- 			<name>libs-release</name> -->
-<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release</url> -->
-<!-- 		</repository> -->
-<!-- 		<repository> -->
-<!-- 			<snapshots /> -->
-<!-- 			<id>acint-snapshots</id> -->
-<!-- 			<name>libs-snapshot</name> -->
-<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot</url> -->
-<!-- 		</repository> -->
-<!-- 	</repositories> -->
-<!-- 	<distributionManagement> -->
-<!-- 		<repository> -->
-<!-- 			<uniqueVersion>false</uniqueVersion> -->
-<!-- 			<id>acint-releases</id> -->
-<!-- 			<name>ACINT Releases</name> -->
-<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release-local</url> -->
-<!-- 		</repository> -->
-<!-- 		<snapshotRepository> -->
-<!-- 			<uniqueVersion>true</uniqueVersion> -->
-<!-- 			<id>acint-snapshots</id> -->
-<!-- 			<name>ACINT Snapshots</name> -->
-<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot-local</url> -->
-<!-- 		</snapshotRepository> -->
-<!-- 	</distributionManagement> -->
-<!-- 	<pluginRepositories> -->
-<!-- 		<pluginRepository> -->
-<!-- 			<snapshots> -->
-<!-- 				<enabled>false</enabled> -->
-<!-- 			</snapshots> -->
-<!-- 			<id>acint-plugins-releases</id> -->
-<!-- 			<name>plugins-release</name> -->
-<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-release</url> -->
-<!-- 		</pluginRepository> -->
-<!-- 		<pluginRepository> -->
-<!-- 			<snapshots /> -->
-<!-- 			<id>acint-plugins-snapshots</id> -->
-<!-- 			<name>plugins-snapshot</name> -->
-<!-- 			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-snapshot</url> -->
-<!-- 		</pluginRepository> -->
-<!-- 	</pluginRepositories> -->
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>acint-releases</id>
+			<name>libs-release</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release</url>
+		</repository>
+		<repository>
+			<snapshots />
+			<id>acint-snapshots</id>
+			<name>libs-snapshot</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot</url>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>acint-releases</id>
+			<name>ACINT Releases</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>true</uniqueVersion>
+			<id>acint-snapshots</id>
+			<name>ACINT Snapshots</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>acint-plugins-releases</id>
+			<name>plugins-release</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-release</url>
+		</pluginRepository>
+		<pluginRepository>
+			<snapshots />
+			<id>acint-plugins-snapshots</id>
+			<name>plugins-snapshot</name>
+			<url>http://mvnkimmel.man.fs.lmco.com:8080/artifactory/plugins-snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<modules>
 		<module>../Unity.Pom</module>
 	</modules>
