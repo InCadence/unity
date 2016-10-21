@@ -20,24 +20,22 @@ package com.incadencecorp.unity.common.connectors;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.incadencecorp.unity.common.IConfigurationsConnector;
 import com.incadencecorp.unity.common.SettingType;
 
+/**
+ * This connector uses memory for storing and retrieving values.
+ * 
+ * @author n78554
+ */
 public class MemoryConnector implements IConfigurationsConnector {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MemoryConnector.class);
+
     private Map<String, Map<String, String>> cache = new HashMap<String, Map<String, String>>();
-
-    @Override
-    public String getAddress()
-    {
-        return null;
-    }
-
-    @Override
-    public int getPort()
-    {
-        return 0;
-    }
 
     @Override
     public String getSetting(String configurationFileName,
@@ -75,9 +73,22 @@ public class MemoryConnector implements IConfigurationsConnector {
     }
 
     @Override
+    public Map<String, String> getSettings(String configurationFileName)
+    {
+        Map<String, String> results = new HashMap<String, String>();
+
+        // Make Copy
+        results.putAll(cache.get(configurationFileName));
+
+        return results;
+    }
+
+    @Override
     public boolean log(String logName, String callResultXml)
     {
-        return false;
+        LOGGER.info("{}: {}", logName, callResultXml);
+
+        return true;
     }
 
 }

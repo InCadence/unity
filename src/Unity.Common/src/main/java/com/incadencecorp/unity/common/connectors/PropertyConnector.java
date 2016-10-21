@@ -21,7 +21,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -49,20 +52,6 @@ public abstract class PropertyConnector implements IConfigurationsConnector, Aut
     /*--------------------------------------------------------------------------
     Overridden Methods
     --------------------------------------------------------------------------*/
-
-    @Override
-    public String getAddress()
-    {
-        // Not applicable to this implementation
-        return null;
-    }
-
-    @Override
-    public int getPort()
-    {
-        // Not applicable to this implementation
-        return 0;
-    }
 
     @Override
     public String getSetting(String configurationFileName,
@@ -147,10 +136,34 @@ public abstract class PropertyConnector implements IConfigurationsConnector, Aut
     }
 
     @Override
+    public Map<String, String> getSettings(String configurationFileName)
+    {
+        Map<String, String> results = new HashMap<String, String>();
+
+        try
+        {
+            for (Entry<Object, Object> entry : getProperties(configurationFileName).entrySet())
+            {
+                if (entry.getKey() instanceof String && entry.getValue() instanceof String)
+                {
+                    results.put((String) entry.getKey(), (String) entry.getValue());
+                }
+            }
+        }
+        catch (IOException e)
+        {
+            LOGGER.error(e.getMessage());
+        }
+
+        return results;
+    }
+
+    @Override
     public boolean log(String logName, String callResultXml)
     {
-        // TODO Auto-generated method stub
-        return false;
+        LOGGER.info("{}: {}", logName, callResultXml);
+
+        return true;
     }
 
     /**

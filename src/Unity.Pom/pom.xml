@@ -27,7 +27,7 @@
     <parent>
         <groupId>com.incadencecorp.unity</groupId>
         <artifactId>unity-bom</artifactId>
-        <version>0.0.4-SNAPSHOT</version>
+        <version>0.0.4</version>
         <relativePath>../Unity.Bom</relativePath>
     </parent>
 
