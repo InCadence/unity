@@ -43,7 +43,7 @@
 	<parent>
 		<groupId>com.incadencecorp.unity</groupId>
 		<artifactId>unity-pom</artifactId>
-		<version>0.0.4</version>
+		<version>0.0.5-SNAPSHOT</version>
 		<relativePath>../Unity.Pom</relativePath>
 	</parent>
 </project>
