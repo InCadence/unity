@@ -277,7 +277,6 @@ public class CallResult {
      */
     public static String productName()
     {
-        // TODO: placeholder
         return "My.Application.Info.ProductName";
     }
 

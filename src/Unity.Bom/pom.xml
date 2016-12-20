@@ -36,45 +36,30 @@
 				<version>${project.version}</version>
 				<type>test-jar</type>
 			</dependency>
-			<!-- <dependency> <groupId>com.incadencecorp.unity</groupId> <artifactId>unity-local-connector</artifactId> 
-				<version>${project.version}</version> </dependency> <dependency> <groupId>com.incadencecorp.unity</groupId> 
-				<artifactId>unity-rest-service</artifactId> <version>${project.version}</version> 
-				</dependency> <dependency> <groupId>com.incadencecorp.unity</groupId> <artifactId>unity-rest-connector</artifactId> 
-				<version>${project.version}</version> </dependency> <dependency> <groupId>com.incadencecorp.unity</groupId> 
-				<artifactId>unity-rmi-connector</artifactId> <version>${project.version}</version> 
-				</dependency> -->
 		</dependencies>
 	</dependencyManagement>
+
 	<repositories>
-<!-- 		<repository> -->
-<!-- 			<releases> -->
-<!-- 				<enabled>true</enabled> -->
-<!-- 				<updatePolicy>always</updatePolicy> -->
-<!-- 				<checksumPolicy>warn</checksumPolicy> -->
-<!-- 			</releases> -->
-<!-- 			<snapshots> -->
-<!-- 				<enabled>true</enabled> -->
-<!-- 				<updatePolicy>always</updatePolicy> -->
-<!-- 				<checksumPolicy>fail</checksumPolicy> -->
-<!-- 			</snapshots> -->
-<!-- 			<id>public</id> -->
-<!-- 			<url>http://192.168.11.59:8081/repository/maven-public/</url> -->
-<!-- 		</repository> -->
 		<repository>
 			<id>public</id>
 			<name>Maven Central</name>
 			<url>http://repo1.maven.org/maven2/</url>
-		</repository>		
+		</repository>
 	</repositories>
-<!-- 	<distributionManagement> -->
-<!-- 		<snapshotRepository> -->
-<!-- 			<id>snapshots</id> -->
-<!-- 			<url>http://192.168.11.59:8081/repository/maven-snapshots/</url> -->
-<!-- 		</snapshotRepository> -->
-<!-- 	</distributionManagement> -->
+
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<url>http://10.15.0.230:8081/repository/maven-releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus</id>
+			<url>http://10.15.0.230:8081/repository/maven-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<modules>
 		<module>../Unity.Pom</module>
 	</modules>
-
 
 </project>
