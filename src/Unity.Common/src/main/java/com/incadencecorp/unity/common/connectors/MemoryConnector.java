@@ -78,7 +78,10 @@ public class MemoryConnector implements IConfigurationsConnector {
         Map<String, String> results = new HashMap<String, String>();
 
         // Make Copy
-        results.putAll(cache.get(configurationFileName));
+        if (cache.containsKey(configurationFileName))
+        {
+            results.putAll(cache.get(configurationFileName));
+        }
 
         return results;
     }

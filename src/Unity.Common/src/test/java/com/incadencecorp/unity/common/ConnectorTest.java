@@ -95,6 +95,8 @@ public class ConnectorTest {
         Assert.assertEquals(value1, settings.get(PARAM1));
         Assert.assertEquals(value2, settings.get(PARAM2));
 
+        Assert.assertEquals(0, connector.getSettings(UUID.randomUUID().toString()).size());
+        
     }
 
 }
