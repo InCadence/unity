@@ -5,7 +5,7 @@
 	<parent>
         <groupId>com.incadencecorp.unity</groupId>
         <artifactId>unity-pom</artifactId>
-        <version>0.0.5-SNAPSHOT</version>
+        <version>0.0.5</version>
         <relativePath>../Unity.Pom/pom.xml</relativePath>
     </parent>
 	<dependencies>
